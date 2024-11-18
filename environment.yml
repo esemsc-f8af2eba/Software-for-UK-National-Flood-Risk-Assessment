@@ -1,0 +1,14 @@
+name: deluge
+
+channels:
+  - defaults
+  - conda-forge
+
+dependencies:
+ - python==3.12
+ - pip
+ - jupyter
+ - flake8
+ - sphinx
+ - pip:
+   - -r requirements.txt

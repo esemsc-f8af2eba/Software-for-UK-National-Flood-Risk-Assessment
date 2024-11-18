@@ -1,0 +1,22 @@
+# Packages required for users to run the code
+# Remember to update setup.py with any changes here
+# remmeber
+# and *don't* include any modules from the standard library.
+numpy
+scipy
+pandas
+folium
+scikit-learn
+matplotlib
+xgboost
+imblearn
+ipywidgets
+seaborn
+geojson
+# Packages needed for testing/scoring
+pytest
+pytest-cov
+pytest-timeout
+
+
+

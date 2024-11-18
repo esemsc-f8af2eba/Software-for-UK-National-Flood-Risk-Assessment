@@ -1,0 +1,1001 @@
+postcode,easting,northing,soilType,elevation,nearestWatercourse,distanceToWatercourse,localAuthority
+RG6 3AP,475996,170644,Gleysols,,River Loddon,,Wokingham
+DA11 9BB,561117,175837,Gleysols,0.0,,210.0,Gravesham
+BS5 6TQ,361138,175498,Unsurveyed/Urban,,River Frome,590.0,"Bristol, City of"
+RG2 0HZ,471700,169500,Unsurveyed/Urban,40.0,,,
+DA4 0WE,553664,174039,Unsurveyed/Urban,20.0,River Darent,,
+RG31 6XX,465674,175638,,80.0,River Thames,1460.0,West Berkshire
+TN31 7BT,591126,120435,,,River Tillingham,450.0,Rother
+SW9 8FZ,531426,175489,Unsurveyed/Urban,,River Thames,4100.0,Lambeth
+DT8 3JH,345607,105006,Planosols,120.0,,640.0,
+BR3 4TX,535666,168653,Unsurveyed/Urban,40.0,,,Bromley
+PO19 9LB,485922,104179,Unsurveyed/Urban,10.0,,620.0,
+SW15 3JU,524100,174200,Unsurveyed/Urban,40.0,,2070.0,
+RG7 6DT,457443,172010,Luvisols,70.0,,,West Berkshire
+RG14 9FB,447245,166993,Unsurveyed/Urban,,River Kennet,390.0,West Berkshire
+RH10 0PU,526911,136846,Unsurveyed/Urban,70.0,Gatwick Stream,,Crawley
+SE4 2FS,536024,175703,,,Ravensbourne River,1910.0,Lewisham
+BH11 8PJ,405014,95518,Unsurveyed/Urban,50.0,,,"Bournemouth, Christchurch and Poole"
+BA3 6RN,379601,156054,,90.0,,390.0,Mendip
+BR3 5DY,538035,169493,,,Ravensbourne River,1840.0,Bromley
+BS19 4QB,344024,166226,Luvisols,,Stowey Rhyne,1330.0,North Somerset
+EX34 9QP,253196,147251,,40.0,,1000.0,
+RG5 4JT,476279,172880,,50.0,River Loddon,,Wokingham
+ME14 1HW,575653,156656,Unsurveyed/Urban,20.0,,270.0,Maidstone
+BH15 1DW,401619,91092,Unsurveyed/Urban,,,1000.0,"Bournemouth, Christchurch and Poole"
+BA1 7AN,376587,167141,Unsurveyed/Urban,,,760.0,Bath and North East Somerset
+SN11 8QQ,402606,169544,,100.0,River's Brook,,Wiltshire
+BA3 4QE,367387,152440,Leptosols,,,570.0,Mendip
+BS2 9DT,359775,173346,Unsurveyed/Urban,,River Frome,470.0,"Bristol, City of"
+TW11 8UR,515000,172000,Unsurveyed/Urban,,Longford River,1440.0,Richmond upon Thames
+TN38 9SH,578462,110802,,30.0,,,Hastings
+TW16 5PU,511580,169386,,10.0,Portlane Brook,730.0,Spelthorne
+SO4 1YU,444347,101269,Unsurveyed/Urban,,Dark Water,540.0,New Forest
+ME15 7DJ,576713,154485,,60.0,,1310.0,
+SE11 6EW,530811,178769,Unsurveyed/Urban,10.0,,1930.0,
+SN4 8NP,407616,183005,Unsurveyed/Urban,120.0,,1260.0,Wiltshire
+BA5 2XB,354432,145448,,,St Andrew's Stream,,
+BN17 5NE,503100,101800,,10.0,River Arun,750.0,Arun
+RH16 2JZ,534618,125581,Unsurveyed/Urban,50.0,Scrase Stream,,Mid Sussex
+TQ4 6LL,288888,57190,,60.0,,,Torbay
+PL12 6QP,237151,65313,,110.0,,470.0,Cornwall
+TN2 5GN,560096,138180,Luvisols,120.0,,1870.0,
+EX32 0AT,256354,130908,Cambisols,,,,North Devon
+BS22 9TY,333228,161055,Gleysols,,Uphill Great Rhyne,1100.0,North Somerset
+ME8 9TP,580459,163458,Unsurveyed/Urban,,,5960.0,Medway
+BN5 0FP,522090,114406,,,,1350.0,Horsham
+BR5 3WB,547415,168503,Unsurveyed/Urban,,River Cray,1030.0,Bromley
+SW19 2WH,524321,170180,,20.0,River Wandle,3040.0,Merton
+BH8 9AX,410816,92773,Unsurveyed/Urban,40.0,The Bourne,3250.0,
+RH18 5GT,542573,134825,,80.0,River Medway,750.0,Wealden
+BH17 8PH,402899,93967,,20.0,,1770.0,"Bournemouth, Christchurch and Poole"
+PO10 8JZ,477248,105716,Luvisols,10.0,,690.0,
+TN21 0LU,557285,121003,Luvisols,150.0,,990.0,Wealden
+RG3 3EH,469712,172049,,50.0,,,Reading
+GU1 2TG,501959,150651,Unsurveyed/Urban,70.0,,2060.0,Guildford
+SE23 3YY,535421,172625,Unsurveyed/Urban,,Pool River,,Lewisham
+PO7 8NX,470073,110148,Unsurveyed/Urban,40.0,,1170.0,Havant
+DA12 4SY,566303,171775,Unsurveyed/Urban,,,2040.0,
+BA15 2YH,380992,161217,Leptosols,110.0,River Avon,,Wiltshire
+RH5 4ES,516777,145965,,90.0,,400.0,Mole Valley
+RG7 3LR,464948,166969,,,,2200.0,
+SE24 9QB,532267,174279,Unsurveyed/Urban,,River Thames,5570.0,Southwark
+BN7 1PZ,540608,110487,Unsurveyed/Urban,60.0,,660.0,
+GU10 4JL,480528,142813,Planosols,120.0,River Wey,,East Hampshire
+UB4 9WA,511387,182394,Unsurveyed/Urban,30.0,Yeading Brook,,
+PO8 9PD,469561,113112,,70.0,,3800.0,East Hampshire
+RG18 0NG,456818,174344,Planosols,110.0,River Pang,3020.0,
+RG9 9HX,476113,182461,,40.0,River Thames,,
+PL19 0JU,249191,77321,,180.0,River Wallabrook,,
+SO31 8LB,447916,109562,Unsurveyed/Urban,,,250.0,
+TA1 2XJ,324936,125263,Unsurveyed/Urban,20.0,River Tone,,Somerset West and Taunton
+SE24 9LA,532456,174445,Unsurveyed/Urban,30.0,,5560.0,Southwark
+CR5 1NX,529653,156531,Luvisols,160.0,,,Reigate and Banstead
+BN11 1TJ,514636,102514,,10.0,,2360.0,Worthing
+RG26 3EJ,461457,162380,Podsols,,,850.0,Basingstoke and Deane
+BS18 5TZ,362985,155648,,,,1270.0,Bath and North East Somerset
+SN8 2BJ,420313,169078,Leptosols,130.0,River Kennet,320.0,
+SM7 3NQ,527402,159804,Unsurveyed/Urban,150.0,,5080.0,
+TQ7 3YG,273513,44195,Cambisols,,,,South Hams
+TR1 1AP,183886,45087,Cambisols,,Truro River,1280.0,Cornwall
+BH15 1TB,401428,90877,Unsurveyed/Urban,10.0,,,"Bournemouth, Christchurch and Poole"
+ME15 7JU,577502,153434,Unsurveyed/Urban,,River Len,1910.0,Maidstone
+SN11 0PF,399163,166589,Stagnosols,,,,Wiltshire
+SN10 2JG,402332,163037,Luvisols,130.0,Kennet and Avon Canal,4230.0,
+CR9 2UL,532502,165815,,60.0,River Wandle,3130.0,Croydon
+BS11 0LZ,354089,178147,Unsurveyed/Urban,10.0,,1950.0,"Bristol, City of"
+EX5 7AS,300505,95065,,30.0,,520.0,East Devon
+RG26 4YS,459080,162046,Podsols,100.0,,1050.0,
+OX44 7TX,460305,198606,Luvisols,60.0,,1010.0,
+TW9 1BY,517900,175000,,,,,
+BS15 9QA,364937,173284,Unsurveyed/Urban,,River Avon,,
+BS16 3LQ,363164,174857,Unsurveyed/Urban,60.0,River Frome,1610.0,
+RG6 9LL,473353,173709,,40.0,River Thames,910.0,Wokingham
+TR11 3XU,181428,32307,,,,,Cornwall
+CT6 8LG,616881,168125,Unsurveyed/Urban,10.0,Plenty Brook,,
+PO19 3SR,485922,104179,Unsurveyed/Urban,,River Lavant,620.0,Chichester
+KT5 8SY,518791,166867,Unsurveyed/Urban,30.0,,380.0,Kingston upon Thames
+RG18 9NU,448830,173674,,120.0,,2090.0,West Berkshire
+TN22 2BW,546415,124359,Luvisols,60.0,,1140.0,
+TQ13 9RU,277671,75138,Histosols,190.0,,,Teignbridge
+SO16 3JD,441926,116171,Unsurveyed/Urban,,,,Southampton
+RG14 7HP,447469,166537,,80.0,Kennet and Avon Canal,740.0,West Berkshire
+SL6 5JG,486106,181317,,,,3680.0,Windsor and Maidenhead
+KT13 0RG,507663,163164,Unsurveyed/Urban,30.0,,,
+SW17 7QL,528062,172940,Unsurveyed/Urban,30.0,River Wandle,,Wandsworth
+BS22 7GB,336196,163963,Cambisols,10.0,River Banwell,,
+RG45 7AR,485581,169271,Unsurveyed/Urban,60.0,,,Bracknell Forest
+GU4 8JP,500530,146153,,50.0,Littlebrook,300.0,Guildford
+GU51 4FL,481569,155037,,70.0,,160.0,Hart
+BA7 7NW,363999,132198,,,,,
+BS19 2XS,346115,170403,,,,,North Somerset
+SO40 0SG,430311,107932,Planosols,40.0,,1100.0,New Forest
+SE16 1WH,536300,179400,,10.0,,680.0,Southwark
+BA11 3DQ,377196,148287,Unsurveyed/Urban,,River Frome,880.0,Mendip
+RG13 1JS,447301,167598,Unsurveyed/Urban,,River Kennet,,
+RG41 3HU,479751,169283,Unsurveyed/Urban,,Emm Brook,350.0,Wokingham
+RG9 1UQ,475501,182564,,,River Thames,1040.0,South Oxfordshire
+DA5 3DP,549608,173648,,20.0,,1640.0,Bexley
+EX13 5TN,329700,97100,,,,770.0,
+RG12 1DE,486989,169337,Unsurveyed/Urban,70.0,,1170.0,Bracknell Forest
+DA3 8NS,558534,165423,Leptosols,90.0,,4840.0,Sevenoaks
+RG3 6AL,468091,173994,,70.0,River Thames,,Reading
+TW2 6SS,515400,173200,Unsurveyed/Urban,10.0,,1010.0,Richmond upon Thames
+TA6 4YA,331689,137624,,10.0,Bridgwater and Taunton Canal,3560.0,Sedgemoor
+BA14 0EP,385240,156703,Unsurveyed/Urban,50.0,Lambrok Stream,,Wiltshire
+DA15 8AD,546002,172751,Unsurveyed/Urban,,,790.0,
+SW8 1DU,530384,177748,,10.0,River Thames,1780.0,Lambeth
+SW18 1YU,525769,173689,Unsurveyed/Urban,10.0,River Wandle,,Wandsworth
+KT15 1YN,505258,164668,Unsurveyed/Urban,20.0,The Bourne,,Runnymede
+BH31 9AD,410557,107663,Gleysols,30.0,Ebblake Stream,380.0,
+PO21 2EH,493327,99837,Unsurveyed/Urban,10.0,,1250.0,Arun
+EX1 3GH,295587,93264,Arenosols,50.0,Pin Brook,1700.0,
+BS12 1EX,363965,190691,Unsurveyed/Urban,,,,
+SO3 3BE,446686,114258,Unsurveyed/Urban,,,1800.0,Eastleigh
+SW18 4WZ,525769,173689,,10.0,River Wandle,1070.0,Wandsworth
+TN13 9QL,553007,154630,,150.0,,1960.0,Sevenoaks
+SO20 6QJ,436699,129340,Luvisols,100.0,,2130.0,Test Valley
+SL5 8YY,493767,167833,Podsols,,,,Windsor and Maidenhead
+RG1 9RE,471613,170786,Unsurveyed/Urban,,,550.0,Reading
+PO19 4HD,487591,104757,,10.0,River Lavant,,
+TN3 0JA,554287,139177,,,River Grom,1380.0,Tunbridge Wells
+BS1 9TE,358267,172797,Unsurveyed/Urban,20.0,,,
+KT17 1SA,522031,162541,Unsurveyed/Urban,,Hogsmill River,690.0,Epsom and Ewell
+EX6 7HN,281830,86602,Histosols,,,760.0,Teignbridge
+SW11 3TX,526534,175823,Unsurveyed/Urban,10.0,,650.0,Wandsworth
+BS37 4YN,371389,182380,Unsurveyed/Urban,,River Frome,,
+BH17 7TW,402902,93893,Podsols,30.0,,1750.0,"Bournemouth, Christchurch and Poole"
+SE1 6UB,533378,178838,Unsurveyed/Urban,10.0,,1400.0,Southwark
+TQ13 8PR,274734,88024,,290.0,,990.0,Teignbridge
+BN12 6JN,511251,103830,,10.0,,1540.0,Worthing
+BS37 7BX,372337,184979,,90.0,,110.0,
+RG24 4EE,462321,153521,Unsurveyed/Urban,,River Loddon,1750.0,Basingstoke and Deane
+GU22 7YB,499800,157800,,40.0,Hoe Stream,,Woking
+PO33 4DL,456062,90400,,40.0,,610.0,Isle of Wight
+DT11 7RQ,388637,106506,Unsurveyed/Urban,,River Stour,1740.0,Dorset
+TQ4 5LD,288409,60415,Unsurveyed/Urban,20.0,,960.0,
+TN9 2DR,559635,145833,Unsurveyed/Urban,,,530.0,Tonbridge and Malling
+RG4 9RJ,470936,180104,Luvisols,,Berry Brook,5430.0,South Oxfordshire
+SL6 3GS,489271,180741,,30.0,White Brook,,Windsor and Maidenhead
+RH15 0NG,532787,119523,,40.0,,780.0,
+SE5 5DJ,532295,176697,,,River Thames,3960.0,Southwark
+PL23 1AQ,212630,51760,,10.0,River Fowey,,
+SE5 7WG,532295,176697,Unsurveyed/Urban,10.0,,3960.0,Southwark
+TW3 9BZ,513939,175863,Unsurveyed/Urban,20.0,River Crane,,Hounslow
+DA14 4BQ,546322,171893,Unsurveyed/Urban,60.0,Wyncham Stream,1610.0,
+TA4 2RP,309991,130604,,130.0,,300.0,Somerset West and Taunton
+BS12 3BB,357417,189110,Luvisols,10.0,Foss Ditch,1060.0,
+EX14 1JR,316126,100593,Unsurveyed/Urban,,,530.0,East Devon
+BN3 6NU,529849,105989,,70.0,River Adur,6520.0,
+SW2 4PT,530300,173400,,50.0,River Thames,4980.0,
+BH20 9BF,392582,88553,Histosols,10.0,,1350.0,
+BH25 5WW,424066,95449,,40.0,,,New Forest
+TR11 3DG,180777,32994,Unsurveyed/Urban,0.0,Penryn River,,Cornwall
+SE12 0WZ,542733,174310,Unsurveyed/Urban,,,1130.0,Greenwich
+SO32 3PP,460787,114640,Stagnosols,70.0,River Meon,,Winchester
+CR3 6LU,534215,155966,,140.0,,3780.0,Tandridge
+BS4 5RQ,363026,170256,,60.0,River Avon,,"Bristol, City of"
+SE6 4TX,537700,173900,Unsurveyed/Urban,20.0,Ravensbourne River,190.0,
+SN11 0HS,399833,171004,Unsurveyed/Urban,70.0,River Marden,300.0,
+GU14 7DW,488100,154812,Unsurveyed/Urban,70.0,,,Rushmoor
+PL8 1BX,254764,48063,Cambisols,30.0,,,South Hams
+TQ12 5YB,287235,66079,Cambisols,,,1080.0,Teignbridge
+KT2 5ED,518292,169669,Unsurveyed/Urban,10.0,River Thames,,Kingston upon Thames
+SE9 3UG,544579,172463,Unsurveyed/Urban,50.0,,350.0,
+BS40 8EW,354125,165034,,100.0,,840.0,North Somerset
+TQ1 9EW,290155,66144,Unsurveyed/Urban,60.0,,,
+UB4 9QS,512104,182257,,30.0,Yeading Brook,1800.0,Hillingdon
+SE15 1SS,535100,177600,Unsurveyed/Urban,,River Thames,2590.0,Southwark
+BA14 0FL,386254,155213,Planosols,40.0,River Biss,,Wiltshire
+PO36 9YX,459022,83943,Luvisols,20.0,,980.0,
+BS11 9AX,351511,178193,Unsurveyed/Urban,10.0,River Avon,,"Bristol, City of"
+HA6 9EH,509824,190617,Unsurveyed/Urban,70.0,,1090.0,
+PO2 0BN,464918,102300,,10.0,,1960.0,
+BS8 2LS,357849,173808,Unsurveyed/Urban,60.0,,1140.0,"Bristol, City of"
+PO21 3JW,489605,98725,Unsurveyed/Urban,10.0,Pagham Rife,,Arun
+GU14 6DY,487584,153965,Unsurveyed/Urban,70.0,,800.0,Rushmoor
+SO1 5EN,440646,113435,,20.0,,1110.0,
+GU11 9WF,486560,150681,Unsurveyed/Urban,90.0,,,
+CR2 6TG,532904,165801,Unsurveyed/Urban,60.0,River Wandle,3530.0,
+PO33 1HX,459774,91459,,,,390.0,Isle of Wight
+GU14 7XB,487203,154118,Unsurveyed/Urban,80.0,,1650.0,Rushmoor
+SW14 7WA,520532,175905,Unsurveyed/Urban,0.0,River Thames,,Richmond upon Thames
+PL2 2YS,245918,57109,Unsurveyed/Urban,40.0,,1140.0,Plymouth
+DA6 7HG,548921,175088,,50.0,,1590.0,
+BN3 3FW,528984,105133,Unsurveyed/Urban,20.0,River Adur,5530.0,
+TR13 0AL,163907,32403,Histosols,100.0,,1750.0,
+BA3 2EX,366461,153957,Arenosols,100.0,,,Bath and North East Somerset
+RG26 5XY,470135,173949,Unsurveyed/Urban,,,1640.0,Reading
+BH24 2QX,410896,103536,Podsols,20.0,,1610.0,
+RG20 9NJ,448395,157694,Luvisols,130.0,,2150.0,Basingstoke and Deane
+GU1 4PA,499682,150238,,40.0,River Wey,610.0,Guildford
+BS24 0AP,332359,155705,,10.0,River Axe,,North Somerset
+SE6 1JL,539687,173170,Unsurveyed/Urban,30.0,Ravensbourne River,,
+PO2 7EE,464964,101641,,10.0,,2250.0,Portsmouth
+RH14 9UN,508932,125106,,,Par Brook,,Horsham
+TR13 9EJ,163081,25349,,10.0,,960.0,Cornwall
+SO40 9GR,436244,112544,,10.0,Bartley Water,220.0,New Forest
+SL5 7ET,492580,168602,,80.0,,,Windsor and Maidenhead
+GU21 6JN,500603,158784,Unsurveyed/Urban,40.0,Basingstoke Canal,,Woking
+SW9 9RF,530614,175776,,20.0,River Thames,3400.0,Lambeth
+GU14 6BW,487306,154024,,80.0,,1080.0,Rushmoor
+UB3 2SU,508684,181677,,,,,Hillingdon
+DA3 7NA,561606,168772,Unsurveyed/Urban,80.0,River Darent,6200.0,
+EX17 5LH,275049,104819,Stagnosols,90.0,Knighty Brook,,Mid Devon
+BA3 3UG,367893,154490,Arenosols,,River Somer,440.0,Bath and North East Somerset
+BS20 7AT,347429,176572,,10.0,,470.0,North Somerset
+KT15 3JB,505266,162861,Luvisols,20.0,,1050.0,
+DA6 8BA,548500,175300,Unsurveyed/Urban,50.0,River Shuttle,1580.0,
+BN20 0EF,555343,98209,,110.0,,4180.0,Wealden
+TN24 8ZA,601227,143045,Unsurveyed/Urban,50.0,Great Stour,640.0,
+SN15 3AL,392491,172748,Leptosols,60.0,River Avon,,Wiltshire
+SM1 2HR,524919,164529,Unsurveyed/Urban,,,,
+BA4 5LG,362026,143686,,,River Sheppey,,Mendip
+EX20 4HU,252549,91441,Cambisols,,,1050.0,West Devon
+TN21 8AN,558399,120720,Luvisols,,Waldron Gill,,Wealden
+DA15 8UB,546143,172855,,30.0,Wyncham Stream,870.0,Bexley
+BN3 1WE,529752,105134,Unsurveyed/Urban,30.0,,,
+PO22 7DW,495033,99573,Unsurveyed/Urban,0.0,Aldingbourne Rife,,Arun
+PO19 2XQ,487551,104560,,10.0,River Lavant,1810.0,Chichester
+SO2 7GR,443883,111442,Unsurveyed/Urban,,River Itchen,,Southampton
+BH21 3YU,399096,96984,Podsols,70.0,,1130.0,Dorset
+PL30 4JL,211335,73554,Histosols,,De Lank River,1850.0,Cornwall
+BH1 9HH,409722,92041,Unsurveyed/Urban,40.0,,1960.0,
+RG23 8ET,460672,152034,Unsurveyed/Urban,,River Loddon,2850.0,Basingstoke and Deane
+PO19 4HW,487355,105467,Unsurveyed/Urban,,River Lavant,1740.0,Chichester
+SO30 0WF,448725,114221,,30.0,,,Eastleigh
+SE27 0JX,531800,172100,Unsurveyed/Urban,,,5060.0,Lambeth
+OX9 8PF,457300,195900,Luvisols,50.0,,,
+TW3 1DU,514461,175819,,20.0,,,Hounslow
+PL2 2EU,245842,57289,Unsurveyed/Urban,,Ham Brook,,Plymouth
+GU51 1AN,479885,155364,Podsols,70.0,,840.0,Hart
+TR1 1WJ,182961,43918,Cambisols,10.0,Truro River,,Cornwall
+TN9 9NH,559913,145919,Unsurveyed/Urban,,Botany Stream,,Tonbridge and Malling
+SO50 7BW,449519,118631,,,,620.0,Eastleigh
+GU17 7WS,482300,160800,Unsurveyed/Urban,,,360.0,Hart
+RH2 0ES,526314,151212,Unsurveyed/Urban,110.0,,,Reigate and Banstead
+TQ2 7JU,289420,66123,Unsurveyed/Urban,50.0,,720.0,Torbay
+ME13 9HY,604737,160779,Luvisols,20.0,,690.0,Swale
+SN11 8NL,400143,171140,,70.0,,1100.0,Wiltshire
+SP11 9QY,426777,150993,Luvisols,130.0,,6680.0,Wiltshire
+RG12 8GF,485193,167323,,,,,
+SO4 0SF,428800,92200,Luvisols,10.0,Danes Stream,,New Forest
+BA12 7PF,381304,145836,Cambisols,130.0,,800.0,Wiltshire
+BN21 2SB,559694,100536,,50.0,,,
+RG41 4DZ,479611,167102,,70.0,,750.0,Wokingham
+RG41 3HS,479565,169295,Unsurveyed/Urban,,,540.0,
+SE6 9EH,537721,172900,,,,1680.0,
+DT4 7EY,368106,79730,Unsurveyed/Urban,10.0,,600.0,
+SN11 8FW,400432,171739,Luvisols,80.0,,,
+BA2 6YJ,376263,165296,,,,2760.0,Bath and North East Somerset
+RG20 5QY,452530,158812,Planosols,100.0,,80.0,
+SW19 9JT,524321,170180,,,River Wandle,,Merton
+SL6 1NT,488760,181045,,30.0,White Brook,1410.0,Windsor and Maidenhead
+BA14 4EW,385783,157995,,40.0,River Biss,510.0,Wiltshire
+BH7 7UZ,409725,92040,,,The Bourne,1960.0,"Bournemouth, Christchurch and Poole"
+SO45 6JJ,442632,107108,Unsurveyed/Urban,,,520.0,New Forest
+SL5 9FT,493767,167833,Podsols,,,,Windsor and Maidenhead
+KT20 5RE,523291,155971,Unsurveyed/Urban,,,,Reigate and Banstead
+SW12 0BW,529064,173831,Unsurveyed/Urban,30.0,River Thames,3760.0,
+BN1 2WD,531040,104624,Unsurveyed/Urban,,,7560.0,Brighton and Hove
+KT5 9XT,518842,168682,Unsurveyed/Urban,,,260.0,
+PO19 9NB,485922,104179,Unsurveyed/Urban,10.0,,620.0,Chichester
+BA2 2DN,374144,163639,,,River Avon,1350.0,
+SM7 1DQ,524365,158973,,170.0,,,Reigate and Banstead
+PO7 8XQ,467346,110204,Stagnosols,40.0,,930.0,
+CT6 8DJ,615876,168074,Unsurveyed/Urban,10.0,,1550.0,Canterbury
+KT14 9BQ,506041,161877,Unsurveyed/Urban,,,710.0,Elmbridge
+SN6 6EZ,409247,193573,,90.0,River Key,1230.0,
+SW4 6DY,529448,175902,,,,2850.0,Lambeth
+TW1 2PY,517487,174436,Gleysols,10.0,River Thames,,Richmond upon Thames
+TN22 1DP,547207,122054,,,,1110.0,Wealden
+SO53 4RA,442664,120314,Arenosols,30.0,,40.0,
+BR7 5SX,540421,169620,Unsurveyed/Urban,70.0,Ravens Bourne,,
+SM4 5JW,525968,168223,Unsurveyed/Urban,20.0,River Wandle,,Merton
+CT4 5HP,619216,153064,,,Nail Bourne,5940.0,Canterbury
+BS49 4ER,342817,165333,,10.0,,1500.0,North Somerset
+RG29 1BE,473017,151400,Planosols,,River Whitewater,,Hart
+BN16 4LH,506762,104906,Gleysols,,,870.0,Arun
+KT17 4ED,521657,160859,,60.0,,1630.0,
+PL4 9QY,249929,54294,Unsurveyed/Urban,10.0,River Plym,250.0,
+BH8 9HH,410847,93874,Unsurveyed/Urban,30.0,River Stour,,"Bournemouth, Christchurch and Poole"
+RG30 4YW,468455,173894,,,River Thames,,
+GU17 7NF,480989,160166,Unsurveyed/Urban,,,1830.0,Hart
+SM1 9HB,525907,163866,,60.0,Pyl Brook,4120.0,Sutton
+PO13 9QU,455657,101294,Unsurveyed/Urban,10.0,River Alver,,Gosport
+RG16 9RY,451048,173861,Planosols,120.0,,2240.0,West Berkshire
+TW16 5BS,510520,170184,Unsurveyed/Urban,,Portlane Brook,540.0,Spelthorne
+EX9 7HE,308200,85200,Cambisols,,,,East Devon
+DA11 9ET,562432,174118,,30.0,River Thames,1230.0,Gravesham
+TQ10 9DD,270282,59667,Cambisols,,,700.0,South Hams
+EX4 7YG,292269,92680,Unsurveyed/Urban,,River Exe,970.0,Exeter
+SE6 9HG,537721,172900,,20.0,,1680.0,
+SW9 8BE,530642,175436,Unsurveyed/Urban,,River Thames,3710.0,
+PO6 2HU,467183,104889,Unsurveyed/Urban,0.0,,,Portsmouth
+RG25 1LR,474021,151080,Luvisols,,Basingstoke Canal,810.0,
+GU3 3PH,496851,154258,Podsols,40.0,,,
+SO2 9GY,444534,110797,Unsurveyed/Urban,20.0,,,Southampton
+EX21 5NT,251338,105956,Cambisols,70.0,River Torridge,1230.0,
+PO6 9BB,465600,105430,Unsurveyed/Urban,10.0,,2540.0,Portsmouth
+TW16 6NT,510010,169645,Unsurveyed/Urban,,,2830.0,Spelthorne
+PO9 5NN,472669,108842,Unsurveyed/Urban,,,1950.0,Havant
+TN31 6UG,584472,124490,Planosols,30.0,,380.0,
+BS35 4LW,355281,185331,Gleysols,,The Pill,420.0,South Gloucestershire
+W4 9DZ,520717,178385,,10.0,,1580.0,
+BA16 0DP,348659,136747,Unsurveyed/Urban,20.0,Old Rhyne,590.0,
+TN20 6UF,559337,127227,Luvisols,110.0,,2210.0,Wealden
+BN2 3QR,532109,105518,,,River Adur,8670.0,Brighton and Hove
+GU1 9DD,499049,150522,,30.0,River Wey,1030.0,Guildford
+CT7 9SF,629636,169347,Unsurveyed/Urban,10.0,Brooksend Stream,,Thanet
+TW19 5LZ,501551,174378,Unsurveyed/Urban,20.0,Colne Brook,1060.0,
+PL26 6QY,201627,44993,Unsurveyed/Urban,,,510.0,Cornwall
+PO12 9FD,460019,100900,Unsurveyed/Urban,10.0,,2050.0,Gosport
+BS39 4AG,361756,163757,,40.0,River Chew,,Bath and North East Somerset
+UB10 0WG,505009,183132,Unsurveyed/Urban,30.0,,1320.0,Hillingdon
+PO33 1GG,460524,91271,Planosols,,,,Isle of Wight
+SO2 7BJ,444996,112595,Unsurveyed/Urban,40.0,River Itchen,1510.0,
+RG26 5GP,465395,159735,Planosols,60.0,,1270.0,Basingstoke and Deane
+RG40 4PX,479132,165321,Luvisols,,,,Wokingham
+EX1 1DD,291900,92200,Unsurveyed/Urban,,River Exe,,Exeter
+BS37 7EG,370911,184708,Stagnosols,70.0,,,South Gloucestershire
+CT14 0PB,632541,156106,,10.0,The Delf,1640.0,
+BS20 6YN,347240,175698,Gleysols,10.0,,430.0,
+SW15 6DY,523355,174767,,20.0,Beverley Brook,1160.0,Wandsworth
+CT15 4DT,627642,150598,Cambisols,80.0,,6910.0,Dover
+BH31 6TH,409751,108085,Podsols,30.0,River Crane,900.0,
+TN27 9DF,582925,144892,,30.0,,1790.0,
+SP11 9LS,425786,149317,Leptosols,120.0,,4930.0,Wiltshire
+SP6 1DB,413934,114142,Luvisols,30.0,Ashford Water,150.0,
+TN22 5GL,548368,119797,Planosols,30.0,Ridgewood Stream,,Wealden
+TR4 8YN,175000,44600,,80.0,,,Cornwall
+RG22 4AR,462369,150542,,100.0,,2040.0,
+SO45 5QX,441081,107085,Planosols,30.0,,1430.0,New Forest
+TA2 7LD,323364,126887,,40.0,Kingston Stream,700.0,Somerset West and Taunton
+EX20 2EQ,265779,101876,Cambisols,120.0,River Taw,,
+TW18 1LQ,504822,170522,Unsurveyed/Urban,20.0,,2500.0,Spelthorne
+RG4 8PD,471300,175700,,,River Thames,1210.0,Reading
+CT12 5HT,635000,164200,Luvisols,20.0,,,
+EX10 9PE,313286,89973,Unsurveyed/Urban,,River Sid,,East Devon
+SM4 5QE,525000,167100,Unsurveyed/Urban,30.0,Pyl Brook,,
+SE9 3LP,542715,172795,Unsurveyed/Urban,50.0,,,Greenwich
+SW9 0ST,530699,176238,,10.0,River Thames,3060.0,Lambeth
+BS34 5QU,358631,180982,Stagnosols,,,1220.0,South Gloucestershire
+TQ12 6YA,284743,69923,Cambisols,50.0,,630.0,Teignbridge
+SW15 2SN,524100,174900,,,,,
+RH19 2NE,539241,140906,Luvisols,,,850.0,
+PL12 5ZX,242804,58863,Arenosols,60.0,River Tamar,780.0,
+BN52 9SH,529121,104388,,,,5640.0,
+RH1 6QA,527512,149380,,,,,Reigate and Banstead
+TW3 2AG,513727,175141,Unsurveyed/Urban,20.0,River Crane,1640.0,
+SE6 1YT,538824,173594,Unsurveyed/Urban,30.0,,2350.0,Lewisham
+GU29 9JF,488315,120473,Podsols,30.0,,,Chichester
+BS3 5AZ,358791,170904,Unsurveyed/Urban,,The Malago,330.0,
+TW3 3AS,513371,175710,Unsurveyed/Urban,20.0,,2310.0,Hounslow
+GU8 4LP,499580,136084,,50.0,,170.0,Waverley
+EX31 3QA,252061,127466,Cambisols,,,1890.0,North Devon
+RH1 9FP,528212,150643,,,Redhill Brook,,Reigate and Banstead
+TN12 9PS,570858,146622,Planosols,20.0,,410.0,
+DA1 9BU,553664,174039,Unsurveyed/Urban,20.0,,1370.0,Dartford
+PO5 3HN,464280,98875,Unsurveyed/Urban,10.0,,,
+GU31 4XR,475466,123203,Luvisols,60.0,,510.0,
+BS36 2PN,367518,181188,Unsurveyed/Urban,,River Frome,1230.0,South Gloucestershire
+RG17 9SU,438558,165093,Planosols,140.0,,,West Berkshire
+RG13 4PG,451500,167000,Luvisols,70.0,,1210.0,West Berkshire
+GU22 8QJ,503420,159932,Unsurveyed/Urban,,Basingstoke Canal,2460.0,
+DA1 3RD,551398,173945,,30.0,River Cray,830.0,Bexley
+KT24 5NT,512206,153276,Arenosols,80.0,,1810.0,Guildford
+BH7 6BN,413100,92800,,20.0,River Stour,,"Bournemouth, Christchurch and Poole"
+PL25 5BQ,201212,52329,Unsurveyed/Urban,,St Austell River,750.0,Cornwall
+PL5 3PW,246481,58784,,60.0,Ham Brook,870.0,Plymouth
+ME8 0HL,580500,164900,Unsurveyed/Urban,,,,Medway
+TN3 0NH,555450,141501,Luvisols,90.0,,360.0,
+BS17 2DB,365916,181866,Unsurveyed/Urban,,River Frome,810.0,South Gloucestershire
+RG30 9GA,470135,173949,Unsurveyed/Urban,40.0,,1640.0,Reading
+SW11 5UQ,527927,175960,Unsurveyed/Urban,,River Thames,1630.0,
+RH4 1YW,516746,149885,Unsurveyed/Urban,50.0,Pipp Brook,,Mole Valley
+SW13 9EG,522600,177600,Unsurveyed/Urban,,River Thames,390.0,Richmond upon Thames
+SO23 8ED,448446,129543,Unsurveyed/Urban,40.0,Upper Brook,,Winchester
+BS18 8UA,356024,161972,Luvisols,60.0,,440.0,Bath and North East Somerset
+GU7 9AR,497539,143898,,40.0,,400.0,
+TA14 6RE,347496,117545,Luvisols,50.0,,1300.0,South Somerset
+OX39 4LJ,473287,201900,Stagnosols,,,860.0,
+GU27 9EE,488980,132610,,130.0,,,Waverley
+KT23 3NW,513730,155402,Unsurveyed/Urban,50.0,River Mole,2360.0,
+SO5 9ZW,438500,119100,Planosols,50.0,,870.0,Test Valley
+DA2 7BG,552700,172300,Unsurveyed/Urban,,,2270.0,Dartford
+ME20 7JY,572094,158126,Unsurveyed/Urban,20.0,River Medway,830.0,
+BN52 9AY,529099,105474,Unsurveyed/Urban,30.0,River Adur,5680.0,
+BS40 7RN,350140,159106,,100.0,,1780.0,
+BS48 4DH,345954,170359,,10.0,Parish Brook,360.0,North Somerset
+UB4 9QH,511904,182403,,30.0,Yeading Brook,,Hillingdon
+ME16 0GA,573378,155298,Unsurveyed/Urban,80.0,,1470.0,
+EX10 0NZ,314800,88800,,160.0,River Sid,1520.0,East Devon
+BS48 2YR,347369,170657,,30.0,Land Yeo,4240.0,North Somerset
+PO9 3PZ,470032,107028,Unsurveyed/Urban,20.0,,830.0,
+ME19 4HR,567698,155089,,,,1770.0,Tonbridge and Malling
+RH12 9PY,517699,131139,Unsurveyed/Urban,50.0,River Arun,,
+BS31 1JU,366255,166856,Leptosols,60.0,,1270.0,Bath and North East Somerset
+BS16 6PD,365346,177729,Unsurveyed/Urban,50.0,,,South Gloucestershire
+RH16 4LW,533200,123700,Unsurveyed/Urban,80.0,Scrase Stream,,Mid Sussex
+KT18 7PJ,520582,160648,Unsurveyed/Urban,,,1360.0,Epsom and Ewell
+SW19 2TE,526400,169800,Unsurveyed/Urban,20.0,,120.0,Merton
+TA1 3HZ,323571,124767,Unsurveyed/Urban,,River Tone,590.0,
+ME14 5ED,575794,156256,Unsurveyed/Urban,20.0,River Medway,660.0,
+SO24 0RL,456553,131585,,,,,
+GU21 9DD,497146,158683,,40.0,,,Woking
+BS26 2EE,341802,154809,Leptosols,20.0,,,
+EX38 8HY,243101,115052,Cambisols,,,2070.0,Torridge
+GU21 6YH,500495,158809,Unsurveyed/Urban,30.0,,930.0,Woking
+PO16 8NT,461289,105778,Unsurveyed/Urban,10.0,Heavy Reach,,Fareham
+ME10 9EW,590552,163563,Unsurveyed/Urban,20.0,,2370.0,Swale
+PO13 9SZ,458225,101798,Unsurveyed/Urban,10.0,,,Gosport
+SE1 2YD,533721,180092,,10.0,,100.0,Southwark
+OX9 3QJ,472930,206214,Cambisols,,Cuttle Brook,570.0,South Oxfordshire
+TN5 7NZ,570900,130700,Luvisols,130.0,,,Rother
+EX32 9FD,256592,132234,Unsurveyed/Urban,20.0,,310.0,
+TR19 6EL,140170,26799,Histosols,,,2120.0,Cornwall
+BS6 9PZ,359117,174505,Unsurveyed/Urban,30.0,,490.0,"Bristol, City of"
+BA1 6BH,376267,166184,,,Kennet and Avon Canal,3470.0,Bath and North East Somerset
+BS31 1EN,365453,168482,Unsurveyed/Urban,20.0,,550.0,Bath and North East Somerset
+RG4 6XH,476225,175125,Gleysols,,Sonning Reach,990.0,
+UB7 7PF,505529,179313,Unsurveyed/Urban,,,,Hillingdon
+ME5 9QX,574629,162197,,180.0,,2730.0,
+TN14 7DL,548883,161431,,,,3010.0,
+BS10 6QP,357947,179430,Unsurveyed/Urban,,Henbury Trym,,
+TR11 2RQ,180006,32228,Unsurveyed/Urban,40.0,,370.0,Cornwall
+SE20 7YY,535020,169518,Unsurveyed/Urban,50.0,,,
+PL26 8AS,195064,57493,,,,1150.0,Cornwall
+BA6 9EP,349824,138807,,20.0,River Brue,,Mendip
+PO20 6EJ,488258,104107,Luvisols,,,2590.0,Chichester
+BH15 4EU,399611,91493,Unsurveyed/Urban,10.0,Upton Lake,,"Bournemouth, Christchurch and Poole"
+RG27 9DZ,472560,154303,Planosols,,River Whitewater,,Hart
+PO20 8RG,481186,96269,Gleysols,10.0,Earnley Rife,,Chichester
+RH11 8HD,525087,136374,,80.0,Ifield Brook,1030.0,Crawley
+GU1 2LB,501352,150024,Unsurveyed/Urban,80.0,River Wey,1820.0,
+BN43 9FZ,521713,105211,Unsurveyed/Urban,10.0,,630.0,Adur
+SE18 4AW,542756,178485,,30.0,,,Greenwich
+SM5 1WX,528685,163962,Unsurveyed/Urban,,,,Sutton
+TR11 4WS,178614,32609,Cambisols,80.0,,,Cornwall
+EX2 4PQ,293177,91912,Unsurveyed/Urban,40.0,River Exe,,Exeter
+BN42 4EG,524290,105008,Unsurveyed/Urban,0.0,River Adur,,Adur
+RH11 7QN,526559,136681,,70.0,Gatwick Stream,3390.0,Crawley
+DT11 9NG,389929,104169,Cambisols,,,830.0,Dorset
+SW8 2XF,529940,176846,Unsurveyed/Urban,10.0,,,Lambeth
+TA12 6WY,346312,119292,Luvisols,,Mill Brook,670.0,South Somerset
+SE16 1QG,536231,179478,Unsurveyed/Urban,10.0,,760.0,Southwark
+RH4 3HB,516310,149295,Unsurveyed/Urban,,Pipp Brook,470.0,
+RG11 4QW,477200,164600,Planosols,,,,
+TN14 5WB,553007,154630,Unsurveyed/Urban,,,,Sevenoaks
+TN33 9BU,575073,111975,,,Watermill Stream,1130.0,Rother
+RG6 9DF,473353,173709,,40.0,,,Wokingham
+BH22 9RY,407673,101461,Unsurveyed/Urban,20.0,,680.0,Dorset
+EX39 9DQ,245484,126857,Unsurveyed/Urban,,River Torridge,,
+BN24 6AH,565853,104185,,,Salt Haven,410.0,
+SW15 6LF,522606,175539,Unsurveyed/Urban,10.0,Beverley Brook,520.0,
+RG6 9RR,473352,173710,,40.0,,,Wokingham
+TW15 3SU,506400,170800,,20.0,River Ash,1350.0,
+BH22 8LA,407468,99353,Unsurveyed/Urban,30.0,,,Dorset
+TW13 7LN,510698,172084,,20.0,River Ash,4250.0,
+BN21 4AY,561338,98663,Unsurveyed/Urban,,,1980.0,Eastbourne
+SP5 3JJ,417071,121712,Luvisols,40.0,,750.0,Wiltshire
+RH12 4YG,517699,131139,,50.0,River Arun,,Horsham
+BA6 8ZD,350085,139020,Unsurveyed/Urban,30.0,River Brue,,Mendip
+TA3 6UD,328490,118223,,80.0,,2160.0,Somerset West and Taunton
+TW6 3XX,507942,174507,,,Duke of Northumberland's River,2390.0,Hillingdon
+BH1 2JX,408969,91287,Unsurveyed/Urban,20.0,The Bourne,1130.0,
+CT16 1UH,633000,142400,,,,2060.0,Dover
+RH4 9GG,516691,149548,Unsurveyed/Urban,60.0,,,
+BN10 8HF,541492,101233,Arenosols,40.0,River Ouse,,
+CT21 4EW,612220,135497,Gleysols,90.0,,730.0,Folkestone and Hythe
+DT7 3NS,333516,92612,,,,370.0,Dorset
+PL14 5LN,226073,71196,Podsols,300.0,,2470.0,
+CR7 8NN,532621,168961,,60.0,,3260.0,Croydon
+SE13 5JG,538300,175600,,10.0,Quaggy River,1290.0,Lewisham
+CR2 9AZ,534609,160907,,150.0,The Beck,6280.0,Croydon
+RG16 7LN,433163,178566,Cambisols,,River Lambourn,,West Berkshire
+CR2 1AU,531406,166024,Unsurveyed/Urban,40.0,River Wandle,2100.0,
+EX6 7PB,283858,84840,,70.0,,110.0,
+ME3 8RJ,581119,176554,Luvisols,40.0,,1980.0,Medway
+BN3 7NL,527616,106624,,,West Arm,5330.0,Brighton and Hove
+CT2 0SF,617333,161446,Planosols,,,3350.0,Canterbury
+RH12 9LS,517699,131139,Unsurveyed/Urban,50.0,,1600.0,
+ME7 5LT,577508,167069,,80.0,Tower Reach,3320.0,Medway
+BN42 4BA,524516,105090,Unsurveyed/Urban,,West Arm,,
+BA21 3XW,355196,115983,,,,990.0,South Somerset
+KT20 5TS,523544,156658,,,,6160.0,Reigate and Banstead
+EX7 0EZ,296571,77333,Arenosols,30.0,Dawlish Water,,Teignbridge
+UB3 2FF,508784,181103,,40.0,Grand Union Canal,1590.0,
+SW19 6BU,523800,173583,Unsurveyed/Urban,50.0,Beverley Brook,2200.0,
+TW7 4BX,515532,176423,,,Duke of Northumberland's River,1210.0,Hounslow
+BH21 4ER,395004,99894,Luvisols,,River Winterborne,1750.0,Dorset
+CR2 4YB,530600,160800,Unsurveyed/Urban,,River Wandle,4750.0,Croydon
+TN9 2RR,558700,145700,Unsurveyed/Urban,30.0,River Medway,,Tonbridge and Malling
+OX10 6BD,461332,186189,Cambisols,50.0,,1260.0,
+SE3 7YP,539769,176057,Unsurveyed/Urban,30.0,,850.0,Lewisham
+TW7 9EJ,517054,177215,,10.0,,960.0,Hounslow
+ME10 2DA,590000,164600,,10.0,,,Swale
+OX9 8EX,459700,192800,Luvisols,50.0,,230.0,South Oxfordshire
+GU14 9JR,484620,156919,Unsurveyed/Urban,70.0,Hawley Lake Stream,310.0,
+PL24 2YB,207178,54022,Unsurveyed/Urban,10.0,,,Cornwall
+ME10 4RH,590450,162180,,40.0,Milton Creek,4310.0,
+ME12 4HW,597958,171696,Stagnosols,,,,Swale
+SO5 8BS,435500,121200,,,Fish Lake,500.0,Test Valley
+ME9 7TN,583973,164481,Luvisols,50.0,,2950.0,Swale
+CR9 6AR,533474,166196,,60.0,,,Croydon
+TA4 4QS,308229,141321,Cambisols,30.0,Lower Stream,830.0,
+SP11 6YW,437273,148063,Luvisols,,,2090.0,Test Valley
+SM4 6QS,525329,167862,Unsurveyed/Urban,30.0,Pyl Brook,,
+BH23 7HL,416275,94958,Luvisols,10.0,,,"Bournemouth, Christchurch and Poole"
+BS15 9NX,364873,172748,Unsurveyed/Urban,110.0,River Avon,2010.0,
+SM2 7BG,524240,162499,Unsurveyed/Urban,70.0,Hogsmill River,,Sutton
+TW13 4LQ,509917,172508,,,,3920.0,Hounslow
+EX4 4XY,292656,92951,Unsurveyed/Urban,40.0,,1320.0,Exeter
+SO5 5WF,446100,119000,Unsurveyed/Urban,10.0,Barton River,,
+RH20 2BP,505409,118599,Luvisols,,River Arun,690.0,Horsham
+RG3 6LX,466612,174733,Unsurveyed/Urban,80.0,River Thames,,Reading
+CT2 9DX,612984,159387,Luvisols,70.0,,2110.0,Canterbury
+CR7 7XS,532904,165801,Unsurveyed/Urban,60.0,River Wandle,,
+BS14 9NX,360683,168675,Unsurveyed/Urban,,,780.0,"Bristol, City of"
+RG20 4JD,449949,162999,Planosols,,,,Basingstoke and Deane
+KT22 0WR,516274,156533,Unsurveyed/Urban,,River Mole,620.0,Mole Valley
+RG11 6PP,483801,164678,,,,830.0,
+RG41 5QJ,477806,170242,Gleysols,50.0,,640.0,Wokingham
+SO1 9XR,437670,115434,Luvisols,20.0,River Test,,
+EX4 1BA,291231,92125,,10.0,,1050.0,Exeter
+BH21 4EF,398415,100783,,30.0,River Stour,,Dorset
+BA2 9DN,371676,163331,Cambisols,,,680.0,Bath and North East Somerset
+SL5 8TT,490800,168800,Podsols,80.0,,1760.0,Windsor and Maidenhead
+PL21 9QB,260665,59772,Cambisols,130.0,,,South Hams
+SW17 0TU,526612,171662,Unsurveyed/Urban,10.0,River Wandle,1130.0,
+CR5 3AZ,529337,158143,Unsurveyed/Urban,100.0,,5010.0,Croydon
+HA5 2QQ,510852,188516,Unsurveyed/Urban,,Yeading Brook,,
+BN22 9RT,560137,102497,,10.0,Willingdon and West Langney Sewer,1320.0,Eastbourne
+RH4 1TB,516000,149900,Unsurveyed/Urban,60.0,Pipp Brook,350.0,
+BN3 3BW,529099,105474,Unsurveyed/Urban,30.0,River Adur,,
+SW9 8PT,531267,175429,Unsurveyed/Urban,,,,
+PL16 0JP,241086,89203,Cambisols,140.0,River Wolf,,Torridge
+RG7 4HF,463447,167154,Histosols,90.0,,1400.0,
+BS23 2LN,331938,162210,,40.0,Uphill Great Rhyne,2700.0,
+SP11 0HH,434445,149993,Luvisols,100.0,,3350.0,Test Valley
+SO30 2TX,451030,113026,Unsurveyed/Urban,,Pudbrook Lake,160.0,
+BS20 8RS,344569,175683,Unsurveyed/Urban,110.0,,2270.0,
+TW8 9QA,517929,178551,Unsurveyed/Urban,10.0,River Brent,,Hounslow
+SE21 7WG,533055,172559,Unsurveyed/Urban,40.0,Pool River,,Southwark
+CT9 4AR,635730,169899,,,,6880.0,
+BS32 4XL,360510,181772,Unsurveyed/Urban,70.0,,1630.0,South Gloucestershire
+SE9 3PN,544090,172449,Unsurveyed/Urban,50.0,,710.0,Greenwich
+GU34 9FW,471656,139156,Unsurveyed/Urban,110.0,River Wey,,East Hampshire
+PL15 7JA,231024,81944,Cambisols,,,,Cornwall
+TA24 8AF,295786,145727,,60.0,,690.0,Somerset West and Taunton
+ME3 0EG,588607,176643,,10.0,,,Medway
+BA12 7LJ,381633,141164,Cambisols,,,1190.0,Wiltshire
+SN12 6XP,391551,161583,Stagnosols,50.0,Semington Brook,,Wiltshire
+RH20 1HE,500326,114597,,30.0,,440.0,Chichester
+TA1 2PX,325177,124399,Gleysols,10.0,Black Brook,,Somerset West and Taunton
+SP1 2TY,414803,129666,Unsurveyed/Urban,50.0,River Avon,,Wiltshire
+SE25 4NH,534770,168447,Unsurveyed/Urban,,,1190.0,Croydon
+PL9 9RN,249559,52515,Unsurveyed/Urban,,,840.0,
+RG12 1XT,486385,169705,Unsurveyed/Urban,,,690.0,Bracknell Forest
+TN15 0ZB,553007,154630,,150.0,,1960.0,Sevenoaks
+SE12 0ER,540753,171940,,,,,
+SW19 9FR,524321,170180,Unsurveyed/Urban,20.0,River Wandle,,Merton
+SN14 7DZ,386029,173334,Leptosols,120.0,,2670.0,Wiltshire
+TA1 4NX,320901,123395,Arenosols,30.0,,490.0,Somerset West and Taunton
+CT16 3BU,629255,143920,,50.0,River Dour,620.0,Dover
+RH12 4SU,517435,135554,,60.0,Boldings Brook,420.0,Horsham
+TR6 0HD,175809,53701,,,,390.0,Cornwall
+GU51 1JS,480433,155534,Podsols,,,380.0,Hart
+TW20 9PP,500320,170667,,,,570.0,Runnymede
+GU51 3DJ,481244,154599,Unsurveyed/Urban,80.0,,,
+UB3 2AP,509302,180896,Unsurveyed/Urban,40.0,Grand Union Canal,,
+GU15 1UA,490300,160400,Unsurveyed/Urban,120.0,,2090.0,Surrey Heath
+TA11 6LN,348647,128888,,,River Cary,1090.0,South Somerset
+BH15 2BH,401812,91376,Unsurveyed/Urban,10.0,Little Channel,1340.0,
+BS35 3JT,362514,188497,,90.0,,,
+TN31 7WJ,591947,120455,Luvisols,10.0,,,Rother
+SO9 7TW,442625,112690,,10.0,,890.0,
+PO22 7EY,495355,99992,,,,1170.0,
+RG11 7QT,483900,163700,Podsols,90.0,,280.0,Bracknell Forest
+RG26 6JE,459880,162118,,100.0,Bishop's Wood Stream,650.0,Basingstoke and Deane
+ME3 7AU,574571,168217,Unsurveyed/Urban,10.0,,580.0,Medway
+SE13 6LZ,538200,175300,Unsurveyed/Urban,,Quaggy River,1340.0,
+TR7 1LT,180466,61878,Unsurveyed/Urban,,River Gannel,960.0,Cornwall
+SO20 6DY,435931,137107,,40.0,,1170.0,
+TR1 3SZ,181836,45471,Unsurveyed/Urban,40.0,River Kenwyn,500.0,
+BR8 7YD,551336,169302,Unsurveyed/Urban,70.0,,2670.0,Sevenoaks
+BH13 7BX,406326,89670,,20.0,,80.0,"Bournemouth, Christchurch and Poole"
+BN41 2LT,525174,106083,,,West Arm,,
+BN9 7UA,541200,102600,Unsurveyed/Urban,,River Ouse,2530.0,Lewes
+TA20 1FD,332967,109798,Planosols,90.0,,,
+SM6 7NU,528535,164755,Unsurveyed/Urban,30.0,River Wandle,,
+CR4 6JT,530900,168300,,40.0,,3250.0,
+SW8 3BT,528703,175904,,10.0,,2400.0,
+BS19 1PB,350600,171500,Leptosols,80.0,,1400.0,North Somerset
+RG29 1JH,474496,149607,,110.0,River Whitewater,,Hart
+SE14 5AD,535851,176825,Unsurveyed/Urban,10.0,River Thames,,
+CR3 6HJ,533482,154494,Unsurveyed/Urban,150.0,,2170.0,Tandridge
+DA14 6RY,545600,171900,Unsurveyed/Urban,,,1300.0,
+CT16 1QN,632210,141628,Unsurveyed/Urban,10.0,River Dour,,Dover
+CR5 1PQ,530525,158220,,120.0,,,Croydon
+TN21 1AA,558163,121511,Luvisols,,,2250.0,Wealden
+RH16 1FL,533131,124714,Unsurveyed/Urban,50.0,Scrase Stream,,Mid Sussex
+BA16 0XP,350087,138997,,30.0,River Brue,650.0,Mendip
+BR8 8JF,551000,168200,Unsurveyed/Urban,80.0,,,
+KT9 1YU,518033,164512,Unsurveyed/Urban,40.0,,1440.0,Kingston upon Thames
+BH23 4PL,419514,94049,,20.0,Bure Brook,1180.0,"Bournemouth, Christchurch and Poole"
+PO9 9FE,472039,106225,Unsurveyed/Urban,,,,Havant
+EX31 4HQ,254935,140111,Histosols,,Colam Stream,360.0,North Devon
+DA14 4HX,546360,172491,,40.0,,1230.0,Bexley
+SW9 7LD,531539,175842,Unsurveyed/Urban,10.0,River Thames,3900.0,
+TN17 4DE,580995,132834,Planosols,,,,Tunbridge Wells
+KT22 7EL,516995,157136,Unsurveyed/Urban,,The Rye,1400.0,Mole Valley
+DT1 1ES,369760,90320,,60.0,River Frome,490.0,Dorset
+SE12 0AP,540488,173326,Unsurveyed/Urban,50.0,Quaggy River,,
+SE1 2EZ,533631,179716,Unsurveyed/Urban,10.0,Upper Pool,490.0,
+SW17 0QQ,527299,171435,,20.0,,,Wandsworth
+SL6 2NT,490740,176358,Planosols,30.0,,1680.0,Windsor and Maidenhead
+KT22 9RR,514600,156700,Planosols,40.0,River Mole,1080.0,
+PO6 1UR,467527,105038,Unsurveyed/Urban,,,1070.0,Portsmouth
+KT17 2AW,522179,162742,Unsurveyed/Urban,40.0,,650.0,Epsom and Ewell
+KT20 7TY,522486,154954,Unsurveyed/Urban,170.0,,4250.0,
+BS99 3DY,360204,173429,Unsurveyed/Urban,20.0,River Frome,,"Bristol, City of"
+PL31 1ED,207143,66895,Unsurveyed/Urban,100.0,,,Cornwall
+GU7 9TN,497259,144012,Unsurveyed/Urban,40.0,,360.0,Waverley
+RH1 6LJ,526486,149119,,,,950.0,
+TN1 2RL,558843,140240,,100.0,,1800.0,
+SW17 0ZU,526843,171761,Unsurveyed/Urban,,River Wandle,,Wandsworth
+SE11 5AG,530857,178489,Unsurveyed/Urban,10.0,,,
+TW14 0SZ,510800,175000,,,River Crane,910.0,Hounslow
+SO31 5WX,451208,108254,,50.0,,1150.0,
+SO2 9AD,443886,111110,Unsurveyed/Urban,20.0,River Itchen,,Southampton
+PO38 3HB,452506,82425,,30.0,,270.0,Isle of Wight
+GU22 2BJ,500740,158617,Unsurveyed/Urban,40.0,Basingstoke Canal,1020.0,
+SO1 9EE,438163,114427,Unsurveyed/Urban,,,1290.0,Southampton
+RG26 5AH,465906,159979,,60.0,,1220.0,Basingstoke and Deane
+TR11 3QW,180400,32400,,,,730.0,Cornwall
+DT1 2WD,368744,90712,Unsurveyed/Urban,80.0,River Frome,,Dorset
+EX31 3UX,253500,132093,,,,420.0,
+RH20 3BA,513383,117347,,40.0,,760.0,Horsham
+BH23 3LL,417804,92809,,0.0,River Mude,640.0,
+SW9 8EE,531019,175460,Unsurveyed/Urban,20.0,River Thames,3880.0,
+BS25 5RJ,341958,159130,,40.0,Churchill Rhyne,,North Somerset
+CT1 2NJ,614757,157692,,10.0,Great Stour,1230.0,Canterbury
+TW9 2AR,518722,176279,,10.0,,,Richmond upon Thames
+CR3 2SS,530300,159400,Unsurveyed/Urban,120.0,,5890.0,
+RG12 8NF,485549,169225,,60.0,,280.0,Bracknell Forest
+PO13 9XZ,458870,101036,,,,1350.0,Gosport
+CR7 6JY,530982,168299,Unsurveyed/Urban,40.0,,,
+ME3 8SL,577988,175337,Stagnosols,,,590.0,Medway
+RG24 0DF,466686,153121,,80.0,River Loddon,320.0,Basingstoke and Deane
+RG1 2BQ,471566,173428,,40.0,River Kennet,,Reading
+ME12 3TS,594805,171763,Stagnosols,20.0,,1020.0,
+CR0 8RP,536449,165206,Unsurveyed/Urban,,The Beck,1680.0,Croydon
+KT4 7QG,520200,165200,Planosols,,,1230.0,Kingston upon Thames
+DA7 6BU,549686,175581,Unsurveyed/Urban,,River Cray,,
+CT6 6QL,620240,168368,Unsurveyed/Urban,30.0,,,Canterbury
+TW17 0WL,508007,167313,Unsurveyed/Urban,,,2520.0,Spelthorne
+BA12 6FL,381740,131597,Stagnosols,,Shreen Water,940.0,Wiltshire
+TN5 6UH,563481,132391,,,,2240.0,
+SE24 9PW,532627,175039,Unsurveyed/Urban,30.0,River Thames,,Southwark
+BH23 2ZX,415856,92673,Unsurveyed/Urban,0.0,Mill Stream,,"Bournemouth, Christchurch and Poole"
+RH16 4YL,533300,123500,,70.0,,1580.0,
+ME9 9TW,595379,162916,Luvisols,10.0,,1360.0,Swale
+TR19 7HA,137167,31413,Histosols,120.0,,670.0,Cornwall
+SE3 8LZ,542201,175960,Unsurveyed/Urban,,Quaggy River,,Greenwich
+GU21 4WF,500740,158617,Unsurveyed/Urban,,Basingstoke Canal,1020.0,Woking
+BR7 5HN,542844,170358,Unsurveyed/Urban,60.0,,,Bromley
+GU51 1LE,480302,155156,,,,780.0,Hart
+DA7 6HB,550079,176119,Unsurveyed/Urban,50.0,,1910.0,
+SL6 9YX,489079,180680,,30.0,White Brook,1740.0,
+SO3 4ST,448773,113588,,30.0,,,Eastleigh
+ME5 8LW,577137,164551,Luvisols,,,4910.0,
+PO22 9AT,492389,100854,Unsurveyed/Urban,10.0,,1210.0,Arun
+BA1 4LB,372169,167274,,80.0,,800.0,
+PO21 9AU,493770,99105,,,Aldingbourne Rife,,
+GU7 1NH,498129,144511,Unsurveyed/Urban,40.0,River Wey,,Waverley
+TN2 3XJ,559924,142133,,,,400.0,
+BA1 2DT,374542,165399,Unsurveyed/Urban,50.0,,,Bath and North East Somerset
+PO36 8AG,460085,84340,,,,810.0,Isle of Wight
+TN21 8WG,558877,121543,Luvisols,170.0,,810.0,Wealden
+DT2 9BE,353679,88790,Leptosols,80.0,River Bride,910.0,
+BA9 9QA,371062,128496,Unsurveyed/Urban,,,430.0,
+TN17 9EW,577605,136035,Luvisols,,Crane Brook,1600.0,Tunbridge Wells
+TN23 4XW,600070,142088,,40.0,Great Stour,430.0,Ashford
+BS16 2SP,364573,177111,,,River Frome,910.0,South Gloucestershire
+SW16 1WD,530045,171870,Unsurveyed/Urban,50.0,,4050.0,Lambeth
+BN3 3UF,529099,105474,Unsurveyed/Urban,30.0,River Adur,,Brighton and Hove
+BH15 9FA,401109,90659,Unsurveyed/Urban,10.0,Little Channel,,
+TA18 7ND,344127,110930,Cambisols,50.0,Gould's Brook,,South Somerset
+KT10 9AE,515400,165700,Unsurveyed/Urban,,,740.0,Elmbridge
+SO21 3BY,454610,142270,,120.0,,5230.0,
+BS37 9WW,371389,182380,Unsurveyed/Urban,80.0,River Frome,,
+GU21 5GZ,500740,158617,Unsurveyed/Urban,40.0,Basingstoke Canal,,Woking
+ME12 3FR,594605,172265,Stagnosols,,,,Swale
+PO10 8HL,476671,105765,,10.0,Ham Brook,1240.0,Chichester
+ME2 3UG,570717,169535,Luvisols,80.0,,2600.0,
+OX9 7DQ,469687,199674,,,Haseley Brook,130.0,South Oxfordshire
+TA1 4DY,322451,124361,Unsurveyed/Urban,,Gaol Stream,100.0,Somerset West and Taunton
+SE25 6ZA,533661,168470,,60.0,,2260.0,
+TA22 9NF,293944,127711,,,River Haddeo,620.0,Somerset West and Taunton
+TN21 8HN,558260,121511,,150.0,,2240.0,Wealden
+BS40 7XN,351506,156992,Luvisols,,,,Mendip
+PL11 2LW,243459,55143,,20.0,River Tamar,820.0,
+TA1 9JL,322271,125483,,20.0,Mill Lease Stream,,Somerset West and Taunton
+TR11 4NY,181589,32045,,,,1580.0,Cornwall
+BN4 1AF,526200,105200,Unsurveyed/Urban,10.0,,2780.0,Brighton and Hove
+PO21 2BX,493243,99508,Unsurveyed/Urban,,Aldingbourne Rife,1580.0,Arun
+CT20 3TP,620041,135932,Unsurveyed/Urban,60.0,,1400.0,Folkestone and Hythe
+BN52 9BH,529099,105474,Unsurveyed/Urban,30.0,River Adur,,Brighton and Hove
+SO31 7GW,450019,110011,Planosols,10.0,River Hamble,,Fareham
+SE10 9YS,540202,178646,Unsurveyed/Urban,10.0,,2960.0,Greenwich
+RG11 3BJ,482512,166687,Luvisols,,,280.0,
+SE17 9DR,532118,178403,Unsurveyed/Urban,10.0,,2400.0,Southwark
+BN7 1AS,540702,110130,Unsurveyed/Urban,,Papermill Cut,880.0,Lewes
+UB8 2WB,505009,183132,,30.0,River Colne,1320.0,Hillingdon
+BS18 1SB,366009,167397,Unsurveyed/Urban,,,670.0,Bath and North East Somerset
+W4 1ZT,520717,178385,Unsurveyed/Urban,10.0,,1580.0,Hounslow
+CR9 6BU,533682,166322,Unsurveyed/Urban,60.0,,3290.0,
+SE17 9DX,532118,178403,Unsurveyed/Urban,10.0,,2400.0,Southwark
+BH12 3YJ,406189,93423,Podsols,50.0,,,"Bournemouth, Christchurch and Poole"
+TA1 3XU,322267,125484,,20.0,Mill Lease Stream,,Somerset West and Taunton
+BH21 1JQ,401020,100069,Unsurveyed/Urban,20.0,River Allen,,Dorset
+TA7 8RL,334116,137623,,,King's Sedgemoor Drain,,
+EX37 9ER,262955,117963,Cambisols,,,1080.0,North Devon
+PL28 8NQ,188112,73710,Cambisols,50.0,,1030.0,
+TW10 7YN,517053,171720,,10.0,River Thames,,
+ME10 1JG,590076,163538,Unsurveyed/Urban,,,3870.0,
+SO40 3XZ,435426,113919,Unsurveyed/Urban,10.0,,830.0,New Forest
+TN2 9TP,546600,120788,,20.0,River Uck,140.0,
+SE1 1XS,532693,180068,Unsurveyed/Urban,10.0,Upper Pool,1030.0,
+BS99 5WR,360204,173429,,20.0,River Frome,820.0,"Bristol, City of"
+DA12 5AG,565090,172537,,30.0,River Thames,2370.0,Gravesham
+BN2 8WQ,536888,102381,Unsurveyed/Urban,,River Ouse,,
+EX7 9JF,296235,76868,Cambisols,30.0,Dawlish Water,490.0,
+GU32 1YH,468640,124206,Cambisols,170.0,River Meon,,
+GU27 9FS,488979,132609,Podsols,130.0,,350.0,Waverley
+ME3 8AN,578521,175607,Stagnosols,,,1070.0,
+TA6 6WT,330074,134912,,,Stock Moor Rhyne,400.0,Sedgemoor
+SW18 1DR,525820,174771,,10.0,River Wandle,,Wandsworth
+RH15 8YZ,529752,118802,Planosols,30.0,,170.0,Mid Sussex
+BA14 0ZW,385789,157986,,40.0,River Biss,520.0,
+SO15 3GE,439999,113032,,10.0,Tanner's Brook,,
+BS37 6HJ,372065,182127,Unsurveyed/Urban,90.0,River Frome,,South Gloucestershire
+EX1 9JG,292653,92961,Unsurveyed/Urban,40.0,,1330.0,Exeter
+ME8 8AH,579385,166161,Cambisols,,,4180.0,Medway
+TA9 3BD,331590,147443,,10.0,River Brue,3240.0,Sedgemoor
+BA2 4PF,375308,164200,,30.0,,1820.0,Bath and North East Somerset
+BN9 7EH,540100,101200,Unsurveyed/Urban,30.0,,4220.0,
+DT6 5LJ,347272,98445,Cambisols,30.0,,1440.0,
+W4 3LJ,520030,177824,Unsurveyed/Urban,,River Thames,,Hounslow
+RG27 8UY,476700,157000,,,,870.0,
+UB7 0AY,505876,177723,Luvisols,,River Colne,2090.0,Hillingdon
+BS18 3AA,368195,166632,Unsurveyed/Urban,60.0,River Avon,,
+TN11 0HZ,563552,150381,Planosols,30.0,,,Tonbridge and Malling
+BN99 9AB,517706,104201,,10.0,,1030.0,
+BH10 7DG,408925,95716,Unsurveyed/Urban,20.0,,1470.0,"Bournemouth, Christchurch and Poole"
+RG5 4RP,476855,174539,Unsurveyed/Urban,50.0,,1470.0,Wokingham
+GU12 4XQ,486977,150005,,90.0,,1050.0,
+TR18 4DW,147440,29956,Unsurveyed/Urban,,Larriggan River,840.0,Cornwall
+PL5 4DZ,247006,59760,Unsurveyed/Urban,40.0,,500.0,Plymouth
+TN16 1ZD,545452,154184,,110.0,,400.0,Sevenoaks
+EX39 3RL,244511,126599,Unsurveyed/Urban,30.0,,,Torridge
+SO1 3QP,439769,113267,Unsurveyed/Urban,10.0,Tanner's Brook,800.0,
+BN14 7EG,513891,103389,Unsurveyed/Urban,10.0,,2350.0,
+PO2 8PE,464542,103016,Unsurveyed/Urban,0.0,,1550.0,Portsmouth
+RG24 8BQ,465674,154314,Planosols,,Petty's Brook,1480.0,Basingstoke and Deane
+BN21 4HU,560956,98597,Unsurveyed/Urban,10.0,,2020.0,Eastbourne
+RG14 7DB,447189,165961,Unsurveyed/Urban,100.0,,1190.0,West Berkshire
+PO4 9DJ,466145,99206,Unsurveyed/Urban,10.0,Shut Lake,,Portsmouth
+CR2 5NE,532000,160400,,,River Wandle,5630.0,Croydon
+PO9 2AR,471692,106724,Unsurveyed/Urban,10.0,,700.0,
+SW14 9DP,520531,175904,,,River Thames,920.0,Richmond upon Thames
+CT5 1LA,610899,166932,,10.0,,2570.0,Canterbury
+SE1 9WZ,533378,178838,,,Upper Pool,,Southwark
+TW12 2FY,513447,169655,Unsurveyed/Urban,10.0,,1000.0,Richmond upon Thames
+BH18 9YH,399707,95591,Unsurveyed/Urban,50.0,,,
+SE3 8EX,541900,176700,,50.0,,2770.0,Greenwich
+TN23 2QJ,600141,142029,Unsurveyed/Urban,,Great Stour,520.0,Ashford
+GU27 2RR,490521,133119,Podsols,,,,Waverley
+TN11 0DJ,563473,149969,Luvisols,,River Bourne,740.0,Tonbridge and Malling
+TW5 9XS,513939,175863,Unsurveyed/Urban,20.0,River Crane,2230.0,
+TW7 6SR,517054,177215,Unsurveyed/Urban,,,,
+BN16 9SF,503071,101978,Unsurveyed/Urban,10.0,River Arun,800.0,
+SN15 3QQ,392042,173675,Unsurveyed/Urban,60.0,,740.0,Wiltshire
+DT11 8JY,393859,111027,Leptosols,70.0,The Tarrant,,Dorset
+SO2 4FR,444702,114115,Unsurveyed/Urban,60.0,River Itchen,,Southampton
+SO51 0NR,434297,126563,Leptosols,,River Test,,Test Valley
+SO19 2FL,444728,111693,Unsurveyed/Urban,,River Itchen,1670.0,Southampton
+KT16 0NU,502047,163659,Podsols,,,860.0,
+SW20 8RL,523709,169636,Unsurveyed/Urban,20.0,,2510.0,Merton
+KT1 1NP,518212,169316,Unsurveyed/Urban,,Hogsmill River,1150.0,Kingston upon Thames
+BN16 3LU,504983,103033,,,,,Arun
+CT20 3DA,620095,135084,Unsurveyed/Urban,10.0,Royal Military Canal,,Folkestone and Hythe
+SW4 9HL,529026,174522,Unsurveyed/Urban,,River Thames,3290.0,Lambeth
+RH19 1PA,537995,139117,Unsurveyed/Urban,110.0,Felbridge Water,1250.0,
+PO38 2DH,450836,77084,Luvisols,110.0,,320.0,Isle of Wight
+SW17 0TH,527162,170948,Unsurveyed/Urban,20.0,River Wandle,,Wandsworth
+BA14 6RF,386630,161663,Cambisols,40.0,,240.0,Wiltshire
+BS34 6EX,361488,181413,,60.0,Stoke Brook,,South Gloucestershire
+SW9 0TS,530828,176241,,10.0,River Thames,3140.0,Lambeth
+BS1 1XU,358664,172903,Unsurveyed/Urban,10.0,,760.0,
+SE24 9YJ,532008,174437,Unsurveyed/Urban,20.0,,5290.0,
+TN8 6JE,543941,147988,Unsurveyed/Urban,60.0,Kent Brook,,Sevenoaks
+CT5 4WE,611096,166539,,10.0,,,Canterbury
+BN2 4GL,532363,106424,Unsurveyed/Urban,30.0,,8820.0,Brighton and Hove
+TQ1 2XA,292955,63613,,,,,Torbay
+SO15 4HT,439097,113279,Unsurveyed/Urban,10.0,,200.0,Southampton
+SW9 6FG,531442,176576,Unsurveyed/Urban,10.0,River Thames,3330.0,
+TN39 5DY,573321,109560,Unsurveyed/Urban,50.0,Watermill Stream,2430.0,
+TN2 5YW,559924,142133,Planosols,70.0,,,Tunbridge Wells
+PL24 2PU,207921,54301,Cambisols,20.0,,,Cornwall
+SP7 8NJ,386955,122702,Unsurveyed/Urban,200.0,River Nadder,2950.0,
+BA12 9AY,387440,145108,Unsurveyed/Urban,,The Were,,Wiltshire
+PO10 7YZ,474902,105976,Unsurveyed/Urban,40.0,,410.0,Havant
+SO5 5RT,445568,118965,Unsurveyed/Urban,,,,Eastleigh
+BS30 9UB,366108,170897,Unsurveyed/Urban,,Siston Brook,640.0,South Gloucestershire
+BN9 9BQ,544714,101325,Unsurveyed/Urban,,River Ouse,240.0,Lewes
+BA2 4NB,375697,163728,Unsurveyed/Urban,40.0,Kennet and Avon Canal,,Bath and North East Somerset
+BS5 7BP,362079,174093,Unsurveyed/Urban,50.0,River Frome,,"Bristol, City of"
+DT2 9UD,367960,94966,Leptosols,110.0,River Cerne,900.0,
+CT8 8RQ,632709,170048,,10.0,,4950.0,Thanet
+SE19 2HS,533915,170282,Unsurveyed/Urban,90.0,,2430.0,Bromley
+PO20 1EH,488764,103794,Luvisols,10.0,,1360.0,Chichester
+TN34 1TD,581230,109683,Unsurveyed/Urban,,,,
+SO19 9QQ,445366,109923,Luvisols,20.0,,210.0,Southampton
+SE26 6UG,534865,171020,Unsurveyed/Urban,60.0,,,Bromley
+BS16 6QN,365304,177221,,,,1480.0,
+UB3 2LG,509788,180948,Unsurveyed/Urban,40.0,Grand Union Canal,,
+BS11 9TX,353214,176677,,,River Avon,,
+BS23 1EN,332104,160524,Unsurveyed/Urban,10.0,Uphill Great Rhyne,,North Somerset
+HA5 2QD,510293,189507,Unsurveyed/Urban,60.0,,2690.0,Hillingdon
+SO4 3RS,435980,113524,,0.0,Bartley Water,1420.0,New Forest
+BN41 2TF,524990,106813,Unsurveyed/Urban,50.0,West Arm,3100.0,
+SP2 9LJ,412426,131193,Unsurveyed/Urban,80.0,,960.0,
+RH15 9XS,529441,119365,Planosols,30.0,,490.0,Mid Sussex
+SW19 6FZ,524321,170180,Unsurveyed/Urban,,River Wandle,3040.0,Merton
+RG21 8WS,462324,153509,Unsurveyed/Urban,110.0,,1740.0,
+EX4 4FJ,292082,92376,Unsurveyed/Urban,30.0,,,Exeter
+TW10 7WS,517837,175249,Unsurveyed/Urban,10.0,,,
+BN23 7QQ,563539,103379,Gleysols,,Mountney Sewer,450.0,Eastbourne
+RG20 5NN,452931,158654,Planosols,110.0,,500.0,Basingstoke and Deane
+SE12 8WX,542733,174310,,60.0,,,Greenwich
+PO14 1QL,456054,105574,,,,,
+TN16 3EZ,543944,159108,,,River Darent,4940.0,Bromley
+GU16 6ZU,486025,159807,,,,420.0,Surrey Heath
+BN7 1SH,540678,110166,Unsurveyed/Urban,,Papermill Cut,,
+ME3 9ET,577633,172238,Luvisols,,,,Medway
+CR4 2DS,528275,170256,Unsurveyed/Urban,,River Wandle,2500.0,Merton
+BH19 1PJ,402834,79773,,20.0,,740.0,Dorset
+BA11 5WZ,376700,148600,Cambisols,110.0,River Frome,,Mendip
+TQ12 4QA,291598,70504,Cambisols,40.0,,,
+RH77 1AF,528138,139315,Planosols,70.0,Gatwick Stream,,Crawley
+CR0 5NJ,533166,164734,Unsurveyed/Urban,60.0,River Wandle,,Croydon
+TQ9 6UQ,278800,61900,,30.0,Bidwell Brook,,
+TR7 3DN,183031,62092,Unsurveyed/Urban,,,830.0,Cornwall
+SN15 3RT,394771,171371,Stagnosols,60.0,,1170.0,Wiltshire
+BH9 2PY,408415,94104,Unsurveyed/Urban,40.0,,,
+TR20 8TJ,145194,29693,Cambisols,50.0,,,Cornwall
+BN1 2WB,531040,104624,Unsurveyed/Urban,,River Adur,,Brighton and Hove
+CR0 7JX,534573,165817,Unsurveyed/Urban,,,2970.0,Croydon
+PL31 1JG,206736,66969,Unsurveyed/Urban,,,,Cornwall
+BR3 3DF,537538,167427,Unsurveyed/Urban,,The Beck,1000.0,Bromley
+OX49 5RP,470646,196857,,120.0,,1920.0,South Oxfordshire
+SL6 2XG,489079,180680,Arenosols,30.0,,1740.0,
+PL4 7YW,249400,55500,,30.0,River Plym,1520.0,Plymouth
+HA4 8EE,510370,187892,Unsurveyed/Urban,,Yeading Brook,,Hillingdon
+PL25 9HE,203781,52688,Gleysols,,,,
+RH17 5WU,533131,124714,Unsurveyed/Urban,50.0,,,
+BN12 6RT,511016,103522,Unsurveyed/Urban,,Ferring Rife,1160.0,Worthing
+BA2 1RX,371966,164835,Unsurveyed/Urban,50.0,,1650.0,Bath and North East Somerset
+PO15 5EA,453750,107210,Arenosols,30.0,,450.0,Fareham
+PL6 8QF,251130,57789,Unsurveyed/Urban,,,430.0,
+SP11 6JH,437750,149093,,100.0,River Anton,3220.0,
+SO2 6LP,446922,111863,Unsurveyed/Urban,50.0,,2620.0,Southampton
+BH15 3AY,401273,92481,,,,,"Bournemouth, Christchurch and Poole"
+BR5 2JZ,546711,168728,Unsurveyed/Urban,50.0,River Cray,,Bromley
+BR8 7YE,551292,169309,Unsurveyed/Urban,70.0,,2620.0,Sevenoaks
+DA3 7DP,560884,168506,Unsurveyed/Urban,70.0,River Darent,,Sevenoaks
+EX2 8GJ,291677,91211,,10.0,River Exe,720.0,Exeter
+EX10 8JR,313168,87873,Unsurveyed/Urban,40.0,River Sid,,East Devon
+BA15 1ZP,375350,164483,,20.0,River Avon,1780.0,Bath and North East Somerset
+BN41 1EE,526216,104960,Unsurveyed/Urban,10.0,,,Brighton and Hove
+BR3 4ET,536928,169373,,,The Beck,,
+SW15 9GH,523857,175007,,,Beverley Brook,,
+GU11 2HW,487500,153500,Unsurveyed/Urban,80.0,,,
+DA14 5DW,547042,170483,,40.0,River Cray,560.0,
+TR3 6EB,179161,43078,Stagnosols,80.0,,730.0,Cornwall
+SE28 8PB,547843,180945,Unsurveyed/Urban,0.0,,300.0,
+ME8 8LX,581848,165910,Unsurveyed/Urban,40.0,,4080.0,Medway
+BN7 1UH,541424,109930,Unsurveyed/Urban,20.0,River Ouse,710.0,
+TW1 3TN,516240,173174,Unsurveyed/Urban,10.0,,1790.0,Richmond upon Thames
+DA7 4XW,548487,176085,Unsurveyed/Urban,50.0,,3070.0,
+OX9 2EZ,469032,205229,,,Cuttle Brook,1050.0,South Oxfordshire
+EX23 9NH,225466,105902,Cambisols,,,710.0,
+UB10 9LA,506884,184381,Unsurveyed/Urban,,River Pinn,370.0,Hillingdon
+RH4 1TH,517084,150357,Unsurveyed/Urban,50.0,,90.0,Mole Valley
+BH23 7BB,415626,97110,Luvisols,,,1000.0,New Forest
+CR0 4XB,530226,166531,,40.0,River Wandle,1410.0,
+SO23 5DD,449331,130038,Unsurveyed/Urban,50.0,River Itchen,,Winchester
+CT1 3PF,615566,156925,Unsurveyed/Urban,,,,
+KT10 9ER,514181,163531,Unsurveyed/Urban,,,600.0,Elmbridge
+SW19 3FG,524321,170180,,20.0,,3040.0,Merton
+BH14 4DA,403680,91738,Unsurveyed/Urban,30.0,,2310.0,"Bournemouth, Christchurch and Poole"
+BR3 5BU,537708,170382,Unsurveyed/Urban,,Ravensbourne River,,Bromley
+SW4 9ZR,529353,175449,Unsurveyed/Urban,20.0,River Thames,3280.0,
+UB3 9JW,510140,179496,Unsurveyed/Urban,30.0,,570.0,
+SO1 1JA,442671,111962,Unsurveyed/Urban,10.0,,,Southampton
+BS20 8DP,345118,176526,Unsurveyed/Urban,,,2470.0,North Somerset
+UB4 0QJ,510247,181691,Unsurveyed/Urban,40.0,Yeading Brook,,Hillingdon
+KT8 2HP,512589,167587,Unsurveyed/Urban,20.0,,470.0,Elmbridge
+GU2 5AG,498651,150664,,,,1380.0,Guildford
+RH5 5DE,519600,141700,,80.0,Beam Brook,,Mole Valley
+SW17 9UX,527625,171548,,,River Wandle,1910.0,Wandsworth
+SP5 5AX,389059,118525,Luvisols,240.0,,1820.0,Dorset
+TN21 8HE,558307,121307,Luvisols,140.0,,1110.0,
+RG4 5AT,472266,174707,,40.0,,630.0,
+RG24 9DJ,464254,153978,Unsurveyed/Urban,,,1730.0,Basingstoke and Deane
+TN27 9LX,584549,144671,Planosols,,River Sherway,640.0,Maidstone
+SO21 2NF,442481,131881,,110.0,,6260.0,
+TW13 6NW,512528,171759,,,,2810.0,Hounslow
+BH12 9HY,406189,93423,,50.0,,340.0,"Bournemouth, Christchurch and Poole"
+SW1P 2UP,529548,177433,Unsurveyed/Urban,0.0,River Thames,1430.0,
+TQ7 1RL,273739,44341,Cambisols,,,550.0,South Hams
+SW19 5NA,523675,171259,,50.0,,1760.0,Merton
+TW20 0LU,500337,171200,Arenosols,,,1250.0,Runnymede
+TW1 9HX,515984,173661,,10.0,,1450.0,
+TN9 9QT,559913,145919,Unsurveyed/Urban,,,,Tonbridge and Malling
+SW16 1JH,530013,172283,Unsurveyed/Urban,50.0,River Wandle,,Lambeth
+GU5 0DR,500913,145718,Luvisols,,,380.0,Guildford
+EX14 0UX,313892,106574,Luvisols,260.0,,1460.0,East Devon
+SW11 3RX,526746,176088,,10.0,River Thames,520.0,Wandsworth
+PO2 7NZ,465000,101400,Unsurveyed/Urban,10.0,,2410.0,Portsmouth
+EX4 3PT,292161,92877,Unsurveyed/Urban,,River Exe,1160.0,Exeter
+BR5 2LX,546278,168672,Unsurveyed/Urban,70.0,,,Bromley
+KT10 8AY,513575,165993,Unsurveyed/Urban,10.0,River Mole,,Elmbridge
+KT9 2PF,517700,162900,Cambisols,50.0,,1190.0,
+TW2 7LH,514224,173585,Unsurveyed/Urban,20.0,,340.0,
+BH2 5LP,408470,91198,Unsurveyed/Urban,10.0,,,"Bournemouth, Christchurch and Poole"
+TR3 6EW,181338,41861,,,,,Cornwall
+PO2 8HJ,464800,102300,,,,1840.0,Portsmouth
+SE1 2HF,533091,180233,Unsurveyed/Urban,,Upper Pool,630.0,Southwark
+SW9 7DW,531800,175700,Unsurveyed/Urban,20.0,River Thames,4190.0,
+TW6 3HZ,507500,175700,Unsurveyed/Urban,20.0,River Colne,3170.0,
+DA13 9JZ,563460,170308,Cambisols,60.0,River Thames,4640.0,
+BN1 2XQ,531040,104624,Unsurveyed/Urban,30.0,River Adur,7560.0,
+PO30 5QH,447402,89224,,,,1360.0,Isle of Wight
+RH1 5AF,527844,147885,Planosols,60.0,,380.0,Reigate and Banstead
+BS18 4XH,358358,159327,,70.0,,600.0,Bath and North East Somerset
+HA4 9UX,511100,187500,Unsurveyed/Urban,50.0,Yeading Brook,,Hillingdon
+SO18 4EG,444531,113298,Unsurveyed/Urban,,River Itchen,1130.0,
+TA6 4HW,331339,136689,Unsurveyed/Urban,,Bridgwater and Taunton Canal,2580.0,Sedgemoor
+RH10 0FS,526911,136846,Unsurveyed/Urban,70.0,Gatwick Stream,3070.0,
+GU12 4FX,486560,150681,,90.0,,,Rushmoor
+TQ9 6WA,278943,61438,,50.0,Bidwell Brook,770.0,South Hams
+RG4 7BD,470425,175493,Unsurveyed/Urban,,River Thames,730.0,Reading
+PO1 3HH,463701,100612,Unsurveyed/Urban,,,1340.0,Portsmouth
+BH23 2JX,414902,93972,Unsurveyed/Urban,10.0,,790.0,"Bournemouth, Christchurch and Poole"
+SW19 5AG,524151,172310,Unsurveyed/Urban,30.0,,,
+RG27 9GE,472785,153914,,80.0,River Whitewater,,
+SE22 8WS,533992,174568,,30.0,,4090.0,Southwark
+TQ9 6SL,284818,57406,,,,450.0,South Hams
+BS17 6DR,373157,181793,Unsurveyed/Urban,110.0,River Frome,,South Gloucestershire
+GU31 4SR,475081,124089,,80.0,Tilmore Brook,,East Hampshire
+EX7 9WA,295966,76636,Cambisols,10.0,,210.0,Teignbridge
+RG24 7JA,466500,152000,,100.0,River Loddon,1010.0,Basingstoke and Deane
+SO5 8PR,437200,121500,,30.0,,120.0,
+KT21 9BE,518560,158066,,70.0,The Rye,2410.0,Mole Valley
+TW16 6PF,510102,168971,Unsurveyed/Urban,20.0,,3010.0,
+RG42 6BW,486932,171398,Planosols,,The Cut,,Bracknell Forest
+DT2 8US,372639,86448,Leptosols,60.0,,,Dorset
+ME13 0ET,599782,155845,Leptosols,80.0,,5680.0,Swale
+TN15 8BB,560724,157282,Luvisols,,,260.0,
+BH14 9BX,405106,92096,Unsurveyed/Urban,,,1880.0,
+RH4 1LJ,517015,150073,Unsurveyed/Urban,50.0,Pipp Brook,,Mole Valley
+PL34 0DU,205836,87866,,100.0,,720.0,
+SN16 0JW,389811,184889,,90.0,,480.0,
+BH20 7JH,385399,96645,Luvisols,,,3410.0,Dorset
+BN21 4DE,559875,99669,Unsurveyed/Urban,,,,Eastbourne
+KT18 5BA,520934,160353,Unsurveyed/Urban,50.0,,1710.0,Epsom and Ewell
+BN50 9XQ,531040,104624,Unsurveyed/Urban,30.0,,,Brighton and Hove
+BH22 8SG,408515,98030,,20.0,,950.0,Dorset
+PO36 0ET,459152,86140,Luvisols,,River Yar,810.0,Isle of Wight
