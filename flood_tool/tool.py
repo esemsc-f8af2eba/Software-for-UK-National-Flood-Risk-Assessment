@@ -9,6 +9,16 @@ import numpy as np
 import pandas as pd
 
 from .geo import *  # noqa: F401, F403
+from .geo import get_gps_lat_long_from_easting_northing
+
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.impute import KNNImputer, SimpleImputer
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler, RobustScaler, OneHotEncoder, OrdinalEncoder, FunctionTransformer
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.cluster import KMeans
+
 
 __all__ = [
     'Tool',
@@ -31,18 +41,24 @@ _example_dir = os.path.join(os.path.dirname(__file__), 'example_data')
 # You should add your own methods here
 flood_class_from_postcode_methods = {
     'all_zero_risk': 'All zero risk',
+    'predicting_all_risks': 'all risks'
 }
 flood_class_from_location_methods = {
     'all_zero_risk': 'All zero risk',
+    'predicting_risk_from_easting_northing': 'easting/northing based risk',
+    'predicting_risk_from_latitude_longitude': 'latitude/longitude based risk'
 }
 historic_flooding_methods = {
     'all_false': 'All False',
+    'historic_flooding': 'KNN model for historic flooding',
 }
 house_price_methods = {
     'all_england_median': 'All England median',
+    'house_price_rf': 'Predicting Median House Price using Random Forest Regressor',
 }
 local_authority_methods = {
     'all_nan': 'All NaN',
+    'local_authority': 'Random Forest Model for Local Authority Prediction',
 }
 
 IMPUTATION_CONSTANTS = {
@@ -104,8 +120,14 @@ class Tool(object):
                                          'district_data.csv')
 
         self._postcodedb = pd.read_csv(labelled_unit_data)
+        self._sector_data = pd.read_csv(sector_data)
+        self._unlabelled_unit_data = pd.read_csv(unlabelled_unit_data)
+        self._district_data = pd.read_csv(district_data)
 
-        # continue your work here
+        # # continue your work here
+        # self.fit(models=['local_authority'])
+        # self.fit(models=['house_price_rf'])
+        # self.fit(models=['historic_flooding'])
 
     def fit(self, models: List = [], update_labels: str = '',
             update_hyperparameters: bool = False, **kwargs):
@@ -134,15 +156,382 @@ class Tool(object):
         >>> classes = tool.predict_flood_class_from_postcode(
         ...    ['M34 7QL'], fcp_methods[0])  # doctest: +SKIP
         '''
-
         if update_labels:
             print('updating labelled sample file')
             # update your labelled postcodes data set here
 
+            self._postcodedb = pd.read_csv(update_labels)
+
         for model in models:
-            if update_hyperparameters:
-                print(f'tuning {model} hyperparameters')
-                # Do your hyperparameter tuning for the specified model
+
+            if model == 'local_authority':
+                print('Training model for Local Authority Prediction...')
+                la_data_cols = ['easting', 'northing', 'localAuthority']
+                la_data = self._postcodedb[la_data_cols]
+                X = la_data.drop('localAuthority', axis=1)
+                y = la_data['localAuthority']
+
+                rf_model = RandomForestClassifier(
+                    n_estimators=100,
+                    max_depth=None,
+                    random_state=42,
+                    class_weight='balanced',
+                )
+
+                rf_model.fit(X, y)
+
+                self.rf_model = rf_model
+
+                print("Model trained successfully.")
+
+            if model == 'house_price_rf':
+                print('Training model for Median House Price Prediction...')
+
+                data = pd.concat([self._postcodedb[:-1], self._unlabelled_unit_data])
+                data['postcodeSector'] = data['postcode'].str.split(' ').str[0] + ' ' + data['postcode'].str.split(' ').str[1].str[0]
+                data['postcodeDistrict'] = data['postcode'].str.split(' ').str[0]
+
+                data = data.merge(self._district_data, on='postcodeDistrict', how='left')
+                data = data.merge(self._sector_data, on='postcodeSector', how='left')
+                postcode_col = data['postcode']
+
+                data.drop(columns=['nearestWatercourse','catsPerHousehold', 'headcount','historicallyFlooded', 'riskLabel','postcode', 'postcodeDistrict','postcodeSector'], inplace=True)
+
+                data = data.dropna(subset=['medianPrice'])
+
+                X = data.drop('medianPrice', axis=1).copy()
+                y = data['medianPrice'].copy()
+
+                def log_function(x):
+                    x_min = np.min(x, axis=0)  # Calculate the minimum of each column
+                    x_shifted = x - x_min      # Shift by the minimum
+                    return np.log1p(x_shifted) # Apply log(1 + x_shifted)
+
+                robust_scaler_features = ['distanceToWatercourse']
+                # log_transform_features = ['easting','northing' ,'elevation', 'distanceToWatercourse', 'dogsPerHousehold','households','numberOfPostcodeUnits']
+
+                onehot_encoding_features = ['soilType']
+                ordinal_encoder_features = ['localAuthority']
+                standard_scaler_features = ['easting','northing','elevation', 'dogsPerHousehold','households','numberOfPostcodeUnits']
+                robust_scaler_features = ['distanceToWatercourse']
+
+                # log_transform_features = ['easting','northing' ,'elevation', 'distanceToWatercourse', 'dogsPerHousehold','households','numberOfPostcodeUnits']
+                onehot_encoding_features = ['soilType']
+                ordinal_encoder_features = ['localAuthority']#, 'postcodeSector']
+                standard_scaler_features = ['easting','northing','elevation', 'dogsPerHousehold','households','numberOfPostcodeUnits']
+
+
+                log_transformer = FunctionTransformer(log_function, feature_names_out='one-to-one')
+
+                log_transform_pipeline = Pipeline(steps=[
+                    ('log_transform', log_transformer)
+                ])
+
+                distanceToWatercourse_pipeline = Pipeline(steps=[
+                    ('imputer', SimpleImputer(strategy='mean')),
+                    ('log', log_transform_pipeline),
+                    ('scaler', RobustScaler())
+                ])
+
+                standard_scaler_features_pipeline = Pipeline(steps=[
+                    ('imputer', SimpleImputer(strategy='mean')),
+                    ('log', log_transform_pipeline),
+                    ('scaler', StandardScaler())
+                ])
+
+                onehot_encoder_pipeline = Pipeline(steps=[
+                    ('onehot', OneHotEncoder(handle_unknown='ignore', sparse_output=False))
+                ])
+
+                ordinal_encoder_pipeline = Pipeline(steps=[
+                    ('ordinal', OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=-1))
+                ])
+
+                preprocessor = ColumnTransformer(transformers=[
+                    ('robust_scaler', distanceToWatercourse_pipeline, robust_scaler_features),
+                    ('num', standard_scaler_features_pipeline, standard_scaler_features),
+                    ('onehot_encoder', onehot_encoder_pipeline, onehot_encoding_features),
+                    ('ordinal_encoder', ordinal_encoder_pipeline,ordinal_encoder_features)], 
+                    remainder='passthrough')
+
+
+                prep_pipe = Pipeline(steps=[
+                    ('preprocessor', preprocessor)
+                ])
+
+                X = data.drop(columns=['medianPrice']).copy()
+                y = data['medianPrice'].copy()
+
+                X = prep_pipe.fit_transform(X)
+                self.hp_data = pd.concat([postcode_col, pd.DataFrame(X)], axis=1)
+
+                house_model = RandomForestRegressor(n_estimators=50, min_samples_split=2, min_samples_leaf=4, max_depth=20, random_state=42)
+
+                house_model.fit(X, y)
+
+                self.house_model = house_model
+
+                print("House Price Model trained successfully.")
+
+            if model == 'historic_flooding':
+                print('Training KNN for historic flood')
+                pc_data_col = ["postcode", "medianPrice", "easting", "northing", "elevation", "distanceToWatercourse", "riskLabel", "historicallyFlooded", 'soilType']
+                pc_data = self._postcodedb[pc_data_col]
+                X = pc_data.drop(columns=["historicallyFlooded", "riskLabel", "medianPrice"])
+                y = pc_data['historicallyFlooded']
+ 
+                X[["outward", "inward"]] = X["postcode"].str.split(" ", expand=True)
+ 
+                X = X.drop(columns=["postcode"])
+ 
+                log_transform_cols = ['elevation', 'distanceToWatercourse']
+ 
+                categorical_transformer = Pipeline(steps=[
+                    ('imputer', SimpleImputer(strategy='most_frequent')),
+                    ('encoder', OneHotEncoder(handle_unknown='ignore'))
+                ])
+ 
+                encoded_transformer = Pipeline(steps=[
+                    ('encoder', OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1))
+                ])
+ 
+                # Log transformation for skewed features
+                def log_positive_negative(x):
+                    return np.where(x > 0, np.log1p(x), -np.log1p(-x))
+ 
+                log_custom = FunctionTransformer(log_positive_negative, feature_names_out="one-to-one")
+                log_transformer = Pipeline([('imputer', SimpleImputer(strategy='median')),
+                                            ('log_transform', log_custom)])
+ 
+                # Column transformer combining all transformations
+                preprocessor = ColumnTransformer(
+                    transformers=[
+                        ('log', log_transformer, log_transform_cols),
+                        ('cat', categorical_transformer, ["soilType"]),
+                        ("encode_cat", encoded_transformer, ["outward", "inward"])
+                    ], remainder="passthrough"
+                )
+ 
+                # Applying transformations
+                X_transformed = preprocessor.fit_transform(X)
+ 
+                # Training KNN model
+                knn_model = KNeighborsClassifier(weights='distance', n_neighbors=5)
+                knn_model.fit(X_transformed, y)
+ 
+                # Save the model and preprocessor for future use
+                self.knn_model = knn_model
+                self.preprocessor = preprocessor
+ 
+                print(f'{model} training complete!')
+
+            if model == 'predicting_all_risks':
+                print('Training model for Postcode-based Prediction...')
+                # Extract relevant columns for postcodes
+                pc_data_cols = ['postcode', 'elevation', 'distanceToWatercourse',
+                                'soilType', 'localAuthority', 'historicallyFlooded', 'riskLabel','easting', 'northing','medianPrice']
+                pc_data = self._postcodedb[pc_data_cols]
+                X = pc_data.drop(columns=['riskLabel', 'postcode'], axis=1)
+                X[['outward_code', 'inward_code']] = pc_data['postcode'].str.split(' ', expand=True)
+
+                y = pc_data['riskLabel']
+
+
+                # Apply preprocessing
+
+                # Preprocessing Pipeline
+
+
+                def log_function(x):
+                    return np.log1p(x)
+
+                log_custom = FunctionTransformer(log_function, feature_names_out='one-to-one')
+
+                log_transform_cols = ['elevation', 'distanceToWatercourse']
+                robust_cols = ['medianPrice']
+                cat_cols_ohe = ['soilType', 'localAuthority', 'historicallyFlooded']
+                standard_cols = ['easting', 'northing']
+                cat_cols_ordinal = ['outward_code', 'inward_code']
+
+                # Create pipelines for transformations
+                log_transformer = Pipeline([('log_transform', log_custom)])
+                robust_transformer = Pipeline([('imputer', SimpleImputer(strategy='mean')), ('robust_scaler', RobustScaler())])
+                categorical_transformer_ohe = Pipeline([('onehot', OneHotEncoder(handle_unknown='ignore', sparse_output=False))])
+                categorical_transformer_ordinal = Pipeline([('ordinal', OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=-1))])
+                standard_transformer = Pipeline([('scaler', StandardScaler()), ('kmeans', KMeans(n_clusters=10, random_state=42))])
+
+                # Combine all transformers into a single ColumnTransformer
+                prep_pipe = ColumnTransformer(
+                    transformers=[
+                        ('log', log_transformer, log_transform_cols),
+                        ('num_robust', robust_transformer, robust_cols),
+                        ('onehot', categorical_transformer_ohe, cat_cols_ohe),
+                        ('standard', standard_transformer, standard_cols),
+                        ('ordinal', categorical_transformer_ordinal, cat_cols_ordinal),
+                    ],
+                    remainder='passthrough'
+                )
+                print('Preprocessing data...')
+                X_transformed = prep_pipe.fit_transform(X)
+
+                self.prep_pipe = prep_pipe
+
+                # Initiate the model
+                rf_model = RandomForestClassifier(
+                    n_estimators=300,
+                    min_samples_split=5,
+                    max_depth=None,
+                    random_state=42,
+                    class_weight='balanced',
+                )
+
+                rf_model.fit(X_transformed, y)
+
+                self.rf_model = rf_model
+
+                print("Model trained successfully.")
+
+            if model == 'predicting_risk_from_easting_northing':
+                print('Training model for easting/northing-based prediction...')
+                # Extract relevant columns for postcodes
+                EN_data_cols = ['easting', 'northing', 'riskLabel']
+                EN_data = self._postcodedb[EN_data_cols]
+                # print(EN_data)
+                X = EN_data.drop('riskLabel', axis=1)
+                y = EN_data['riskLabel']
+
+                # preprocessing pipeline
+                # Step 1: Specify columns for each transformation
+                standard_cols = ['easting', 'northing']
+
+                # Step 2: Create pipelines for transformations
+                # Standard scaling pipeline for lat/long
+                standard_transformer = Pipeline([
+                    ('scaler', StandardScaler()),  # Scale numeric features
+                    ('kmeans', KMeans(n_clusters=10, random_state=42))  # Add K-Means clustering
+                ])
+
+                # Combine all transformers into a single ColumnTransformer
+                preprocessor = ColumnTransformer(
+                    transformers=[
+                        ('standard', standard_transformer, standard_cols)  # Standard scaling with K-means for lat/long
+                    ],
+                    remainder='passthrough'  # Pass through any remaining columns
+                )
+
+                # Final pipeline
+                prep_pipe_en = preprocessor
+
+                # Fitting the preprocessor
+                X_transformed = prep_pipe_en.fit_transform(X)
+
+                self.prep_pipe_en = prep_pipe_en
+
+                # RandomForest Classifier
+                rf_model_en = RandomForestClassifier(
+                    n_estimators=400,
+                    min_samples_split=2,
+                    min_samples_leaf=1,
+                    max_features='log2',
+                    max_depth=20,
+                    random_state=42,
+                    class_weight='balanced',
+                )
+
+                rf_model_en.fit(X_transformed, y)
+
+                self.rf_model_en = rf_model_en
+
+                print("Model trained successfully.")
+
+            if model == 'predicting_risk_from_latitude_longitude':
+                print('Training model for latitude/longitude-based prediction...')
+                # Extract relevant columns for postcodes
+                LL_data_cols = ['easting', 'northing', 'riskLabel']
+                LL_data = self._postcodedb[LL_data_cols]
+
+                # from flood_tool.geo import get_gps_lat_long_from_easting_northing
+
+                easting = LL_data['easting']
+                northing = LL_data['northing']
+
+                LL_result = get_gps_lat_long_from_easting_northing(easting, northing)
+
+                # Combine latitude and longitude into a 2D array
+                latitudes, longitudes = LL_result
+                combined_result = np.column_stack((latitudes, longitudes))
+
+                # Include Lat/Long to the DataFrame
+                combined_result_df = pd.DataFrame(combined_result, columns=['latitude', 'longitude'])
+
+                LL_data['latitude'] = combined_result_df['latitude']
+                LL_data['longitude'] = combined_result_df['longitude']
+                # EN_data_cols = ['easting', 'northing', 'riskLabel']
+                # EN_data = self._postcodedb[EN_data_cols]
+
+                X = LL_data.drop(['riskLabel', 'easting', 'northing'], axis=1)
+                y = LL_data['riskLabel']
+
+                # Apply preprocessing pipeline
+                # Step 1: Specify columns for each transformation
+                standard_cols = ['latitude', 'longitude']
+
+                # Step 2: Create pipelines for transformations
+                # Standard scaling pipeline for lat/long
+                standard_transformer = Pipeline([
+                    ('scaler', StandardScaler()),  # Scale numeric features
+                    ('kmeans', KMeans(n_clusters=10, random_state=42))  # Add K-Means clustering
+                ])
+
+                # Combine all transformers into a single ColumnTransformer
+                preprocessor = ColumnTransformer(
+                    transformers=[
+                        ('standard', standard_transformer, standard_cols)  # Standard scaling with K-means for lat/long
+                    ],
+                    remainder='passthrough'  # Pass through any remaining columns
+                )
+
+                # Final pipeline
+                prep_pipe_ll = preprocessor
+
+                # Fitting the preprocessor
+                X_transformed = prep_pipe_ll.fit_transform(X)
+
+                self.prep_pipe_ll = prep_pipe_ll
+
+                # RandomForest Classifier
+                rf_model_ll = RandomForestClassifier(
+                    n_estimators=50,
+                    min_samples_split=2,
+                    min_samples_leaf=1,
+                    max_features=None,
+                    random_state=42,
+                    class_weight='balanced_subsample',
+                )
+
+                rf_model_ll.fit(X_transformed, y)
+
+                self.rf_model_ll = rf_model_ll
+
+                print("Model trained successfully.")
+
+#                 if update_hyperparameters:
+#                 print('Performing hyperparameter tuning for Postcode model...')
+#                 from sklearn.model_selection import RandomizedSearchCV
+#                 param_dist = kwargs.get('param_dist', {
+#                     'n_estimators': [100, 200, 300],
+#                     'max_depth': [10, 20, None],
+#                     'min_samples_split': [2, 5, 10]
+#                 })
+#                 search = RandomizedSearchCV(rf_model, param_distributions=param_dist, n_iter=10, 
+#                                             cv=5, scoring='accuracy', random_state=42, n_jobs=-1)
+#                 search.fit(X_transformed, y)
+#                 rf_model = search.best_estimator_
+#                 print(f"Best hyperparameters: {search.best_params_}")
+
+            # if update_hyperparameters:
+            #     print(f'tuning {model} hyperparameters')
+            #     # Do your hyperparameter tuning for the specified model
             else:
                 print(f'training {model}')
                 # Do your regular fitting/training for the specified model
@@ -224,9 +613,39 @@ class Tool(object):
         postcode
         M34 7QL  53.4461    -2.0997
         '''
-        # INCOMPLETE: continue your work here
-        return pd.DataFrame(columns=['longitude', 'latitude'],
-                            index=postcodes, dtype=dtype)
+        # # INCOMPLETE: continue your work here
+        # return pd.DataFrame(columns=['longitude', 'latitude'],
+        #                     index=postcodes, dtype=dtype)
+
+        # Ensure postcodes are in the format of an index
+        postcodes = pd.Index(postcodes)
+
+        # Copy the existing database and set index as postcode
+        frame = self._postcodedb.copy()
+        frame = frame.set_index('postcode')
+
+        # Reindex to match input postcodes
+        frame = frame.reindex(postcodes)
+
+        # Ensure 'easting' and 'northing' columns are available
+        if 'easting' not in frame.columns or 'northing' not in frame.columns:
+            raise ValueError(
+                "The database must contain 'easting' and 'northing' columns.")
+
+        # Extract easting and northing
+        eastings = frame['easting'].values
+        northings = frame['northing'].values
+
+        # Convert easting and northing to latitude and longitude
+        latitudes, longitudes = get_gps_lat_long_from_easting_northing(
+                                eastings, northings, dtype=dtype)
+
+        # Create a DataFrame with latitude and longitude
+        frame['latitude'] = latitudes
+        frame['longitude'] = longitudes
+
+        # Return only the latitude and longitude columns
+        return frame[['latitude', 'longitude']]
 
     def impute_missing_values(self, dataframe: pd.DataFrame,
                               method: str = 'mean',
@@ -270,6 +689,55 @@ class Tool(object):
         '''
         # INCOMPLETE: continue your work here. Feel free to add more
         # methods for imputation. If you do, remember to update the docstring
+
+        dataframe = dataframe.copy()
+
+        # Ensure all expected columns exist in the dataframe
+        for col in constant_values.keys():
+            if col not in dataframe.columns:
+                dataframe[col] = np.nan
+
+        if method == 'mean':
+            # Step 1: Fill columns based on `constant_values`
+            for col, value in constant_values.items():
+                if col in dataframe.columns and \
+                        not pd.api.types.is_numeric_dtype(dataframe[col]):
+                    dataframe[col] = dataframe[col].fillna(value)
+
+            # Step 2: Fill remaining numerical columns with their mean values
+            for col in dataframe.select_dtypes(
+                                include=['float', 'int']).columns:
+                dataframe[col] = dataframe[col].fillna(
+                                dataframe[col].mean())
+
+        elif method == 'constant':
+            # Fill columns based on `IMPUTATION_CONSTANTS`
+            for col, value in constant_values.items():
+                if col in dataframe.columns:
+                    dataframe[col] = dataframe[col].fillna(value)
+
+        elif method == 'knn':
+
+            # Step 1: Fill columns based on `constant_values`
+            for col, value in constant_values.items():
+                if col in dataframe.columns and \
+                        not pd.api.types.is_numeric_dtype(dataframe[col]):
+                    dataframe[col] = dataframe[col].fillna(value)
+
+            # Step 2: Apply KNNImputer to the remaining numerical columns
+            numeric_columns = dataframe.select_dtypes(
+                                include=['float', 'int']).columns
+            imputer = KNNImputer(n_neighbors=5)
+
+            # Only impute numeric columns
+            dataframe[numeric_columns] = imputer.fit_transform(
+                                        dataframe[numeric_columns])
+
+        else:
+            raise ValueError(f"Unknown method '{method}'. "
+                             f"Supported methods are 'mean', "
+                             f"constant', and 'knn'.")
+
         return dataframe
 
     def predict_flood_class_from_postcode(self, postcodes: Sequence[str],
@@ -296,6 +764,84 @@ class Tool(object):
             Series of flood risk classification labels indexed by postcodes.
             Returns NaN for postcode units not in the available postcode files.
         '''
+
+        if method == 'predicting_all_risks':
+            # Step 1: Split postcodes into outward and inward parts
+            print("Processing postcodes...")
+            # outward, inward = zip(*[pc.split(" ") for pc in postcodes])
+
+            # print(len(postcodes))
+
+            labelled_drop_risk = self._postcodedb.drop(columns = ["riskLabel"], axis =1)
+
+            Both_data_sets = pd.concat([labelled_drop_risk, self._unlabelled_unit_data], axis=0)
+            # for pc in postcodes:
+            # postcodes.loc[postcodes.index.max() + 1] = "test 123"
+            # print(postcodes)
+            Select_data = Both_data_sets[Both_data_sets['postcode'].isin(postcodes)]
+
+
+            # postcodes_sele = pd.DataFrame(Select_data['postcode'])
+
+            # print(postcodes_sele.columns)
+
+            # postcodes_sele.set_index('postcode',inplace=True, drop=False)
+            # Both_data_sets.set_index('postcode',inplace=True, drop=False)
+            postcodes = pd.Series(postcodes)
+
+            # postcodes_df = pd.DataFrame(postcodes, columns='postcode')
+
+            # Nan_data = postcodes_df[~postcodes_df['postcode'].isin(Both_data_sets['postcode'])]
+            Nan_data = postcodes[~postcodes.isin(Both_data_sets['postcode'])]
+
+            # Nan_data.set_index('postcode', inplace=True, drop=False)
+            # need remove dups in
+            Select_data.drop_duplicates(subset='postcode', keep="last", inplace=True)
+            Select_post_code_list = Select_data['postcode'].to_list()
+
+            Select_data.drop(columns=["nearestWatercourse"],axis=1)
+
+            if not Select_data.empty:
+
+                Select_data[['outward_code', 'inward_code']] = Select_data['postcode'].str.split(" ", expand=True)
+                Select_data.drop(columns=["postcode"],axis=1)
+                # Step 2: Create a DataFrame for the input data
+                input_data = Select_data
+
+                Nan_data_list = list(Nan_data)
+                # print(Select_post_code_list)
+                # print(Nan_data_list)
+
+                # Step 4: Predict flood classes using the trained model
+                print("Predicting flood classes...")
+
+                input_data = self.prep_pipe.transform(input_data)
+                predictions = self.rf_model.predict(input_data)
+                # print(f"nan data list{Nan_data_list}")
+                fill_nan = np.empty(len(Nan_data_list))
+                fill_nan.fill(np.nan)
+
+                if len(Nan_data_list) != 0:
+
+                    predictions= np.concatenate((predictions, fill_nan))
+                else:
+                    predictions = predictions
+                # print(Select_post_code_list)
+                postcodes = Select_post_code_list + Nan_data_list
+                # predictions = predictions.reset_index(drop = True)
+
+
+                # Step 5: Return the predictions as a Series
+
+                return pd.Series(predictions, index=postcodes, name='Predicted Flood Class')
+
+            else:
+
+                Nan_data_list = list(Nan_data)
+                fill_nan = np.empty(len(Nan_data_list))
+                fill_nan.fill(np.nan)
+                return pd.Series(data=fill_nan, index=Nan_data_list, name='Predicted Flood Class')
+
 
         if method == 'all_zero_risk':
             return pd.Series(
@@ -334,6 +880,19 @@ class Tool(object):
             as an (easting, northing) tuple.
         '''
 
+        if method == 'predicting_risk_from_easting_northing':
+            input_data = pd.DataFrame(
+                data=np.column_stack((eastings, northings)),
+                columns=['easting', 'northing']
+            )
+
+            input_data = self.prep_pipe_en.transform(input_data)
+            predictions = self.rf_model_en.predict(input_data)
+
+            # Return the predictions as a Series
+            location_index = [(e, n) for e, n in zip(eastings, northings)]
+            return pd.Series(predictions, index=location_index, name='Predicted Flood Class')
+
         if method == 'all_zero_risk':
             return pd.Series(
                 data=np.ones(len(eastings), int),
@@ -369,6 +928,20 @@ class Tool(object):
             Series of flood risk classification labels multi-indexed by
             location as a (longitude, latitude) pair.
         '''
+
+        if method == 'predicting_risk_from_latitude_longitude':
+            input_data = pd.DataFrame(
+                data=np.column_stack((longitudes, latitudes)),
+                columns=['latitude', 'longitude']
+            )
+
+            input_data = self.prep_pipe_ll.transform(input_data)
+            predictions = self.rf_model_ll.predict(input_data)
+
+            # Return the predictions as a Series
+            location_index = [(long, lat) for long, lat in zip(longitudes, latitudes)]
+            return pd.Series(predictions, index=location_index, name='Predicted Flood Class')
+
 
         if method == 'all_zero_risk':
             idx = pd.MultiIndex.from_tuples([(lng, lat) for lng, lat in
@@ -406,6 +979,34 @@ class Tool(object):
             Series of median house price estimates indexed by postcodes.
         '''
 
+        if method == 'house_price_rf':
+            if isinstance(postcodes, list):
+                postcodes = pd.Series(postcodes)
+            elif isinstance(postcodes, np.ndarray):
+                postcodes = pd.Series(postcodes.to_series())
+            elif isinstance(postcodes, pd.Series):
+                postcodes = postcodes
+            elif isinstance(postcodes, pd.DataFrame):
+                postcodes = pd.Series(postcodes[0])
+            else:
+                raise ValueError('postcodes must be a list, numpy array, pandas series or pandas dataframe')
+            
+
+            input_data = self.hp_data[self.hp_data['postcode'].isin(postcodes)]
+            input_data = input_data.drop_duplicates(subset=['postcode'])
+
+            invalid_postcodes = [postcode for postcode in postcodes if postcode not in input_data['postcode'].values]
+            valid_postcodes = input_data['postcode'].unique().tolist()
+            input_data = input_data.drop(columns=['postcode'])
+
+            features = pd.Series(
+                data=self.house_model.predict(input_data),
+                index=valid_postcodes,
+                name='medianPrice',
+            )
+
+            return features
+
         if method == 'all_england_median':
             return pd.Series(
                 data=np.full(len(postcodes), 245000.0),
@@ -417,7 +1018,7 @@ class Tool(object):
 
     def predict_local_authority(
         self, eastings: Sequence[float], northings: Sequence[float],
-        method: str = 'do_nothing'
+        method: str = 'local_authority'  # do_nothing before
     ) -> pd.Series:
         '''
         Generate series predicting local authorities in m for a sequence
@@ -443,6 +1044,21 @@ class Tool(object):
             locations, and multiindexed by the location as a
             (easting, northing) tuple.
         '''
+        if method == 'local_authority':
+            features = pd.DataFrame(
+                data=np.column_stack((eastings, northings)),
+                columns=['easting', 'northing']
+            )
+
+            predictions = self.rf_model.predict(features)
+
+            idx = pd.MultiIndex.from_tuples([(est, nth) for est, nth in
+                                             zip(eastings, northings)])
+            return pd.Series(
+                data=predictions,
+                index=idx,
+                name='localAuthority'
+            )
 
         if method == 'all_nan':
             idx = pd.MultiIndex.from_tuples([(est, nth) for est, nth in
@@ -481,6 +1097,59 @@ class Tool(object):
             flooding, indexed by the postcodes.
         '''
 
+        frame = self._postcodedb.copy()
+        frame = frame.set_index('postcode')
+ 
+        if method == 'historic_flooding':
+            # split postcodes into outward and inward parts
+ 
+            labelled_drop_hist=self._postcodedb.drop(columns=['historicallyFlooded'])
+           
+            both_data_sets = pd.concat([labelled_drop_hist, self._unlabelled_unit_data])
+           
+            postcodes = pd.Series(postcodes)
+            select_data = both_data_sets[both_data_sets["postcode"].isin(postcodes)]
+            select_data = select_data.drop(columns=[ 'localAuthority', "medianPrice", "riskLabel", "nearestWatercourse"], axis=1)
+            select_data = select_data.drop_duplicates()
+            select_post_code_list = select_data['postcode'].to_list()
+            Nan_data = postcodes[~postcodes.isin(both_data_sets['postcode'])]
+            print(f'nandatadf{Nan_data}')
+            # select_data[['outward', 'inward']] = select_data['postcode'].str.split(" ", expand=True)
+
+            if not select_data.empty:
+ 
+                input_data = select_data.copy()
+               
+                input_data[['outward', 'inward']] = input_data['postcode'].str.split(" ", expand=True)
+ 
+                input_data = input_data.drop(columns=['postcode'], axis=1)
+               
+                input_data = self.preprocessor.transform(input_data)
+                predictions = self.knn_model.predict(input_data)
+               
+                Nan_data_list = list(Nan_data)
+                print(f'nandata{Nan_data_list}')
+                fill_nan = np.empty(len(Nan_data_list))
+                fill_nan.fill(np.nan)
+                if len(Nan_data_list) !=0:
+                    predictions= np.concatenate((predictions, fill_nan))
+ 
+                else:
+                    predictions = predictions
+               
+                postcodes = select_post_code_list + Nan_data_list
+                print(f'predction{predictions}')
+                print(f'fillnan{fill_nan}')
+                print(len(predictions))
+                return pd.Series(data=predictions, index=postcodes, name='historicallyFlooded')
+           
+            else:
+ 
+                Nan_data_list = list(Nan_data)
+                fill_nan = np.empty(len(Nan_data_list))
+                fill_nan.fill(np.nan)
+                return pd.Series(data = fill_nan, index=Nan_data_list, name='historicallyFlooded')
+
         if method == 'all_false':
             return pd.Series(
                 data=np.full(len(postcodes), False),
@@ -498,6 +1167,9 @@ class Tool(object):
         The estimate is based on the median house price for the area and an
         estimate of the number of properties it contains.
 
+        We assume that the total number of houses is number of households
+        divided by the number of postcode units.
+
         Parameters
         ----------
 
@@ -513,7 +1185,37 @@ class Tool(object):
             Series of total property value estimates indexed by locations.
         '''
 
-        raise NotImplementedError
+        if isinstance(postal_data, pd.DataFrame):
+            postal_data.columns = ['postcodeSector']
+        elif isinstance(postal_data, pd.Series):
+            postal_data = pd.DataFrame(postal_data,
+                                       columns=['postcodeSector'])
+        elif isinstance(postal_data, list):
+            postal_data = pd.DataFrame(postal_data,
+                                       columns=['postcodeSector'])
+        elif isinstance(postal_data, np.ndarray):
+            postal_data = pd.DataFrame(postal_data,
+                                       columns=['postcodeSector'])
+        else:
+            raise ValueError('Input must be a pandas DataFrame, '
+                             'Series, list or numpy array.')
+        matched_rows = self._sector_data[self._sector_data[
+            'postcodeSector'].isin(postal_data['postcodeSector'])]
+
+        if matched_rows.empty:
+            raise ValueError('No data available '
+                             'for the given postcode sectors.')
+
+        households = matched_rows['households']
+        postcode_units = matched_rows['numberOfPostcodeUnits']
+
+        num_houses = households / postcode_units
+        median_price = self.predict_median_house_price(postal_data)
+
+        matched_rows['totalvalue'] = num_houses * median_price
+
+        return pd.Series(matched_rows['totalvalue'].values,
+                         index=matched_rows['postcodeSector'])
 
     def estimate_annual_human_flood_risk(self, postcodes: Sequence[str],
                                          risk_labels: [pd.Series | None] = None
@@ -525,6 +1227,9 @@ class Tool(object):
         Risk is defined here as an impact coefficient multiplied by the
         estimated number of people under threat multiplied by the probability
         of an event.
+
+        We assume that the total population is number of households
+        divided by the number of postcode units.
 
         Parameters
         ----------
@@ -543,10 +1248,47 @@ class Tool(object):
             indexed by postcode.
         '''
 
-        risk_labels = (risk_labels or
-                       self.get_flood_class_from_postcodes(postcodes))
+        if isinstance(postcodes, pd.DataFrame):
+            postcodes.columns = ['postcodeSector']
+        elif isinstance(postcodes, pd.Series):
+            postcodes = pd.DataFrame(postcodes,
+                                     columns=['postcodeSector'])
+        elif isinstance(postcodes, list):
+            postcodes = pd.DataFrame(postcodes,
+                                     columns=['postcodeSector'])
+        elif isinstance(postcodes, np.ndarray):
+            postcodes = pd.DataFrame(postcodes,
+                                     columns=['postcodeSector'])
+        else:
+            raise ValueError('Input must be a pandas DataFrame, '
+                             'Series, list or numpy array.')
 
-        raise NotImplementedError
+        part = postcodes['postcodeSector'].str.split(' ', n=1).str[0] + \
+            ' ' + postcodes['postcodeSector'].str.split(' ', n=1).str[1].str[0]
+        matched_rows = self._sector_data[
+            self._sector_data['postcodeSector'].isin(part)]
+        # check if the postcode is in the sector data
+
+        if matched_rows.empty:
+            raise ValueError('No data available for '
+                             'the given postcode sectors.')
+
+        impact_coef = 0.1
+
+        households = matched_rows['headcount']
+        postcode_units = matched_rows['numberOfPostcodeUnits']
+
+        total_population = households / postcode_units
+        flood_probability = self.predict_flood_class_from_postcode(postcodes)
+
+        matched_rows['humanrisk'] = (
+            impact_coef * total_population * flood_probability)
+
+        # risk_labels = (risk_labels or
+        #                 self.get_flood_class_from_postcodes(postcodes))
+
+        return pd.Series(matched_rows['humanrisk'].values,
+                         index=matched_rows['postcodeSector'])
 
     def estimate_annual_flood_economic_risk(
             self, postcodes: Sequence[str],
@@ -576,7 +1318,41 @@ class Tool(object):
             by postcode.
         '''
 
-        risk_labels = (risk_labels or
-                       self.get_flood_class_from_postcodes(postcodes))
+        if isinstance(postcodes, pd.DataFrame):
+            postcodes.columns = ['postcodeSector']
+        elif isinstance(postcodes, pd.Series):
+            postcodes = pd.DataFrame(postcodes,
+                                     columns=['postcodeSector'])
+        elif isinstance(postcodes, list):
+            postcodes = pd.DataFrame(postcodes,
+                                     columns=['postcodeSector'])
+        elif isinstance(postcodes, np.ndarray):
+            postcodes = pd.DataFrame(postcodes,
+                                     columns=['postcodeSector'])
+        else:
+            raise ValueError('Input must be a pandas DataFrame, '
+                             'Series, list or numpy array.')
 
-        raise NotImplementedError
+        part = postcodes['postcodeSector'].str.split(' ', n=1).str[0] +\
+            ' ' + postcodes['postcodeSector']\
+            .str.split(' ', n=1).str[1].str[0]
+        # split the postcode to get the postcode sector
+
+        matched_rows = self._sector_data[
+            self._sector_data['postcodeSector'].isin(part)].copy()
+        # check if the postcode is in the sector data
+
+        if matched_rows.empty:
+            raise ValueError('No data available for '
+                             'the given postcode sectors.')
+
+        damage_coef = 0.05
+        totalpropvalue = self.estimate_total_value(postcodes)
+        flood_probability = self.predict_flood_class_from_postcode(postcodes)
+        matched_rows['economicrisk'] = (
+            damage_coef * totalpropvalue * flood_probability)
+
+        # risk_labels = (risk_labels or
+        #                 self.get_flood_class_from_postcodes(postcodes))
+        return pd.Series(matched_rows['economicrisk'].values,
+                         index=matched_rows['postcodeSector'])
