@@ -127,11 +127,14 @@ class Tool(object):
         self._unlabelled_unit_data = pd.read_csv(unlabelled_unit_data)
         self._district_data = pd.read_csv(district_data)
 
-        # # continue your work here
-        # self.fit(models=['local_authority'])
-        # self.fit(models=['house_price_rf'])
-        # self.fit(models=['historic_flooding'])
-        # self.fit(models=['predicting_all_risks'])
+        # continue your work here
+        self.fit(models=['local_authority'])
+        self.fit(models=['house_price_rf'])
+        self.fit(models=['historic_flooding'])
+        self.fit(models=['predicting_all_risks'])
+        self.fit(models=['predicting_risk_from_latitude_longitude'])
+        self.fit(models=['predicting_risk_from_easting_northing'])
+
 
     def fit(self, models: List = [], update_labels: str = '',
             update_hyperparameters: bool = False, **kwargs):
