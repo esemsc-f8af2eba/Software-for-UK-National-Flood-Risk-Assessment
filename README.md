@@ -42,6 +42,12 @@ This README file *should be updated* over the course of your group's work to rep
 
 - [Chatgpt RandomForest overfitting](https://chatgpt.com/share/67405e58-0d6c-800d-9635-c324411353bb)
 
+- [Chatgpt Risk Label](https://chatgpt.com/share/6740732c-1a4c-800d-a981-72a5bf05924f) - This is used in debugging and some of our codes are inspired by.
+
+- [Chatgpt Git](https://chatgpt.com/share/67408c2e-8a58-8013-888b-e2b67396af98) - Fixing erros in Github console.
+
+- [Chatgpt Fixing Overfitting](https://chatgpt.com/share/67408d0c-0ca0-8013-a65b-bc7e61496221) - This is to fix overfitting when constructing median house prices.
+
 
 ### Software Installation Guide
 
