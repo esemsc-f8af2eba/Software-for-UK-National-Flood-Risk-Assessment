@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Regression and Classification models &#8212; Flood Tool  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Distance Measuring &amp; Geodetic Transformations" href="coordinates.html" />
+    <link rel="prev" title="Data Formats" href="data_formats.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="regression-and-classification-models">
+<h1>Regression and Classification models<a class="headerlink" href="#regression-and-classification-models" title="Link to this heading">¶</a></h1>
+<p><strong>Any papers or AI tools used to assist you in creating your models should be described here and referenced appropriately.</strong>
+<strong>reference</strong></p>
+<ul class="simple">
+<li><p>Sphinx (<a class="reference external" href="https://www.sphinx-doc.org">https://www.sphinx-doc.org</a>)</p></li>
+<li><p>LaTeX (<a class="reference external" href="https://www.latex-project.org/get/">https://www.latex-project.org/get/</a>)</p></li>
+</ul>
+<section id="median-house-price-prediction">
+<h2>Median House Price Prediction<a class="headerlink" href="#median-house-price-prediction" title="Link to this heading">¶</a></h2>
+<p>This function predicts the median house price for a collection of postcodes using either a regression model or a default median value for England.</p>
+<p><strong>Description</strong></p>
+<p>The <cite>predict_median_house_price</cite> function generates predictions for median house prices. It supports two methods:
+1. <strong>`house_price_rf`</strong>: Uses a pre-trained regression model to predict house prices based on postcode-specific features.
+2. <strong>`all_england_median`</strong>: Assigns the national median house price (£245,000) to all input postcodes, regardless of their specific features.</p>
+<p><strong>Methodology</strong></p>
+<ol class="arabic simple">
+<li><p><strong>For `house_price_rf`</strong>:
+- Validates the input <cite>postcodes</cite> to ensure they are provided as a list, NumPy array, Pandas Series, or DataFrame.
+- Filters the internal house price dataset (<cite>hp_data</cite>) for rows corresponding to the input postcodes.
+- Removes duplicate postcodes from the dataset.
+- Identifies and excludes invalid postcodes (those not present in <cite>hp_data</cite>).
+- Uses the regression model (<cite>house_model</cite>) to predict house prices for valid postcodes.
+- Returns predictions as a Pandas Series indexed by the valid postcodes.</p></li>
+<li><p><strong>For `all_england_median`</strong>:
+- Assigns a fixed median value (£245,000) to all postcodes.
+- Returns a Pandas Series indexed by the input postcodes.</p></li>
+</ol>
+<p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>postcodes</strong> (sequence of str): A list, NumPy array, Pandas Series, or DataFrame containing postcode units.</p></li>
+<li><p><strong>method</strong> (str, optional): Specifies the prediction method:
+- <cite>‘house_price_rf’</cite>: Uses the regression model.
+- <cite>‘all_england_median’</cite>: Uses the national median house price.</p></li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul class="simple">
+<li><p>A <cite>pandas.Series</cite> indexed by postcodes with the predicted median house prices.</p></li>
+</ul>
+<p><strong>Example</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tool</span> <span class="o">=</span> <span class="n">Tool</span><span class="p">()</span>
+
+<span class="c1"># Predict using the regression model</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">tool</span><span class="o">.</span><span class="n">predict_median_house_price</span><span class="p">(</span>
+    <span class="n">postcodes</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;AB12 3CD&#39;</span><span class="p">,</span> <span class="s1">&#39;EF45 6GH&#39;</span><span class="p">],</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;house_price_rf&#39;</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Expected Output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>AB12 3CD    300000.0
+EF45 6GH    275000.0
+dtype: float64
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predict using the all-England median</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">tool</span><span class="o">.</span><span class="n">predict_median_house_price</span><span class="p">(</span>
+    <span class="n">postcodes</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;AB12 3CD&#39;</span><span class="p">,</span> <span class="s1">&#39;EF45 6GH&#39;</span><span class="p">],</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;all_england_median&#39;</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Expected Output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>AB12 3CD    245000.0
+EF45 6GH    245000.0
+dtype: float64
+</pre></div>
+</div>
+<p><strong>Limitations</strong></p>
+<ul class="simple">
+<li><p>The <cite>house_price_rf</cite> method depends on the quality and completeness of the <cite>hp_data</cite> dataset.</p></li>
+<li><p>Invalid or missing postcodes will not be included in the predictions.</p></li>
+<li><p>The <cite>all_england_median</cite> method does not account for postcode-specific variations.</p></li>
+</ul>
+<p><strong>Error Handling</strong></p>
+<ul class="simple">
+<li><p>If the input <cite>postcodes</cite> is not a valid type (list, NumPy array, Pandas Series, or DataFrame), a <cite>ValueError</cite> is raised.</p></li>
+<li><p>If an unsupported <cite>method</cite> is specified, a <cite>NotImplementedError</cite> is raised.</p></li>
+</ul>
+<p>—</p>
+</section>
+<section id="risk-prediction-models">
+<h2>Risk Prediction Models<a class="headerlink" href="#risk-prediction-models" title="Link to this heading">¶</a></h2>
+<section id="postcode-based-risk-prediction">
+<h3>Postcode-based Risk Prediction<a class="headerlink" href="#postcode-based-risk-prediction" title="Link to this heading">¶</a></h3>
+<p>This model predicts flood risk levels based on features extracted from a database using input postcodes.</p>
+<p><strong>Description</strong></p>
+<p>The model uses a combination of numerical and categorical features to predict flood risk (<cite>riskLabel</cite>), applying a preprocessing pipeline for feature engineering and a <cite>RandomForestClassifier</cite> for prediction.</p>
+<p>The features used by the model include:</p>
+<ul class="simple">
+<li><p><strong>Numerical features</strong>:
+- <code class="docutils literal notranslate"><span class="pre">elevation</span></code>
+- <code class="docutils literal notranslate"><span class="pre">distanceToWatercourse</span></code>
+- <code class="docutils literal notranslate"><span class="pre">medianPrice</span></code>
+- <code class="docutils literal notranslate"><span class="pre">easting</span></code>
+- <code class="docutils literal notranslate"><span class="pre">northing</span></code></p></li>
+<li><p><strong>Categorical features</strong>:
+- <code class="docutils literal notranslate"><span class="pre">soilType</span></code>
+- <code class="docutils literal notranslate"><span class="pre">localAuthority</span></code>
+- <code class="docutils literal notranslate"><span class="pre">historicallyFlooded</span></code>
+- <code class="docutils literal notranslate"><span class="pre">outward_code</span></code> (derived from postcodes)
+- <code class="docutils literal notranslate"><span class="pre">inward_code</span></code> (derived from postcodes)</p></li>
+</ul>
+<p>Missing values are filled with default values:
+- Numerical values are replaced with <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+- Categorical values are replaced with <code class="docutils literal notranslate"><span class="pre">'unknown'</span></code>.</p>
+<p><strong>Methodology</strong></p>
+<ol class="arabic simple">
+<li><p>The model extracts relevant features from the postcode database (<code class="docutils literal notranslate"><span class="pre">_postcodedb</span></code>), including columns like <code class="docutils literal notranslate"><span class="pre">elevation</span></code>, <code class="docutils literal notranslate"><span class="pre">soilType</span></code>, and <code class="docutils literal notranslate"><span class="pre">riskLabel</span></code>.</p></li>
+<li><p>Postcodes are split into <code class="docutils literal notranslate"><span class="pre">outward_code</span></code> and <code class="docutils literal notranslate"><span class="pre">inward_code</span></code> for better granularity.</p></li>
+<li><p>A preprocessing pipeline is applied to transform the features:
+- <strong>Log Transformation</strong>: Reduces skewness in <code class="docutils literal notranslate"><span class="pre">elevation</span></code> and <code class="docutils literal notranslate"><span class="pre">distanceToWatercourse</span></code>.
+- <strong>Robust Scaling</strong>: Handles outliers in <code class="docutils literal notranslate"><span class="pre">medianPrice</span></code>.
+- <strong>One-Hot Encoding</strong>: Converts categorical features (<code class="docutils literal notranslate"><span class="pre">soilType</span></code>, <code class="docutils literal notranslate"><span class="pre">localAuthority</span></code>, <code class="docutils literal notranslate"><span class="pre">historicallyFlooded</span></code>) into binary vectors.
+- <strong>Ordinal Encoding</strong>: Assigns integer values to <code class="docutils literal notranslate"><span class="pre">outward_code</span></code> and <code class="docutils literal notranslate"><span class="pre">inward_code</span></code>.
+- <strong>Standard Scaling and Clustering</strong>: Applies scaling to <code class="docutils literal notranslate"><span class="pre">easting</span></code> and <code class="docutils literal notranslate"><span class="pre">northing</span></code> while augmenting features using KMeans clustering.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">RandomForestClassifier</span></code> is trained on the transformed features with the following parameters:
+- <code class="docutils literal notranslate"><span class="pre">n_estimators=300</span></code>
+- <code class="docutils literal notranslate"><span class="pre">min_samples_split=5</span></code>
+- <code class="docutils literal notranslate"><span class="pre">max_depth=None</span></code>
+- <code class="docutils literal notranslate"><span class="pre">class_weight='balanced'</span></code></p></li>
+<li><p>The trained model (<code class="docutils literal notranslate"><span class="pre">rf_model</span></code>) and preprocessing pipeline (<code class="docutils literal notranslate"><span class="pre">prep_pipe</span></code>) are saved for future use.</p></li>
+</ol>
+<p><strong>Inputs</strong></p>
+<ul class="simple">
+<li><p><strong>postcodes</strong>: A list of postcodes used to extract features from the database.</p></li>
+<li><p><strong>riskLabel</strong>: The target variable representing flood risk levels.</p></li>
+</ul>
+<p><strong>Outputs</strong></p>
+<ul class="simple">
+<li><p>A trained <code class="docutils literal notranslate"><span class="pre">RandomForestClassifier</span></code> is saved for predicting flood risk labels.</p></li>
+<li><p>The preprocessing pipeline (<code class="docutils literal notranslate"><span class="pre">prep_pipe</span></code>) is saved for future feature transformations.</p></li>
+</ul>
+<p><strong>Example</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;predicting_all_risks&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;predicting_all_risks&#39;</span><span class="p">:</span>
+        <span class="n">tool</span><span class="o">.</span><span class="n">train_model_for_postcode_risks</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Expected Output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Training model for Postcode-based Prediction...
+Preprocessing data...
+Model trained successfully.
+</pre></div>
+</div>
+<p><strong>Limitations</strong></p>
+<ul class="simple">
+<li><p>The model depends on the quality and completeness of the <code class="docutils literal notranslate"><span class="pre">_postcodedb</span></code> dataset. Missing or inaccurate data may reduce prediction accuracy.</p></li>
+<li><p>Default values for missing features might introduce bias.</p></li>
+<li><p>The models performance might vary on unbalanced datasets or unseen postcode patterns.</p></li>
+</ul>
+</section>
+<section id="easting-and-northing-based-risk-prediction">
+<h3>Easting and Northing-based Risk Prediction<a class="headerlink" href="#easting-and-northing-based-risk-prediction" title="Link to this heading">¶</a></h3>
+<p>This model predicts flood risk levels based on geographic features such as <cite>easting</cite> and <cite>northing</cite>.</p>
+<p><strong>Description</strong></p>
+<p>The <cite>predicting_risk_from_easting_northing</cite> model uses numerical geographic features to predict flood risk levels (<cite>riskLabel</cite>). The model applies a preprocessing pipeline to standardize the input data and uses a <cite>RandomForestClassifier</cite> for prediction.</p>
+<p>The features used by the model include:</p>
+<ul class="simple">
+<li><p><strong>Numerical features</strong>:
+- <code class="docutils literal notranslate"><span class="pre">easting</span></code>
+- <code class="docutils literal notranslate"><span class="pre">northing</span></code></p></li>
+</ul>
+<p><strong>Methodology</strong></p>
+<ol class="arabic simple">
+<li><p>The model extracts relevant features from the postcode database (<cite>_postcodedb</cite>), including:
+- Features: <code class="docutils literal notranslate"><span class="pre">easting</span></code> and <code class="docutils literal notranslate"><span class="pre">northing</span></code>
+- Target: <code class="docutils literal notranslate"><span class="pre">riskLabel</span></code></p></li>
+<li><p>A preprocessing pipeline is applied:
+- <strong>Standard Scaling</strong>: Normalizes <code class="docutils literal notranslate"><span class="pre">easting</span></code> and <code class="docutils literal notranslate"><span class="pre">northing</span></code> for consistent ranges.
+- <strong>K-Means Clustering</strong>: Adds contextual grouping by clustering geographic locations into 10 clusters.</p></li>
+<li><p>A <cite>RandomForestClassifier</cite> is trained on the transformed data with the following parameters:
+- <code class="docutils literal notranslate"><span class="pre">n_estimators=400</span></code>: Number of trees in the forest.
+- <code class="docutils literal notranslate"><span class="pre">max_depth=20</span></code>: Maximum depth of each tree.
+- <code class="docutils literal notranslate"><span class="pre">min_samples_split=2</span></code>: Minimum samples required to split an internal node.
+- <code class="docutils literal notranslate"><span class="pre">min_samples_leaf=1</span></code>: Minimum samples required to form a leaf node.
+- <code class="docutils literal notranslate"><span class="pre">max_features='log2'</span></code>: Maximum number of features considered at each split.
+- <code class="docutils literal notranslate"><span class="pre">class_weight='balanced'</span></code>: Adjusts weights inversely proportional to class frequencies.</p></li>
+<li><p>The trained model (<cite>rf_model_en</cite>) and preprocessing pipeline (<cite>prep_pipe_en</cite>) are saved for future use.</p></li>
+</ol>
+<p><strong>Preprocessing Pipeline</strong></p>
+<p>The preprocessing pipeline includes the following steps:</p>
+<ol class="arabic simple">
+<li><p><strong>Standard Scaling</strong>:
+- Normalizes numerical features (<cite>easting</cite>, <cite>northing</cite>) to have zero mean and unit variance.</p></li>
+<li><p><strong>K-Means Clustering</strong>:
+- Groups geographic locations into 10 clusters using the <cite>KMeans</cite> algorithm, which augments the dataset with a cluster feature.</p></li>
+</ol>
+<p><strong>Inputs</strong></p>
+<ul class="simple">
+<li><p><strong>X</strong>: A dataset containing the features <cite>easting</cite> and <cite>northing</cite>.</p></li>
+<li><p><strong>y</strong>: A dataset containing the target variable <cite>riskLabel</cite>.</p></li>
+</ul>
+<p><strong>Outputs</strong></p>
+<ul class="simple">
+<li><p>A trained <cite>RandomForestClassifier</cite> is saved for predicting flood risk levels (<cite>rf_model_en</cite>).</p></li>
+<li><p>A preprocessing pipeline (<cite>prep_pipe_en</cite>) is saved for feature transformations.</p></li>
+</ul>
+<p><strong>Example</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tool</span> <span class="o">=</span> <span class="n">Tool</span><span class="p">()</span>
+<span class="n">tool</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;predicting_risk_from_easting_northing&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Expected Output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Training model for easting/northing-based prediction...
+Model trained successfully.
+</pre></div>
+</div>
+<p><strong>Limitations</strong></p>
+<ul class="simple">
+<li><p>The model’s performance depends heavily on the quality and completeness of the <cite>easting</cite> and <cite>northing</cite> data.</p></li>
+<li><p>Preprocessing relies on the effectiveness of clustering through K-Means, which may not capture all spatial relationships.</p></li>
+<li><p>The model assumes balanced or adjusted class weights for fair predictions.</p></li>
+</ul>
+<p>—</p>
+</section>
+<section id="latitude-and-longitude-based-risk-prediction">
+<h3>Latitude and Longitude-based Risk Prediction<a class="headerlink" href="#latitude-and-longitude-based-risk-prediction" title="Link to this heading">¶</a></h3>
+<p>This model predicts flood risk levels based on geographic features derived from latitude and longitude.</p>
+<p><strong>Description</strong></p>
+<p>The <cite>predicting_risk_from_latitude_longitude</cite> model uses latitude and longitude values, which are derived from <cite>easting</cite> and <cite>northing</cite> coordinates using the <cite>get_gps_lat_long_from_easting_northing</cite> function from <cite>geo.py</cite>. The model preprocesses these features and trains a <cite>RandomForestClassifier</cite> to predict flood risk levels (<cite>riskLabel</cite>).</p>
+<p>The features used by the model include:</p>
+<ul class="simple">
+<li><p><strong>Numerical features</strong>:
+- <code class="docutils literal notranslate"><span class="pre">latitude</span></code>: Derived from <cite>easting</cite> and <cite>northing</cite>.
+- <code class="docutils literal notranslate"><span class="pre">longitude</span></code>: Derived from <cite>easting</cite> and <cite>northing</cite>.</p></li>
+</ul>
+<p><strong>Methodology</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Coordinate Conversion</strong>:
+- Extracts <cite>easting</cite> and <cite>northing</cite> from the postcode database (<cite>_postcodedb</cite>).
+- Converts <cite>easting</cite> and <cite>northing</cite> into latitude and longitude using the <cite>get_gps_lat_long_from_easting_northing</cite> function in <cite>geo.py</cite>.
+- Combines latitude and longitude into a single dataset.</p></li>
+<li><p><strong>Data Preparation</strong>:
+- Features: <code class="docutils literal notranslate"><span class="pre">latitude</span></code> and <code class="docutils literal notranslate"><span class="pre">longitude</span></code>.
+- Target: <code class="docutils literal notranslate"><span class="pre">riskLabel</span></code>.</p></li>
+<li><p><strong>Preprocessing Pipeline</strong>:
+- <strong>Standard Scaling</strong>: Normalizes <cite>latitude</cite> and <cite>longitude</cite>.
+- <strong>K-Means Clustering</strong>: Adds contextual grouping by dividing the geographic area into 10 clusters.</p></li>
+<li><p><strong>Model Training</strong>:
+- A <cite>RandomForestClassifier</cite> is trained on the transformed data with the following parameters:
+- <cite>n_estimators=100</cite>
+- <cite>max_depth=20</cite>
+- <cite>min_samples_split=2</cite>
+- <cite>min_samples_leaf=1</cite>
+- <cite>max_features=’log2’</cite>
+- <cite>class_weight=’balanced’</cite></p></li>
+<li><p>Saves the trained model (<cite>rf_model_ll</cite>) and preprocessing pipeline (<cite>prep_pipe_ll</cite>) for future use.</p></li>
+</ol>
+<p><strong>Preprocessing Pipeline</strong></p>
+<p>The preprocessing pipeline includes:</p>
+<ol class="arabic simple">
+<li><p><strong>Standard Scaling</strong>:
+- Normalizes numerical features (<cite>latitude</cite>, <cite>longitude</cite>) to have zero mean and unit variance.</p></li>
+<li><p><strong>K-Means Clustering</strong>:
+- Groups geographic locations into 10 clusters using the <cite>KMeans</cite> algorithm, augmenting the dataset with a cluster feature.</p></li>
+</ol>
+<p><strong>Inputs</strong></p>
+<ul class="simple">
+<li><p><strong>X</strong>: A dataset containing the features <cite>latitude</cite> and <cite>longitude</cite> derived from <cite>easting</cite> and <cite>northing</cite>.</p></li>
+<li><p><strong>y</strong>: A dataset containing the target variable <cite>riskLabel</cite>.</p></li>
+</ul>
+<p><strong>Outputs</strong></p>
+<ul class="simple">
+<li><p>A trained <cite>RandomForestClassifier</cite> is saved for predicting flood risk levels (<cite>rf_model_ll</cite>).</p></li>
+<li><p>A preprocessing pipeline (<cite>prep_pipe_ll</cite>) is saved for feature transformations.</p></li>
+</ul>
+<p><strong>Example</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tool</span> <span class="o">=</span> <span class="n">Tool</span><span class="p">()</span>
+<span class="n">tool</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;predicting_risk_from_latitude_longitude&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Expected Output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Training model for latitude/longitude-based prediction...
+Model trained successfully.
+</pre></div>
+</div>
+<p><strong>Limitations</strong></p>
+<ul class="simple">
+<li><p>The model’s accuracy depends on the precision of the <cite>get_gps_lat_long_from_easting_northing</cite> function in <cite>geo.py</cite>.</p></li>
+<li><p>Preprocessing relies on clustering with K-Means, which may not fully capture the geographic context of all locations.</p></li>
+<li><p>The model assumes balanced or adjusted class weights for fair predictions.</p></li>
+</ul>
+<p>—</p>
+</section>
+</section>
+<section id="local-authority-prediction-models">
+<h2>Local Authority Prediction Models<a class="headerlink" href="#local-authority-prediction-models" title="Link to this heading">¶</a></h2>
+<section id="local-authority-prediction">
+<h3>Local Authority Prediction<a class="headerlink" href="#local-authority-prediction" title="Link to this heading">¶</a></h3>
+<p>This model predicts the local authority for a given location based on geographical features like <cite>easting</cite> and <cite>northing</cite>.</p>
+<p><strong>Description</strong></p>
+<p>The model uses a <cite>RandomForestClassifier</cite> to predict the local authority (<cite>localAuthority</cite>) based on geographical coordinates:</p>
+<ul class="simple">
+<li><p><strong>Features</strong>:
+- <code class="docutils literal notranslate"><span class="pre">easting</span></code>: The eastward coordinate of the location.
+- <code class="docutils literal notranslate"><span class="pre">northing</span></code>: The northward coordinate of the location.</p></li>
+<li><p><strong>Target</strong>:
+- <code class="docutils literal notranslate"><span class="pre">localAuthority</span></code>: The local authority corresponding to the location.</p></li>
+</ul>
+<p><strong>Methodology</strong></p>
+<ol class="arabic simple">
+<li><p>Extract relevant columns from the postcode database (<cite>_postcodedb</cite>):
+- Features: <code class="docutils literal notranslate"><span class="pre">easting</span></code> and <code class="docutils literal notranslate"><span class="pre">northing</span></code>
+- Target: <code class="docutils literal notranslate"><span class="pre">localAuthority</span></code></p></li>
+<li><p>Train a <cite>RandomForestClassifier</cite> using the extracted features (<cite>X</cite>) and target labels (<cite>y</cite>).</p></li>
+<li><p>Save the trained model (<cite>rf_model</cite>) for future predictions.</p></li>
+</ol>
+<p><strong>Random Forest Classifier Parameters</strong>:
+- <code class="docutils literal notranslate"><span class="pre">n_estimators=100</span></code>: Number of trees in the forest.
+- <code class="docutils literal notranslate"><span class="pre">max_depth=None</span></code>: No limit on the depth of the trees.
+- <code class="docutils literal notranslate"><span class="pre">random_state=42</span></code>: Ensures reproducibility of results.
+- <code class="docutils literal notranslate"><span class="pre">class_weight='balanced'</span></code>: Handles imbalanced class distributions by weighting classes inversely proportional to their frequency.</p>
+<p><strong>Inputs</strong></p>
+<ul class="simple">
+<li><p><strong>X</strong>: A dataset containing the features <code class="docutils literal notranslate"><span class="pre">easting</span></code> and <code class="docutils literal notranslate"><span class="pre">northing</span></code>.</p></li>
+<li><p><strong>y</strong>: A dataset containing the target variable <code class="docutils literal notranslate"><span class="pre">localAuthority</span></code>.</p></li>
+</ul>
+<p><strong>Outputs</strong></p>
+<ul class="simple">
+<li><p>A trained <cite>RandomForestClassifier</cite> saved as <cite>rf_model</cite>, which predicts the local authority for a given location.</p></li>
+</ul>
+<p><strong>Example</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;local_authority&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;local_authority&#39;</span><span class="p">:</span>
+        <span class="n">tool</span><span class="o">.</span><span class="n">train_local_authority_model</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Expected Output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Training model for Local Authority Prediction...
+Model trained successfully.
+</pre></div>
+</div>
+<p><strong>Limitations</strong></p>
+<ul class="simple">
+<li><p>The model’s accuracy depends on the quality and completeness of the <cite>_postcodedb</cite> dataset.</p></li>
+<li><p>Missing or inaccurate geographical features (<cite>easting</cite>, <cite>northing</cite>) may reduce prediction accuracy.</p></li>
+<li><p>The model assumes a balanced dataset or adjusts using <cite>class_weight=’balanced’</cite>.</p></li>
+</ul>
+<p>—</p>
+<p><strong>Next Steps</strong></p>
+<ul class="simple">
+<li><p>Add hyperparameter tuning to optimize the models performance. For example, use <cite>RandomizedSearchCV</cite> or <cite>GridSearchCV</cite> to adjust parameters like <cite>n_estimators</cite> or <cite>max_depth</cite>.</p></li>
+<li><p>Evaluate the model using additional metrics such as precision, recall, or F1-score.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Flood Tool</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="data_formats.html">Data Formats</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Regression and Classification models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#median-house-price-prediction">Median House Price Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#risk-prediction-models">Risk Prediction Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#local-authority-prediction-models">Local Authority Prediction Models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Distance Measuring &amp; Geodetic Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">Visualising Risk &amp; Rainfall</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="data_formats.html" title="previous chapter">Data Formats</a></li>
+      <li>Next: <a href="coordinates.html" title="next chapter">Distance Measuring &amp; Geodetic Transformations</a></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/models.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

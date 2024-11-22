@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Data Formats &#8212; Flood Tool  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Regression and Classification models" href="models.html" />
+    <link rel="prev" title="The Team X Flood Prediction Tool" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="data-formats">
+<h1>Data Formats<a class="headerlink" href="#data-formats" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p>Expand this section to describe any additional work on data formats you have done. *</p></li>
+</ul>
+<section id="unit-level-data">
+<h2>Unit level Data<a class="headerlink" href="#unit-level-data" title="Link to this heading">¶</a></h2>
+<section id="labelled-data">
+<h3>Labelled data<a class="headerlink" href="#labelled-data" title="Link to this heading">¶</a></h3>
+<p>Labelled postcode data is assumed to be in a tabular format, with the following columns:</p>
+<ul class="simple">
+<li><p>postcode: the full unit postcode of the area.</p></li>
+<li><p>outward: the outward part of the postcodes.</p></li>
+<li><p>inward: the inward part of the postcode.</p></li>
+<li><p>easting: the OSGB36 easting coordinate of the centroid of the area.</p></li>
+<li><p>northing: the OSGB36 northing coordinate of the centroid of the area.</p></li>
+<li><p>soilType: the soil type of the area.</p></li>
+<li><p>elevation: the elevation (i.e. mean local height above mean sea level) of the area.</p></li>
+<li><p>nearestWaterway: the name of the nearest waterway to the postcode centroid.</p></li>
+<li><p>distanceToWaterway: the distance from the postcode centroid to the nearest waterway.</p></li>
+<li><p>localAuthority: the local authority in charge of the area.</p></li>
+<li><p>riskLabel: the flood risk label of the area on the 1-7 scale.</p></li>
+<li><p>medianPrice: the median house price for properties in the area.</p></li>
+<li><p>historicallyFlooded: a Boolean value indicating whether the area has a record of having been historically flooded.</p></li>
+</ul>
+<p>Labelled data is assumed to have been cleaned and preprocessed to a limited extent, with no missing values, but
+may require further processing before being used in a model.</p>
+</section>
+<section id="unlabelled-postcode-data">
+<h3>Unlabelled postcode data<a class="headerlink" href="#unlabelled-postcode-data" title="Link to this heading">¶</a></h3>
+<p>Unlabelled unit level data is assumed to be in a tabular format, with many of the columns as above, but without (at minimum)
+the riskLabel, medianPrice, and historicallyFlooded columns. In some cases the soilType, elevation, nearestWaterway, and
+distanceToWaterway and localAuthority data may also be missing for individual postcodes, and may need to be imputed, however
+the easting and northing coordinates can be assumed to be present for all postcodes.</p>
+</section>
+</section>
+<section id="sector-level-data">
+<h2>Sector Level Data<a class="headerlink" href="#sector-level-data" title="Link to this heading">¶</a></h2>
+<p>Sector level data is assumed to be in a tabular format, with the following columns:</p>
+<ul class="simple">
+<li><p>postcodeSector: the sector of the postcode area.</p></li>
+<li><p>households: the number of households in the sector.</p></li>
+<li><p>numberOfPostcodeUnits: the number of postcode units in the sector.</p></li>
+<li><p>headcount: the total number of people in the sector based on the 2011 census.</p></li>
+</ul>
+</section>
+<section id="distrist-level-data">
+<h2>Distrist level Data<a class="headerlink" href="#distrist-level-data" title="Link to this heading">¶</a></h2>
+<p>District level data is assumed to be in a tabular format, with the following columns:</p>
+<ul class="simple">
+<li><p>postcodeDistrict: the district of the postcode area.</p></li>
+<li><p>catsPerHousehold: the average number of cats per household in the district (based on government data).</p></li>
+<li><p>dogsPerHousehold: the average number of dogs per household in the district (based on government data.</p></li>
+</ul>
+</section>
+<section id="environment-agency-data">
+<h2>Environment Agency Data<a class="headerlink" href="#environment-agency-data" title="Link to this heading">¶</a></h2>
+<section id="station-data">
+<h3>Station data<a class="headerlink" href="#station-data" title="Link to this heading">¶</a></h3>
+<p>Environment Agency station data is assumed to be provided in a tabular format, with the following columns:</p>
+<ul class="simple">
+<li><p>stationReference: the reference ID of the station.</p></li>
+<li><p>stationName: the given name of the station.</p></li>
+<li><p>latitude: the latitude of the station in decimal degrees (WGS84).</p></li>
+<li><p>longitude: the longitude of the station in decimal degrees (WGS84).</p></li>
+<li><p>maxOnRecord: the maximum water level on record at the station (for river levels only).</p></li>
+<li><p>minOnRecord: the minimum water level on record at the station (for river levels only).</p></li>
+<li><p>typicalRangeHigh: the typical high water level at the station (for river levels only).</p></li>
+<li><p>typicalRangeLow: the typical low water level at the station (for river levels only).</p></li>
+</ul>
+</section>
+<section id="reading-data">
+<h3>Reading data<a class="headerlink" href="#reading-data" title="Link to this heading">¶</a></h3>
+<p>Environment Agency reading data is assumed to be provided in a tabular format, with the following columns:</p>
+<ul class="simple">
+<li><p>dateTime: the date and time of the reading.</p></li>
+<li><p>stationReference: the reference ID of the station (in the same format as the station data).</p></li>
+<li><p>parameter: the parameter being measured (e.g. rainfall water level, flow rate, etc.).</p></li>
+<li><p>qualifier: a qualifier for the reading (typically the measurement method).</p></li>
+<li><dl class="simple">
+<dt>unitName: the unit of measurement for the reading. This is mm for rainfall and for water level readings usually one of:_[1]</dt><dd><ul>
+<li><p>mASD: metres above stage depth (i.e. height in comparison to a local fixed 0 height, which is usually close to, although not necessarily on the riverbed).</p></li>
+<li><p>mAOD: metres above ordnance datum (i.e. height in comparison to the Ordnance Survey value for mean sea level, mostly used for tidal data).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>value: the value of the reading (in the specified unit).</p></li>
+</ul>
+<p>_[1] <a class="reference external" href="https://check-for-flooding.service.gov.uk/how-we-measure-river-sea-groundwater-levels">https://check-for-flooding.service.gov.uk/how-we-measure-river-sea-groundwater-levels</a></p>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Flood Tool</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Formats</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#unit-level-data">Unit level Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sector-level-data">Sector Level Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#distrist-level-data">Distrist level Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#environment-agency-data">Environment Agency Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Regression and Classification models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates.html">Distance Measuring &amp; Geodetic Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">Visualising Risk &amp; Rainfall</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">The Team X Flood Prediction Tool</a></li>
+      <li>Next: <a href="models.html" title="next chapter">Regression and Classification models</a></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/data_formats.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

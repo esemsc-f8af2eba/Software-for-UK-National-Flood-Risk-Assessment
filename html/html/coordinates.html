@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Distance Measuring &amp; Geodetic Transformations &#8212; Flood Tool  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Visualising Risk &amp; Rainfall" href="visualization.html" />
+    <link rel="prev" title="Regression and Classification models" href="models.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="distance-measuring-geodetic-transformations">
+<h1>Distance Measuring &amp; Geodetic Transformations<a class="headerlink" href="#distance-measuring-geodetic-transformations" title="Link to this heading">¶</a></h1>
+<section id="distances-on-the-earth">
+<h2>Distances on the Earth<a class="headerlink" href="#distances-on-the-earth" title="Link to this heading">¶</a></h2>
+<p>To a first approximation, the Earth can be modelled as a sphere with a radius of 6371.009 km. This
+means that for points on the surface of the Earth at significant separation the
+surface distance between them (the great-circle distance) is uniquely defined by the angle between them at the centre of the
+Earth, and can be well approximated using the Haversine formula <a class="footnote-reference brackets" href="#id5" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>,</p>
+<div class="math notranslate nohighlight">
+\[d = 2r\arcsin\left(\sqrt{\sin^2\left(\frac{\phi_2-\phi_1}{2}\right)+\cos(\phi_1)\cos(\phi_2)\sin^2\left(\frac{\lambda_2-\lambda_1}{2}\right)}\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\phi\)</span> and <span class="math notranslate nohighlight">\(\lambda\)</span> are latitude and longitude respectively,
+and <span class="math notranslate nohighlight">\(r\)</span> is the radius of the Earth.</p>
+<p>Where the points are very close together, the Haversine formula as given above is not
+accurate for numerical calculations. In this case, the distance can be approximated by the Pythagorean
+theorem, using the latitude and longitude as Cartesian coordinates. This is
+only valid for small distances, but is much faster to calculate.</p>
+<div class="math notranslate nohighlight">
+\[d = r\sqrt{(x_1-x_2)^2+(y_1-y_2)^2}\]</div>
+<p>For intermediate distances, we can use
+an iterative method such as the Vincenty formula, which takes into account the squashing of the Earth’s shape towards the poles.</p>
+<p>A Python algorithm for the Vincenty formula is given below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">tan</span><span class="p">,</span> <span class="n">arctan</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">radians</span><span class="p">,</span> <span class="n">degrees</span><span class="p">,</span> <span class="n">arctan2</span>
+
+<span class="k">def</span> <span class="nf">vincenty_distance</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculate the Vincenty distance between two points on the Earth&#39;s surface.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lat1 : float</span>
+<span class="sd">        Latitude of the first point in degrees.</span>
+<span class="sd">    lon1 : float</span>
+<span class="sd">        Longitude of the first point in degrees.</span>
+<span class="sd">    lat2 : float</span>
+<span class="sd">        Latitude of the second point in degrees.</span>
+<span class="sd">    lon2 : float</span>
+<span class="sd">        Longitude of the second point in degrees.</span>
+<span class="sd">    tol : float, optional</span>
+<span class="sd">        Tolerance for convergence. The default is 1e-12.</span>
+<span class="sd">    max_iter : int, optional</span>
+<span class="sd">        Maximum number of iterations. The default is 100.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+
+<span class="sd">    s : float</span>
+<span class="sd">        The distance between the two points in metres.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># WGS-84 ellipsiod parameters</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">6378137</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mf">6356752.314245</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mf">298.257223563</span>
+
+    <span class="n">L</span> <span class="o">=</span> <span class="n">radians</span><span class="p">(</span><span class="n">lon2</span> <span class="o">-</span> <span class="n">lon1</span><span class="p">)</span>
+    <span class="n">lat1</span> <span class="o">=</span> <span class="n">radians</span><span class="p">(</span><span class="n">lat1</span><span class="p">)</span>
+    <span class="n">lat2</span> <span class="o">=</span> <span class="n">radians</span><span class="p">(</span><span class="n">lat2</span><span class="p">)</span>
+    <span class="n">U1</span> <span class="o">=</span> <span class="n">arctan</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">f</span><span class="p">)</span> <span class="o">*</span> <span class="n">tan</span><span class="p">(</span><span class="n">lat1</span><span class="p">))</span>
+    <span class="n">U2</span> <span class="o">=</span> <span class="n">arctan</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">f</span><span class="p">)</span> <span class="o">*</span> <span class="n">tan</span><span class="p">(</span><span class="n">lat2</span><span class="p">))</span>
+
+    <span class="n">sinU1</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">U1</span><span class="p">)</span>
+    <span class="n">cosU1</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">U1</span><span class="p">)</span>
+    <span class="n">sinU2</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">U2</span><span class="p">)</span>
+    <span class="n">cosU2</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">U2</span><span class="p">)</span>
+    <span class="n">lambdaP</span> <span class="o">=</span> <span class="n">L</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
+        <span class="n">sinLambda</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">lambdaP</span><span class="p">)</span>
+        <span class="n">cosLambda</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">lambdaP</span><span class="p">)</span>
+        <span class="n">sinSigma</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">((</span><span class="n">cosU2</span><span class="o">*</span><span class="n">sinLambda</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">cosU1</span><span class="o">*</span><span class="n">sinU2</span><span class="o">-</span><span class="n">sinU1</span><span class="o">*</span><span class="n">cosU2</span><span class="o">*</span><span class="n">cosLambda</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sinSigma</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="n">cosSigma</span> <span class="o">=</span> <span class="n">sinU1</span><span class="o">*</span><span class="n">sinU2</span> <span class="o">+</span> <span class="n">cosU1</span><span class="o">*</span><span class="n">cosU2</span><span class="o">*</span><span class="n">cosLambda</span>
+        <span class="n">sigma</span> <span class="o">=</span> <span class="n">arctan2</span><span class="p">(</span><span class="n">sinSigma</span><span class="p">,</span> <span class="n">cosSigma</span><span class="p">)</span>
+        <span class="n">sinAlpha</span> <span class="o">=</span> <span class="n">cosU1</span> <span class="o">*</span> <span class="n">cosU2</span> <span class="o">*</span> <span class="n">sinLambda</span> <span class="o">/</span> <span class="n">sinSigma</span>
+        <span class="n">cosSqAlpha</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sinAlpha</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">cos2SigmaM</span> <span class="o">=</span> <span class="n">cosSigma</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">sinU1</span><span class="o">*</span><span class="n">sinU2</span><span class="o">/</span><span class="n">cosSqAlpha</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">f</span><span class="o">/</span><span class="mi">16</span><span class="o">*</span><span class="n">cosSqAlpha</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="o">+</span><span class="n">f</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">cosSqAlpha</span><span class="p">))</span>
+        <span class="n">lambdaP</span> <span class="o">=</span> <span class="n">L</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">C</span><span class="p">)</span> <span class="o">*</span> <span class="n">f</span> <span class="o">*</span> <span class="n">sinAlpha</span> <span class="o">*</span> <span class="p">(</span><span class="n">sigma</span> <span class="o">+</span> <span class="n">C</span><span class="o">*</span><span class="n">sinSigma</span><span class="o">*</span><span class="p">(</span><span class="n">cos2SigmaM</span><span class="o">+</span><span class="n">C</span><span class="o">*</span><span class="n">cosSigma</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">cos2SigmaM</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">lambdaP</span> <span class="o">-</span> <span class="n">L</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="n">uSq</span> <span class="o">=</span> <span class="n">cosSqAlpha</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">uSq</span><span class="o">/</span><span class="mi">16384</span><span class="o">*</span><span class="p">(</span><span class="mi">4096</span><span class="o">+</span><span class="n">uSq</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">768</span><span class="o">+</span><span class="n">uSq</span><span class="o">*</span><span class="p">(</span><span class="mi">320</span><span class="o">-</span><span class="mi">175</span><span class="o">*</span><span class="n">uSq</span><span class="p">)))</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">uSq</span><span class="o">/</span><span class="mi">1024</span> <span class="o">*</span> <span class="p">(</span><span class="mi">256</span><span class="o">+</span><span class="n">uSq</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">128</span><span class="o">+</span><span class="n">uSq</span><span class="o">*</span><span class="p">(</span><span class="mi">74</span><span class="o">-</span><span class="mi">47</span><span class="o">*</span><span class="n">uSq</span><span class="p">)))</span>
+    <span class="n">deltaSigma</span> <span class="o">=</span> <span class="n">B</span><span class="o">*</span><span class="n">sinSigma</span><span class="o">*</span><span class="p">(</span><span class="n">cos2SigmaM</span><span class="o">+</span><span class="n">B</span><span class="o">/</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">cosSigma</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">cos2SigmaM</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="n">B</span><span class="o">/</span><span class="mi">6</span><span class="o">*</span><span class="n">cos2SigmaM</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="o">*</span><span class="n">sinSigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="o">*</span><span class="n">cos2SigmaM</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="n">s</span> <span class="o">=</span><span class="n">b</span><span class="o">*</span><span class="n">A</span><span class="o">*</span><span class="p">(</span><span class="n">sigma</span><span class="o">-</span><span class="n">deltaSigma</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s</span>
+</pre></div>
+</div>
+<p>for more general work, especially where more than two points are involved,
+we may be better off using a projection method to transform the local band of
+latitude and longitude into a  flat 2D surface approximation.</p>
+</section>
+<section id="leveraging-projections">
+<h2>Leveraging Projections<a class="headerlink" href="#leveraging-projections" title="Link to this heading">¶</a></h2>
+<p>Although the surface of the Earth is curved, for many purposes we can treat it
+as locally flat. This is the basis of most map projections, which transform
+latitude and longitude coordinates on the surface of the Earth to a flat
+two-dimensional Cartesian coordinate system. This has many advantages for
+concepts such as calculating distances, applying clustering algorithms and
+visualising data, including in maps.</p>
+<section id="the-ordnance-survey-national-grid">
+<h3>The Ordnance Survey National Grid<a class="headerlink" href="#the-ordnance-survey-national-grid" title="Link to this heading">¶</a></h3>
+<p>For historical reasons, multiple coordinate systems exist in British mapping.
+The Ordnance Survey has been mapping the British Isles since the 18th Century
+and the last major retriangulation from 1936-1962 produced the Ordance Survey
+National Grid (or <strong>OSGB36</strong>), which defined latitude and longitude across the
+island of Great Britain <a class="footnote-reference brackets" href="#id6" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>. For convenience, a standard Transverse Mercator
+projection <a class="footnote-reference brackets" href="#id7" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> was also defined, producing a notionally flat gridded surface,
+with gradations called eastings and westings. The scale for these gradations
+was identified with metres. To a good approximation, the Pythagorean theorem
+can be used to calculate distances on this grid.</p>
+<div class="math notranslate nohighlight">
+\[d = \sqrt{(E_1-E_2)^2+(N_1-N_2)^2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(N\)</span> are easting and northing coordinates respectively.</p>
+<p>The OSGB36 datum is based on the Airy Ellipsoid of 1830, which defines
+semimajor axes for its model of the earth, <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>, a scaling
+factor <span class="math notranslate nohighlight">\(F_0\)</span> and ellipsoid height, <span class="math notranslate nohighlight">\(H\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}a &amp;= 6377563.396, \\
+b &amp;= 6356256.910, \\
+F_0 &amp;= 0.9996012717, \\
+H &amp;= 24.7.\end{split}\]</div>
+<p>The point of origin for the transverse Mercator projection is defined in the
+Ordnance Survey longitude-latitude and easting-northing coordinates as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\phi^{OS}_0 &amp;= 49^\circ \mbox{ north}, \\
+\lambda^{OS}_0 &amp;= 2^\circ \mbox{ west}, \\
+E^{OS}_0 &amp;= 400000 m, \\
+N^{OS}_0 &amp;= -100000 m.\end{split}\]</div>
+</section>
+<section id="gps-and-the-wgs84-datum">
+<h3>GPS and the WGS84 Datum<a class="headerlink" href="#gps-and-the-wgs84-datum" title="Link to this heading">¶</a></h3>
+<p>More recently, the world has gravitated towards the use of the satellite based
+Global Positioning Systems (GPS) for navigation and location. This
+equipment, uses the (globally more appropriate) World Geodetic System
+1984 (or <strong>WGS84</strong>). This datum uses a different ellipsoid, which offers a
+better fit for a global coordinate system. Its key properties are:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}a_{WGS} &amp;= 6378137,, \\
+b_{WGS} &amp;= 6356752.314, \\
+F_0 &amp;= 0.9996.\end{split}\]</div>
+<p>For a given point on the WGS84 ellipsoid, an approximate mapping to the
+OSGB36 datum can be found using a Helmert transformation <a class="footnote-reference brackets" href="#id8" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>,</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{x}^{OS} = \mathbf{t}+\mathbf{M}\mathbf{x}^{WGS}.\]</div>
+<p>Here <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> denotes a coordinate in Cartesian space (i.e in 3D)
+as given by the (invertible) transformation</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\nu &amp;= \frac{aF_0}{\sqrt{1-e^2\sin^2(\phi^{OS})}} \\
+x &amp;= (\nu+H) \sin(\lambda)\cos(\phi) \\
+y &amp;= (\nu+H) \cos(\lambda)\cos(\phi) \\
+z &amp;= ((1-e^2)\nu+H)\sin(\phi)\end{split}\]</div>
+<p>and the transformation parameters are</p>
+<div class="math notranslate nohighlight">
+\begin{eqnarray*}
+\mathbf{t} &amp;= \left(\begin{array}{c}
+-446.448\\ 125.157\\ -542.060
+\end{array}\right),\\
+\mathbf{M} &amp;= \left[\begin{array}{ c c c }
+1+s&amp; -r_3&amp; r_2\\
+r_3 &amp; 1+s &amp; -r_1 \\
+-r_2 &amp; r_1 &amp; 1+s
+\end{array}\right], \\
+s &amp;= 20.4894\times 10^{-6}, \\
+\mathbf{r} &amp;= [0.1502'', 0.2470'', 0.8421''].
+\end{eqnarray*}</div><p>Given a latitude, <span class="math notranslate nohighlight">\(\phi^{OS}\)</span> and longitude, <span class="math notranslate nohighlight">\(\lambda^{OS}\)</span> in the
+OSGB36 datum, easting and northing coordinates, <span class="math notranslate nohighlight">\(E^{OS}\)</span> &amp; <span class="math notranslate nohighlight">\(N^{OS}\)</span>
+can then be calculated using the following formulae:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\rho &amp;= \frac{aF_0(1-e^2)}{\left(1-e^2\sin^2(\phi^{OS})\right)^{\frac{3}{2}}} \\
+\eta &amp;= \sqrt{\frac{\nu}{\rho}-1} \\
+M &amp;= bF_0\left[\left(1+n+\frac{5}{4}n^2+\frac{5}{4}n^3\right)(\phi^{OS}-\phi^{OS}_0)\right. \\
+&amp;\quad-\left(3n+3n^2+\frac{21}{8}n^3\right)\sin(\phi-\phi_0)\cos(\phi^{OS}+\phi^{OS}_0) \\
+&amp;\quad+\left(\frac{15}{8}n^2+\frac{15}{8}n^3\right)\sin(2(\phi^{OS}-\phi^{OS}_0))\cos(2(\phi^{OS}+\phi^{OS}_0)) \\
+&amp;\left.\quad-\frac{35}{24}n^3\sin(3(\phi-\phi_0))\cos(3(\phi^{OS}+\phi^{OS}_0))\right] \\
+I &amp;= M + N^{OS}_0 \\
+II &amp;= \frac{\nu}{2}\sin(\phi^{OS})\cos(\phi^{OS}) \\
+III &amp;= \frac{\nu}{24}\sin(\phi^{OS})cos^3(\phi^{OS})(5-\tan^2(phi^{OS})+9\eta^2) \\
+IIIA &amp;= \frac{\nu}{720}\sin(\phi^{OS})cos^5(\phi^{OS})(61-58\tan^2(\phi^{OS})+\tan^4(\phi^{OS})) \\
+IV &amp;= \nu\cos(\phi^{OS}) \\
+V &amp;= \frac{\nu}{6}\cos^3(\phi^{OS})\left(\frac{\nu}{\rho}-\tan^2(\phi^{OS})\right) \\
+VI &amp;= \frac{\nu}{120}\cos^5(\phi^{OS})(5-18\tan^2(\phi^{OS})+\tan^4(\phi^{OS}) \\
+&amp;\quad+14\eta^2-58\tan^2(\phi^{OS})\eta^2) \\
+E^{OS} &amp;= E^{OS}_0+IV(\lambda^{OS}-\lambda^{OS}_0)+V(\lambda-\lambda^{OS}_0)^3+VI(\lambda^{OS}-\lambda^{OS}_0)^5 \\
+N^{OS} &amp;= I + II(\lambda^{OS}-\lambda^{OS}_0)^2+III(\lambda-\lambda^{OS}_0)^4+IIIA(\lambda^{OS}-\lambda^{OS}_0)^6\end{split}\]</div>
+<p class="rubric">References</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id5" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>The Haversine formula <a class="reference external" href="https://en.wikipedia.org/wiki/Haversine_formula">https://en.wikipedia.org/wiki/Haversine_formula</a></p>
+</aside>
+<aside class="footnote brackets" id="id6" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>A guide to coordinate systems in Great Britain, Ordnance Survey</p>
+</aside>
+<aside class="footnote brackets" id="id7" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>Map projections - A Working Manual, John P. Snyder, <a class="reference external" href="https://doi.org/10.3133/pp1395">https://doi.org/10.3133/pp1395</a></p>
+</aside>
+<aside class="footnote brackets" id="id8" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<p>Computing Helmert transformations, G Watson, <a class="reference external" href="http://www.maths.dundee.ac.uk/gawatson/helmertrev.pdf">http://www.maths.dundee.ac.uk/gawatson/helmertrev.pdf</a></p>
+</aside>
+</aside>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Flood Tool</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="data_formats.html">Data Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Regression and Classification models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Distance Measuring &amp; Geodetic Transformations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#distances-on-the-earth">Distances on the Earth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#leveraging-projections">Leveraging Projections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">Visualising Risk &amp; Rainfall</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="models.html" title="previous chapter">Regression and Classification models</a></li>
+      <li>Next: <a href="visualization.html" title="next chapter">Visualising Risk &amp; Rainfall</a></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/coordinates.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
