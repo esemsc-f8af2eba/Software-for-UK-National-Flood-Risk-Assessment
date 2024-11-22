@@ -131,6 +131,7 @@ class Tool(object):
         # self.fit(models=['local_authority'])
         # self.fit(models=['house_price_rf'])
         # self.fit(models=['historic_flooding'])
+        # self.fit(models=['predicting_all_risks'])
 
     def fit(self, models: List = [], update_labels: str = '',
             update_hyperparameters: bool = False, **kwargs):
@@ -752,10 +753,10 @@ class Tool(object):
 
         method : str, optional
             Method to use for imputation. Options include:
-            - 'mean', to use the mean for the labelled dataset
-            - 'constant', to use a constant value for imputation
-            - 'knn' to use k-nearest neighbours imputation from the
-              labelled dataset
+            - 'mean': Use the mean for the labelled dataset.
+            - 'constant': Use a constant value for imputation.
+            - 'knn': Use k-nearest neighbours imputation from the
+            labelled dataset.
 
         constant_values : dict, optional
             Dictionary containing constant values to
@@ -1272,7 +1273,7 @@ class Tool(object):
         else:
             raise NotImplementedError(f'method {method} not implemented')
 
-    def estimate_total_value(self, postal_data: Sequence[str]) -> pd.Series:
+    def estimate_total_value(self, postcodes: Sequence[str]) -> pd.Series:
         '''
         Return a series of estimates of the total property values
         of a sequence of postcode units or postcode sectors.
@@ -1298,37 +1299,82 @@ class Tool(object):
             Series of total property value estimates indexed by locations.
         '''
 
-        if isinstance(postal_data, pd.DataFrame):
-            postal_data.columns = ['postcodeSector']
-        elif isinstance(postal_data, pd.Series):
-            postal_data = pd.DataFrame(postal_data,
-                                       columns=['postcodeSector'])
-        elif isinstance(postal_data, list):
-            postal_data = pd.DataFrame(postal_data,
-                                       columns=['postcodeSector'])
-        elif isinstance(postal_data, np.ndarray):
-            postal_data = pd.DataFrame(postal_data,
-                                       columns=['postcodeSector'])
+        if isinstance(postcodes, pd.Series):
+            pass
+        elif isinstance(postcodes, pd.DataFrame):
+            postcodes = pd.Series(postcodes.iloc[:, 0])
+        elif isinstance(postcodes, np.ndarray):
+            postcodes = pd.Series(postcodes)
         else:
-            raise ValueError('Input must be a pandas DataFrame, '
-                             'Series, list or numpy array.')
-        matched_rows = self._sector_data[self._sector_data[
-            'postcodeSector'].isin(postal_data['postcodeSector'])]
+            raise TypeError('Must be Series, Dataframe or array')
 
-        if matched_rows.empty:
-            raise ValueError('No data available '
-                             'for the given postcode sectors.')
+        self._sector_data['postcodeSector'] = \
+            self._sector_data['postcodeSector']\
+            .str.replace('  ', ' ', regex=False).str.strip()
+        sectors_check = (postcodes.str.split(' ', n=1)
+                         .str[1].str.len() == 1).any()
 
-        households = matched_rows['households']
-        postcode_units = matched_rows['numberOfPostcodeUnits']
+        if sectors_check:
+            part = postcodes
+        else:
+            part = (
+                postcodes.str.split(' ', n=1).str[0]
+                + ' '
+                + postcodes.str.split(' ', n=1).str[1].str[0]
+            )
 
-        num_houses = households / postcode_units
-        median_price = self.predict_median_house_price(postal_data)
+        part = part.dropna()
 
-        matched_rows['totalvalue'] = num_houses * median_price
+        matched_rows = self._sector_data[
+            self._sector_data['postcodeSector'].isin(part)]
+        matched_postcodes = postcodes[
+            part.isin(matched_rows['postcodeSector'])]
 
-        return pd.Series(matched_rows['totalvalue'].values,
-                         index=matched_rows['postcodeSector'])
+        matched_postcodes = matched_postcodes.reset_index(drop=True)
+        matched_postcodes = pd.DataFrame(
+            matched_postcodes, columns=['postcode'])
+        matched_postcodes['postcodeSector'] = part
+
+        if matched_postcodes.empty:
+            raise ValueError('No data available for '
+                             'the given postcode.')
+
+        matched_postcodes = matched_postcodes.merge(
+            self._sector_data, on='postcodeSector', how='left')
+
+        matched_postcodes['num_houses'] = \
+            matched_postcodes['households'] / \
+            matched_postcodes['numberOfPostcodeUnits']
+
+        combined_postcode = pd.concat(
+            [self._postcodedb['postcode'],
+             self._unlabelled_unit_data['postcode']], axis=0)
+
+        def find_valid_postcode(part_value):
+            try:
+                valid_postcode = combined_postcode[
+                    combined_postcode.str.startswith(part_value)].iloc[0]
+                return valid_postcode
+            except IndexError:
+                return None
+
+        if sectors_check:
+            median_price_input = part.apply(find_valid_postcode)
+        else:
+            median_price_input = matched_postcodes['postcode']
+
+        median_price = self.predict_median_house_price(
+            median_price_input, method='house_price_rf')
+        median_price = median_price.reset_index(drop=True)
+        matched_postcodes['median_price'] = median_price
+
+        matched_postcodes['totalvalue'] = (
+            matched_postcodes['num_houses'] *
+            matched_postcodes['median_price'])
+
+        return pd.Series(
+            matched_postcodes['totalvalue'].values,
+            index=matched_postcodes['postcodeSector'])
 
     def estimate_annual_human_flood_risk(self, postcodes: Sequence[str],
                                          risk_labels: [pd.Series | None] = None
@@ -1361,47 +1407,70 @@ class Tool(object):
             indexed by postcode.
         '''
 
-        if isinstance(postcodes, pd.DataFrame):
-            postcodes.columns = ['postcodeSector']
-        elif isinstance(postcodes, pd.Series):
-            postcodes = pd.DataFrame(postcodes,
-                                     columns=['postcodeSector'])
-        elif isinstance(postcodes, list):
-            postcodes = pd.DataFrame(postcodes,
-                                     columns=['postcodeSector'])
+        if isinstance(postcodes, pd.Series):
+            pass
+        elif isinstance(postcodes, pd.DataFrame):
+            postcodes = pd.Series(postcodes.iloc[:, 0])
         elif isinstance(postcodes, np.ndarray):
-            postcodes = pd.DataFrame(postcodes,
-                                     columns=['postcodeSector'])
+            postcodes = pd.Series(postcodes)
         else:
-            raise ValueError('Input must be a pandas DataFrame, '
-                             'Series, list or numpy array.')
+            raise TypeError('Must be Series, '
+                            'Dataframe or array')
 
-        part = postcodes['postcodeSector'].str.split(' ', n=1).str[0] + \
-            ' ' + postcodes['postcodeSector'].str.split(' ', n=1).str[1].str[0]
+        self._sector_data['postcodeSector'] = \
+            self._sector_data['postcodeSector']\
+            .str.replace('  ', ' ', regex=False).str.strip()
+
+        part = (
+            postcodes.str.split(' ', n=1).str[0]  # Outward code
+            + ' '
+            + postcodes.str.split(' ', n=1).str[1].str[0]
+            # First character of inward code
+        )
+
+        part = part.dropna()
+
         matched_rows = self._sector_data[
             self._sector_data['postcodeSector'].isin(part)]
-        # check if the postcode is in the sector data
+        matched_postcodes = postcodes[
+            part.isin(matched_rows['postcodeSector'])]
 
-        if matched_rows.empty:
-            raise ValueError('No data available for '
-                             'the given postcode sectors.')
+        matched_postcodes = matched_postcodes.reset_index(drop=True)
+        matched_postcodes = pd.DataFrame(
+            matched_postcodes, columns=['postcode'])
+        matched_postcodes['postcodeSector'] = part
+
+        if matched_postcodes.empty:
+            raise ValueError('No data available '
+                             'for the given postcode.')
+
+        matched_postcodes = matched_postcodes.merge(
+            self._sector_data, on='postcodeSector', how='left')
 
         impact_coef = 0.1
 
-        households = matched_rows['headcount']
-        postcode_units = matched_rows['numberOfPostcodeUnits']
+        matched_postcodes['total_population'] = \
+            matched_postcodes['headcount'] / \
+            matched_postcodes['numberOfPostcodeUnits']
 
-        total_population = households / postcode_units
-        flood_probability = self.predict_flood_class_from_postcode(postcodes)
+        flood_probability_initial = \
+            self.predict_flood_class_from_postcode(
+                matched_postcodes['postcode'],
+                method='predicting_all_risks')
 
-        matched_rows['humanrisk'] = (
-            impact_coef * total_population * flood_probability)
+        flood_probability = flood_probability_initial\
+            .reset_index(drop=True)
 
-        # risk_labels = (risk_labels or
-        #                 self.get_flood_class_from_postcodes(postcodes))
+        matched_postcodes = matched_postcodes.reset_index(drop=True)
+        matched_postcodes['flood_probability'] = flood_probability
 
-        return pd.Series(matched_rows['humanrisk'].values,
-                         index=matched_rows['postcodeSector'])
+        matched_postcodes['humanrisk'] = impact_coef \
+            * matched_postcodes['total_population'] \
+            * matched_postcodes['flood_probability']
+
+        return pd.Series(
+            matched_postcodes['humanrisk'].values,
+            index=matched_postcodes['postcode'])
 
     def estimate_annual_flood_economic_risk(
             self, postcodes: Sequence[str],
@@ -1431,41 +1500,64 @@ class Tool(object):
             by postcode.
         '''
 
-        if isinstance(postcodes, pd.DataFrame):
-            postcodes.columns = ['postcodeSector']
-        elif isinstance(postcodes, pd.Series):
-            postcodes = pd.DataFrame(postcodes,
-                                     columns=['postcodeSector'])
-        elif isinstance(postcodes, list):
-            postcodes = pd.DataFrame(postcodes,
-                                     columns=['postcodeSector'])
+        if isinstance(postcodes, pd.Series):
+            pass
+        elif isinstance(postcodes, pd.DataFrame):
+            postcodes = pd.Series(postcodes.iloc[:, 0])
         elif isinstance(postcodes, np.ndarray):
-            postcodes = pd.DataFrame(postcodes,
-                                     columns=['postcodeSector'])
+            postcodes = pd.Series(postcodes)
         else:
-            raise ValueError('Input must be a pandas DataFrame, '
-                             'Series, list or numpy array.')
+            raise TypeError('Must be Series, '
+                            'Dataframe or array')
 
-        part = postcodes['postcodeSector'].str.split(' ', n=1).str[0] +\
-            ' ' + postcodes['postcodeSector']\
-            .str.split(' ', n=1).str[1].str[0]
-        # split the postcode to get the postcode sector
+        self._sector_data['postcodeSector'] = \
+            self._sector_data['postcodeSector']\
+            .str.replace('  ', ' ', regex=False).str.strip()
+
+        part = (
+            postcodes.str.split(' ', n=1).str[0]  # Outward code
+            + ' '
+            + postcodes.str.split(' ', n=1).str[1].str[0]
+            # First character of inward code
+        )
+
+        part = part.dropna()
 
         matched_rows = self._sector_data[
-            self._sector_data['postcodeSector'].isin(part)].copy()
-        # check if the postcode is in the sector data
+            self._sector_data['postcodeSector'].isin(part)]
+        matched_postcodes = postcodes[
+            part.isin(matched_rows['postcodeSector'])]
 
-        if matched_rows.empty:
-            raise ValueError('No data available for '
-                             'the given postcode sectors.')
+        matched_postcodes = matched_postcodes.reset_index(drop=True)
+        matched_postcodes = pd.DataFrame(
+            matched_postcodes, columns=['postcode'])
+        matched_postcodes['postcodeSector'] = part
+
+        if matched_postcodes.empty:
+            raise ValueError('No data available '
+                             'for the given postcode.')
+
+        matched_postcodes = matched_postcodes.merge(
+            self._sector_data, on='postcodeSector', how='left')
 
         damage_coef = 0.05
-        totalpropvalue = self.estimate_total_value(postcodes)
-        flood_probability = self.predict_flood_class_from_postcode(postcodes)
-        matched_rows['economicrisk'] = (
-            damage_coef * totalpropvalue * flood_probability)
+        totalpropvalue = self.estimate_total_value(
+            matched_postcodes['postcode'])
+        totalpropvalue = totalpropvalue.reset_index(drop=True)
 
-        # risk_labels = (risk_labels or
-        #                 self.get_flood_class_from_postcodes(postcodes))
-        return pd.Series(matched_rows['economicrisk'].values,
-                         index=matched_rows['postcodeSector'])
+        matched_postcodes['totalpropvalue'] = totalpropvalue
+
+        flood_probability = \
+            self.predict_flood_class_from_postcode(
+                matched_postcodes['postcode'],
+                method = 'predicting_all_risks')
+        flood_probability = flood_probability.reset_index(drop=True)
+        matched_postcodes['flood_probability'] = flood_probability
+
+        matched_postcodes['economicrisk'] = (
+            damage_coef * matched_postcodes['totalpropvalue']
+            * matched_postcodes['flood_probability'])
+
+        return pd.Series(
+            matched_postcodes['economicrisk'].values,
+            index=matched_postcodes['postcodeSector'])
