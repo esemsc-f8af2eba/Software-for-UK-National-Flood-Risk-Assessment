@@ -1550,7 +1550,7 @@ class Tool(object):
         flood_probability = \
             self.predict_flood_class_from_postcode(
                 matched_postcodes['postcode'],
-                method = 'predicting_all_risks')
+                method='predicting_all_risks')
         flood_probability = flood_probability.reset_index(drop=True)
         matched_postcodes['flood_probability'] = flood_probability
 
