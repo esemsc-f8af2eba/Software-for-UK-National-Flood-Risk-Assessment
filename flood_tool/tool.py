@@ -135,7 +135,6 @@ class Tool(object):
         self.fit(models=['predicting_risk_from_latitude_longitude'])
         self.fit(models=['predicting_risk_from_easting_northing'])
 
-
     def fit(self, models: List = [], update_labels: str = '',
             update_hyperparameters: bool = False, **kwargs):
         '''Fit/train models using a labelled set of samples.
