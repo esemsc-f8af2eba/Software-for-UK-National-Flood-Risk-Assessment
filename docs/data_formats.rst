@@ -14,6 +14,8 @@ Labelled data
 Labelled postcode data is assumed to be in a tabular format, with the following columns:
 
 - postcode: the full unit postcode of the area.
+- outward: the outward part of the postcodes.
+- inward: the inward part of the postcode.
 - easting: the OSGB36 easting coordinate of the centroid of the area.
 - northing: the OSGB36 northing coordinate of the centroid of the area.
 - soilType: the soil type of the area.
@@ -31,7 +33,7 @@ may require further processing before being used in a model.
 Unlabelled postcode data
 ------------------------
 
-Unlabelled unit level data is assumed to be in a tabular format, with many of the  columns as above, but without (at minimum)
+Unlabelled unit level data is assumed to be in a tabular format, with many of the columns as above, but without (at minimum)
 the riskLabel, medianPrice, and historicallyFlooded columns. In some cases the soilType, elevation, nearestWaterway, and
 distanceToWaterway and localAuthority data may also be missing for individual postcodes, and may need to be imputed, however
 the easting and northing coordinates can be assumed to be present for all postcodes.

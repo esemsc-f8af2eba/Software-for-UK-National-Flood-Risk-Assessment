@@ -1,8 +1,8 @@
 # Flood Risk Prediction tool
 
 ## Deadlines
--  **Code: 12pm GMT Friday 24th November 2023**
--  **Presentation and one-page report: 4pm GMT Friday 24th November 2023**
+-  **Code: 12pm GMT Friday 22th November 2024**
+-  **Presentation and one-page report: 4pm GMT Friday 22th November 2024**
 
 You should update this document in the course of your work to reflect the scope and abilities of your project, as well as to provide appropriate instuctions to potential users (and markers) of your code.
 
@@ -34,15 +34,148 @@ This README file *should be updated* over the course of your group's work to rep
 
 ### AI usage
 
-*To be written by you during the week explaining how your group used AI tools in developing your code*
+- [Chatgpt Plotly Map](https://chatgpt.com/share/67405614-7250-800f-a6d2-9d26ba2403fb) - This is used to get insights on Plotly Map.
+
+- [Chatgpt Encoding Fix](https://chatgpt.com/share/674063c1-ad30-800d-a857-ebb2fe89dfe6) - This is used in debugging and concepts clarification on oversampling when construcing the historic_flood model.
+
+- [Chatgpt Git Conflict Resolution](https://chatgpt.com/share/67405e17-7298-800d-8468-2916b60582ac)
+
+- [Chatgpt RandomForest overfitting](https://chatgpt.com/share/67405e58-0d6c-800d-9635-c324411353bb)
+
 
 ### Software Installation Guide
 
-*To be written by you during the week*
+**Prerequisite**
+
+**Ensure Python3 is installed on your machine**
+
+```bash
+python3 --version
+```
+
+This project uses Conda as a package manager for managing software packages, dependencies and environments. You should have conda configured on your local machine before installing the project.
+You can check if Conda is installed by running:
+
+```bash
+conda -V
+```
+
+We will now use Miniconda to create the `deluge` environment. To start, we first use `git` to clone the repository containing the materials of flooding risk project.
+
+```bash
+git clone https://github.com/ese-ada-lovelace-2024/ads-deluge-exe.git
+```
+
+Navigate into the repository (e.g., cd ads-deluge-exe). Then configure the conda environment:
+
+```bash
+conda env create -f environment.yml
+conda avtivate deluge
+```
+
+To deactivate the environment you can run:
+
+```bash
+conda deactivate
+```
+
+**VS Code**
+
+You can run the code in this project interactively in VSCode or use Jupyter Notebook for example. To get started:
+1. Make sure you are setting up environment correctly and in the correct file path in the terminal.
+2. In VS Code, run the following command.
+
+```bash
+code .
+```
 
 ### User instructions
 
-*To be written by you during the week*
+**Risk Tool**
+
+The tool.py file combines the main functionality of the flooding risk tool. It provides methods for working with flood data associated with UK postcode and geographic coordinates. This enables predictions for:
+
+- Flood class
+- Median house prices
+- Identification of local authority
+- Historic flooding
+
+---
+
+#### **To get started:**
+
+The first step is to import the tool from the flood_tool module:
+
+```python
+import sys
+sys.path.append('..')
+import flood_tool as ft
+tool = ft.Tool()
+```
+
+Run the following command to train all the models:
+```python
+tool.fit()
+```
+
+Now, the class is initialized, we can simply call functions from tool directly. See below for description and instruction of each function involved in this tool.py.
+
+1. Flood risk prediction: Predict flood risk levels (with riskLabel being the target variable) for postcodes or geographic coordinates based on trained models.
+
+#### Flood risk for postcodes: 
+```python
+tool.predict_flood_class_from_postcodes(postcodes=['RH16 2QE'], method = 'predicting_all_risks')
+```
+
+
+#### Flood risk from easting/northing: 
+```python
+tool.predict_flood_class_from_OSGB36_location(eastings=[535295.0], northings=[123643.0], method='predicting_risk_from_easting_northing')
+```
+
+#### Flood risk from longitude/latitude: 
+```python
+tool.predict_flood_class_from_WGS84_locations(longitudes=[0], latitudes=[50], method = 'predicting_risk_from_latitude_longitude')
+```
+
+2. Median house price prediction: Predicting median house prices for a collection of postcodes using Random Forest regression.
+```python
+tool.predict_median_house_price(postcodes=['RH16 2QE'], method = 'house_price_rf')
+```
+
+3. Local authority prediction: Predicting local authorities for a sequence of easting and northing (OSGB36 locations).
+```python
+tool.predict_local_authority(eastings=[535295.0], northings=[123643.0], method='local_authority')
+```
+
+4. Historic flooding prediction: predicting whether a collection of postcodes has experienced historic flooding.
+```python
+tool.predict_historic_flooding(postcodes=['RH16 2QE'], method='historic_flooding')
+```
+
+### Visualization
+
+Once the packages are imported into the Data Visualization.ipynb, we then can use it to explaore/analysis the data and generating interactive plot (e.g., maps).
+
+Follow the instructions below to understand the functionality provided.
+
+1. Import functions from analysis.py to be able to perform EDA.
+2. Import functions from mapping.py to plot predicted variables (local authority, median house prices, historic flooding and flood class). 
+
+Examples of visualizations:
+
+### predicting median house price:
+By running the following command, we can get an example plot from model predicting median house price:
+```python
+mapping.plot_predict_median_house_price(df, tool)
+```
+![median house price](images/meidanhouse.png)
+
+and an example plot from model predicting flood class:
+```python
+mapping.plot_predict_flood_class(df, tool)
+```
+![flood class](images/floodclass.png)
 
 ### Documentation
 
