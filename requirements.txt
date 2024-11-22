@@ -13,10 +13,11 @@ imblearn
 ipywidgets
 seaborn
 geojson
+lightgbm
+plotly
 # Packages needed for testing/scoring
 pytest
 pytest-cov
 pytest-timeout
-
 
 

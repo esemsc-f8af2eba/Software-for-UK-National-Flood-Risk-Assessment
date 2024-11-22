@@ -8,12 +8,64 @@ import pandas as pd
 
 import matplotlib
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 __all__ = ['plot_risk_map']
 
 DEFAULT_POSTCODE_FILE = os.path.join(
     os.path.dirname(__file__), 'resources', 'postcodes_unlabelled.csv'
 )
+
+
+def eda_function(file_path, show_plot=True):
+    """This function is used to perform
+    exploratory data analysis on the data"""
+
+    data = pd.read_csv(file_path)
+
+    print("Showing you the first 5 rows of the data")
+
+    print("Focusing now on any missing values in the data")
+    missing = data.isnull().sum() / len(data) * 100
+    print(missing)
+
+    print("Checking for the correlation "
+          "between different features in the data")
+
+    num_cols = data.select_dtypes(include=[np.number]).columns
+    data_corr = data[num_cols].corr()
+    print(data_corr)
+
+    print("\n ---Correlation Heatmap ---")
+    sns.heatmap(data_corr, annot=True)
+    plt.show()
+    print("\n ---Pairplot for numerical features---")
+    sns.pairplot(data[num_cols])
+    plt.show()
+
+    print("\n ---Checking numerical data distribution---")
+    fig, ax = plt.subplots(3, 3, figsize=(15, 15))
+    ax = ax.flatten()
+    for i in range(0, len(num_cols)):
+        sns.histplot(data[num_cols[i]], ax=ax[i])
+    plt.show()
+
+    print("\n ---Checking the distribution of "
+          "MedianPrice and impacts of outliers---")
+    sns.histplot(data[data['medianPrice'] < 10e5]['medianPrice'])
+    plt.show()
+
+    print("\n ---Checking the description of the dataset---")
+    data.describe()
+
+    print("\n ---No outliers in the location data---")
+    data[data['northing'].min() == data['northing']]
+    data.sort_values(by='medianPrice', ascending=False)
+
+    print("\n ---Distribution of data with BoxPlot---")
+    sns.boxplot(data["medianPrice"], orient='h')
+
+    return None
 
 
 def plot_postcode_density(
