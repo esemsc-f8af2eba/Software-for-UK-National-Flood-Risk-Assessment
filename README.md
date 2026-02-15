@@ -1,36 +1,5 @@
 # Flood Risk Prediction tool
 
-## Deadlines
--  **Code: 12pm GMT Friday 22th November 2024**
--  **Presentation and one-page report: 4pm GMT Friday 22th November 2024**
-
-You should update this document in the course of your work to reflect the scope and abilities of your project, as well as to provide appropriate instuctions to potential users (and markers) of your code.
-
-### Key Requirements
-
-Your project must provide the following:
-
- 1. at least one analysis method to estimate a number of attributes for unlabelled postcodes extrapolated from sample data which is provided to you:
-    - Flood risk from rivers & seas (on a 10 point scale).
-    - Flood risk from surface water (on a 10 point scale).
-    - Median house price.
- 2. at least one analysis method to estimate the Local Authority & flood risks of arbitrary locations. 
- 3. a process to find the rainfall and water level near a given postcode from provided rainfall, river and tide level data, or by looking online.
- 4. visualization and analysis tools for the postcode, rainfall, river & tide data provided to you, ideally in a way which will identify potential areas at immediate risk of flooding by combining the data you have been given.
- 
- Your code should have installation instructions and basic documentation, as docstrings for functions & class methods, as a full manual or ideally both.
-
-![London postcode density](images/LondonPostcodeDensity.png)
-![England Flood Risk](images/EnglandFloodRisk.png)
-![UK soil types](images/UKSoilTypes.png)
-
-This README file *should be updated* over the course of your group's work to represent the scope and abilities of your project.
-
-### Assessment
-
- - Your code will be assessed for its speed (both at training and prediction) & predictive accuracy.
- - Your code should include tests of its functionality.
- - Additional marks will be awarded for maintaining good code quality and for a clean, well-organised repository. You should consider the kind of code you would be happy to take over from another group of students.
 
 ### AI usage
 
@@ -216,3 +185,4 @@ python -m pytest --doctest-modules flood_tool
  - [A guide to coordinate systems in Great Britain](https://webarchive.nationalarchives.gov.uk/20081023180830/http://www.ordnancesurvey.co.uk/oswebsite/gps/information/coordinatesystemsinfo/guidecontents/index.html)
 
  - [Information on postcode validity](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/283357/ILRSpecification2013_14Appendix_C_Dec2012_v1.pdf)
+
